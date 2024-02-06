@@ -4,6 +4,7 @@ namespace App\Services\Api\TheMovieDatabase;
 
 use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Client\PendingRequest;
+use App\Services\Api\TheMovieDatabase\Endpoints\HasPeopleList;
 use App\Services\Api\TheMovieDatabase\Endpoints\HasDetailMovies;
 use App\Services\Api\TheMovieDatabase\Endpoints\HasPopularMovies;
 
@@ -11,6 +12,7 @@ class TheMovieDatabaseService
 {
     use HasPopularMovies;
     use HasDetailMovies;
+    use HasPeopleList;
 
     public PendingRequest $api;
 

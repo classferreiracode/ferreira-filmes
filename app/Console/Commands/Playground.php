@@ -28,8 +28,7 @@ class Playground extends Command
     {
         $service = new TheMovieDatabaseService();
         $json = $service
-            ->detailMovies()
-            ->fromMovie(866398)
+            ->peopleList()
             ->get();
 
         ds($json);
