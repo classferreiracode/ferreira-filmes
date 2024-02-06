@@ -2,19 +2,11 @@
 
 namespace App\Services\Api\TheMovieDatabase\Endpoints;
 
-use Illuminate\Support\Collection;
 use App\Services\Api\TheMovieDatabase\Entities\Movie;
-use App\Services\Api\TheMovieDatabase\TheMovieDatabaseService;
 
-class Details
+class Details extends BaseEndpoint
 {
-    private ?int $movieId;
-    private TheMovieDatabaseService $service;
-
-    public function __construct()
-    {
-        $this->service = new TheMovieDatabaseService();
-    }
+    private int $movieId;
 
     public function fromMovie(int|Movie $movie)
     {
@@ -24,9 +16,11 @@ class Details
 
     public function get(): mixed
     {
-        return $this->service
+        $return[] = $this->service
             ->api
             ->get('/movie/' . $this->movieId . '?language=pt-BR')
             ->json();
+
+        return $return;
     }
 }
