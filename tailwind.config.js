@@ -6,8 +6,14 @@ export default {
         "./resources/**/*.vue",
     ],
     theme: {
-        extend: {},
+        extend: {
+            fontFamily: {
+                sans: ['Almarai', 'sans-serif'],
+            },
+        },
     },
-    plugins: [],
+    plugins: [
+        require('@tailwindcss/forms'),
+    ],
 }
 

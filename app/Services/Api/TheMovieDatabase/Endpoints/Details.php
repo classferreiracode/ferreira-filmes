@@ -16,7 +16,7 @@ class Details extends BaseEndpoint
 
     public function get(): mixed
     {
-        $return[] = $this->service
+        $return = $this->service
             ->api
             ->get('/movie/' . $this->movieId . '?language=pt-BR')
             ->json();
