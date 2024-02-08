@@ -17,5 +17,5 @@ Este projeto nasceu de forma totalmente estudantil, onde estava precisando coloc
 
 This project was born entirely as a student, where I needed to put my knowledge of [VUE3](https://vuejs.org/) and [LARAVEL](https://laravel.com/docs/) into practice. It has been a great pleasure to work on this personal project and make it available to everyone.
 
-
+---
 ## 
