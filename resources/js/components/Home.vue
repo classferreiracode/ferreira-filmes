@@ -24,16 +24,6 @@
                             </div>
                         </div>
                     </template>
-                    <template #loading>
-                        <div>
-                            <div class="text-sm">
-                                Carregando...
-                            </div>
-                            <div class="text-xs text-gray-500">
-                                Aguarde...
-                            </div>
-                        </div>
-                    </template>
                     <template #selectedOption="{ option }">
                         <div>
                             <div class="text-sm">
