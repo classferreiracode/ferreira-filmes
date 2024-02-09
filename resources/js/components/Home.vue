@@ -38,7 +38,9 @@
             </form>
             <div class="mt-4 w-full mx-auto">
                 <div class="mt-4 text-2xl text-bold text-gray-200" v-if="select_id">
+
                     <ArrowDownCircleIcon class="h-6 w-6 text-blue-500" />
+
                     <p>Você selecionou: {{ selected.name }}</p>
                     <p>Id: {{ select_id }}</p>
                     <img :src="selected.image" alt=""
@@ -59,7 +61,8 @@ export default {
             options: [],
             searching: false,
             result: null,
-            select_id: null
+            select_id: null,
+            imdb_id: null
         }
     },
     methods: {
@@ -96,6 +99,7 @@ export default {
         },
         onSelect(selectedOption) {
             this.select_id = selectedOption.id;
+            this.imdb_id = selectedOption.imdb_id;
         }
     },
 }

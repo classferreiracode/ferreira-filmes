@@ -4,10 +4,10 @@ namespace App\Services\Api\TheMovieDatabase\Entities;
 
 class Search
 {
-    public $id;
-    public $name;
-    public $year;
-    public $image;
+    public int $id;
+    public string $name;
+    public string $year;
+    public string $image;
 
     public function __construct($data)
     {
