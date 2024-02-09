@@ -10,10 +10,17 @@ export default {
             fontFamily: {
                 sans: ['Almarai', 'sans-serif'],
             },
+            spacing: {
+                '46': '11.25rem',
+            }
         },
+    },
+    corePlugins: {
+        aspectRatio: false,
     },
     plugins: [
         require('@tailwindcss/forms'),
+        require('@tailwindcss/aspect-ratio'),
     ],
 }
 

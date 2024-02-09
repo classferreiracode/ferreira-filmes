@@ -6,6 +6,7 @@
         "build": "vite build"
     },
     "devDependencies": {
+        "@tailwindcss/aspect-ratio": "^0.4.2",
         "@tailwindcss/forms": "^0.5.7",
         "autoprefixer": "^10.4.17",
         "axios": "^1.6.4",
@@ -15,6 +16,7 @@
         "vite": "^5.0.0"
     },
     "dependencies": {
+        "@heroicons/vue": "^2.1.1",
         "@vitejs/plugin-vue": "^5.0.3",
         "jquery": "^3.7.1",
         "vue": "^3.4.15",

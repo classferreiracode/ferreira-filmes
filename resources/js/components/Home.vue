@@ -38,10 +38,11 @@
             </form>
             <div class="mt-4 w-full mx-auto">
                 <div class="mt-4 text-2xl text-bold text-gray-200" v-if="select_id">
+                    <ArrowDownCircleIcon class="h-6 w-6 text-blue-500" />
                     <p>Você selecionou: {{ selected.name }}</p>
                     <p>Id: {{ select_id }}</p>
                     <img :src="selected.image" alt=""
-                        class="h-[720px] rounded-3xl border-4 border-violet-500 shadow-sm shadow-violet-500">
+                        class="h-96 rounded-3xl border-4 border-violet-500 shadow-sm shadow-violet-500">
                 </div>
             </div>
         </div>
@@ -49,6 +50,7 @@
 </template>
 
 <script>
+
 export default {
     data() {
         return {
