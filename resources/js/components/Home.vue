@@ -1,5 +1,5 @@
 <template>
-    <div class="mt-8 w-full mx-auto max-w-7xl">
+    <div class="mt-8 w-full mx-auto max-w-7xl pt-4">
         <div>
             <form>
                 <VueMultiselect class="" v-model="selected" placeholder="Busque um filme/serie por nome" label="name"
@@ -13,15 +13,17 @@
                     </template>
                     <template #option="{ option }">
                         <div class="flex items-center">
-                            <img :src="option.image" :alt="option.name" class="h-16 mr-3" v-if="option.image" />
-                            <div>
-                                <div class="text-sm">
-                                    {{ option.name }}
+                            <a :href="'/movie/' + option.id">
+                                <img :src="option.image" :alt="option.name" class="h-16 mr-3" v-if="option.image" />
+                                <div>
+                                    <div class="text-sm">
+                                        {{ option.name }}
+                                    </div>
+                                    <div class="text-xs text-gray-500">
+                                        {{ option.year }}
+                                    </div>
                                 </div>
-                                <div class="text-xs text-gray-500">
-                                    {{ option.year }}
-                                </div>
-                            </div>
+                            </a>
                         </div>
                     </template>
                     <template #selectedOption="{ option }">
@@ -36,71 +38,35 @@
                     </template>
                 </VueMultiselect>
             </form>
-            <div class="mt-4 w-full mx-auto">
-                <div class="mt-4 text-2xl text-bold text-gray-200" v-if="select_id">
-
-                    <ArrowDownCircleIcon class="h-6 w-6 text-blue-500" />
-
-                    <p>Você selecionou: {{ selected.name }}</p>
-                    <p>Id: {{ select_id }}</p>
-                    <img :src="selected.image" alt=""
-                        class="h-96 rounded-3xl border-4 border-violet-500 shadow-sm shadow-violet-500">
-                </div>
-            </div>
         </div>
     </div>
 </template>
 
-<script>
+<script setup>
+import { ref } from 'vue';
+import VueMultiselect from 'vue-multiselect';
 
-export default {
-    data() {
-        return {
-            selected: null,
-            searchQuery: '',
-            options: [],
-            searching: false,
-            result: null,
-            select_id: null,
-            imdb_id: null
-        }
-    },
-    methods: {
-        customLabel(option) {
-            return `${option.name} - ${option.year}`
-        },
-        onSearchChange(searchQuery) {
-            this.searchQuery = searchQuery;
-            if (!this.searching) {
-                this.search();
-            }
-        },
-        onInput(selectedOption) {
-            if (selectedOption != null || selectedOption != [] || selectedOption != '')
-                this.selected = selectedOption;
+const options = ref([]);
+const selected = ref(null);
+const select_id = ref(null);
+const search = ref('');
 
-            this.searching = false;
-        },
-        search() {
-            this.searching = true;
-            axios.post('/search', { query: this.searchQuery })
-                .then(response => {
-                    if (response.data.length > 0) {
-                        response.data = response.data.filter(option => option.name !== null);
-                        this.options = response.data;
-                    }
-                })
-                .catch(error => {
-                    console.error(error);
-                })
-                .finally(() => {
-                    this.searching = false;
-                });
-        },
-        onSelect(selectedOption) {
-            this.select_id = selectedOption.id;
-            this.imdb_id = selectedOption.imdb_id;
-        }
-    },
-}
+const onSearchChange = (query) => {
+    search.value = query;
+
+    axios.post('search', {
+        query: query
+    }).then((response) => {
+        options.value = response.data;
+    })
+};
+const onInput = (option) => {
+    select_id.value = option.id;
+};
+const onSelect = (option) => {
+    select_id.value = option.id;
+};
+const customLabel = (option) => {
+    return `${option.name} (${option.year})`;
+};
 </script>

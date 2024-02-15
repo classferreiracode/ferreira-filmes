@@ -12,6 +12,9 @@ export default {
             },
             spacing: {
                 '46': '11.25rem',
+            },
+            gridTemplateRows: {
+                '[auto,auto,1fr]': 'auto auto 1fr',
             }
         },
     },
@@ -21,6 +24,7 @@ export default {
     plugins: [
         require('@tailwindcss/forms'),
         require('@tailwindcss/aspect-ratio'),
+        require("daisyui"),
     ],
 }
 

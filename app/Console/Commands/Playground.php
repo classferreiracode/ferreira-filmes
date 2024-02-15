@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use App\Services\Api\TheMovieDatabase\TheMovieDatabaseService;
+use App\Services\Api\ViaCep\ViaCepService;
 
 class Playground extends Command
 {
@@ -29,10 +30,10 @@ class Playground extends Command
         $service = new TheMovieDatabaseService();
         $json = $service
             ->detailMovies()
-            ->fromMovie(1182734)
+            ->fromMovie(180)
             ->get();
 
-        ds($json);
+        dd($json);
 
         return Command::SUCCESS;
     }

@@ -12,7 +12,7 @@ class Populars extends BaseEndpoint
         return $this->transform(
             $this->service
                 ->api
-                ->get('/movie/popular?include_adult=true&language=pt-BR&sort_by=popularity.desc')
+                ->get('/movie/popular?include_adult=false&language=pt-BR&sort_by=popularity.desc')
                 ->json('results'),
             Popular::class
         );

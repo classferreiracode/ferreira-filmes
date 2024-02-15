@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Services\Api\TheMovieDatabase\TheMovieDatabaseService;
+use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
 
 class HomeController extends Controller
@@ -27,5 +28,17 @@ class HomeController extends Controller
             ->search()
             ->fromSearch($request->input('query'))
             ->get();
+    }
+
+    public function movie($id): View
+    {
+        $movie = $this->service
+            ->detailMovies()
+            ->fromMovie($id)
+            ->get();
+
+        return view('movie', [
+            'movie' => $movie
+        ]);
     }
 }

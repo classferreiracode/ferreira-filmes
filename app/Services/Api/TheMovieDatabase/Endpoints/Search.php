@@ -19,7 +19,7 @@ class Search extends BaseEndpoint
         return $this->transform(
             $this->service
                 ->api
-                ->get('search/movie?query=' . $this->query . '&language=pt-BR&include_adult=true')
+                ->get('search/movie?query=' . $this->query . '&language=pt-BR&include_adult=false')
                 ->json('results'),
             OnSearch::class
         );
