@@ -12,8 +12,8 @@
                         Digite o nome do filme para iniciar a busca
                     </template>
                     <template #option="{ option }">
-                        <div class="flex items-center">
-                            <a :href="'/movie/' + option.id">
+                        <a :href="'/movie/' + option.id">
+                            <div class="flex items-center">
                                 <img :src="option.image" :alt="option.name" class="h-16 mr-3" v-if="option.image" />
                                 <div>
                                     <div class="text-sm">
@@ -23,8 +23,8 @@
                                         {{ option.year }}
                                     </div>
                                 </div>
-                            </a>
-                        </div>
+                            </div>
+                        </a>
                     </template>
                     <template #selectedOption="{ option }">
                         <div>
