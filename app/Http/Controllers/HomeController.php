@@ -16,7 +16,13 @@ class HomeController extends Controller
     }
     public function index()
     {
-        return view('welcome');
+        $popularMovies = $this->service
+            ->popularMovies()
+            ->get();
+
+        return view('welcome', [
+            'popularMovies' => $popularMovies
+        ]);
     }
 
     public function search(Request $request)

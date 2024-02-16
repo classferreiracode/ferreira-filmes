@@ -8,7 +8,7 @@ export default {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Almarai', 'sans-serif'],
+                sans: ['IBM Plex Sans', 'sans-serif'],
             },
             spacing: {
                 '46': '11.25rem',
@@ -22,9 +22,13 @@ export default {
         aspectRatio: false,
     },
     plugins: [
-        require('@tailwindcss/forms'),
+        //require('@tailwindcss/forms'),
+        require('@tailwindcss/typography'),
         require('@tailwindcss/aspect-ratio'),
         require("daisyui"),
     ],
+    daisyui: {
+        themes: ["light", "dark", "synthwave"],
+    },
 }
 

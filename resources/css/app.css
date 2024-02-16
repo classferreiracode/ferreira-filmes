@@ -1,5 +1,5 @@
 @import url('../../node_modules/vue-multiselect/dist/vue-multiselect.css');
-@import url(https://fonts.bunny.net/css?family=almarai:300,400,700,800);
+@import url(https://fonts.bunny.net/css?family=ibm-plex-sans:100,200,400,600,700);
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

@@ -1,72 +1,44 @@
 <template>
-    <div class="mt-8 w-full mx-auto max-w-7xl pt-4">
-        <div>
-            <form>
-                <VueMultiselect class="" v-model="selected" placeholder="Busque um filme/serie por nome" label="name"
-                    track-by="id" :options="options" :custom-label="customLabel" :show-labels="false"
-                    @search-change="onSearchChange" @input="onInput" @select="onSelect">
-                    <template #noResult>
-                        Oops! Nenhum resultado encontrado para <b>{{ selected }}</b>
-                    </template>
-                    <template #noOptions>
-                        Digite o nome do filme para iniciar a busca
-                    </template>
-                    <template #option="{ option }">
-                        <a :href="'/movie/' + option.id">
-                            <div class="flex items-center">
-                                <img :src="option.image" :alt="option.name" class="h-16 mr-3" v-if="option.image" />
-                                <div>
-                                    <div class="text-sm">
-                                        {{ option.name }}
-                                    </div>
-                                    <div class="text-xs text-gray-500">
-                                        {{ option.year }}
-                                    </div>
-                                </div>
-                            </div>
+    <div class="container mx-auto px-4 pt-8">
+        <div class="popular-movies">
+            <h2 class="uppercase tracking-wider text-primary text-lg font-semibold">
+                Filmes Populares
+            </h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
+                <div class="mt-8" v-for="movie in popular_movies" :key="movie.id">
+                    <a :href="'/movie/' + movie.id">
+                        <img :src="movie.poster_path" alt="{{ movie.title }}" class="hover:opacity-75 transition ease-in-out duration-150">
+                    </a>
+                    <div class="mt-2">
+                        <a href="#" class="text-lg mt-2 hover:text-gray-300 duration-500">
+                            {{ movie.title }}
                         </a>
-                    </template>
-                    <template #selectedOption="{ option }">
-                        <div>
-                            <div class="text-sm">
-                                {{ option.name }}
-                            </div>
-                            <div class="text-xs text-gray-500">
-                                {{ option.year }}
-                            </div>
+                        <div class="flex items-center text-gray-400 text-sm mt-1">
+                            <StarIcon class="h-5 w-5 fill-yellow-500" />
+                            <span class="ml-1">
+                                {{ movie.vote_average.toFixed(1) }}
+                            </span>
+                            <span class="mx-2">|</span>
+                            <span>
+                                {{ movie.release_date }}
+                            </span>
                         </div>
-                    </template>
-                </VueMultiselect>
-            </form>
+                        <div class="text-gray-400 text-sm">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </template>
 
 <script setup>
-import { ref } from 'vue';
-import VueMultiselect from 'vue-multiselect';
+import { StarIcon } from '@heroicons/vue/24/solid'
 
-const options = ref([]);
-const selected = ref(null);
-const select_id = ref(null);
-const search = ref('');
+const props = defineProps({
+    popular_movies: Object
+})
 
-const onSearchChange = (query) => {
-    search.value = query;
-
-    axios.post('search', {
-        query: query
-    }).then((response) => {
-        options.value = response.data;
-    })
-};
-const onInput = (option) => {
-    select_id.value = option.id;
-};
-const onSelect = (option) => {
-    select_id.value = option.id;
-};
-const customLabel = (option) => {
-    return `${option.name} (${option.year})`;
-};
+console.log(props.popular_movies);
 </script>
