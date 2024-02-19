@@ -8,16 +8,19 @@ class Movie
 {
     public int $id;
     public ?string $imdb_id;
-    public string $title;
+    public ?string $title;
     public ?string $release_date;
     public ?float $vote_average;
     public ?string $overview;
-    public array $genres;
+    public ?array $genres;
     public ?string $backdrop_path;
     public ?string $poster_path;
     public ?string $runtime;
-    public array $credits;
-    public array $videos;
+    public ?array $credits;
+    public ?array $videos;
+    public ?array $recommendations;
+    public ?array $similar;
+    public ?array $keywords;
 
 
     public function __construct($data)
@@ -36,5 +39,8 @@ class Movie
         $this->runtime          = data_get($data, 'runtime') . ' min';
         $this->credits          = data_get($data, 'credits');
         $this->videos           = data_get($data, 'videos');
+        $this->recommendations  = data_get($data, 'recommendations');
+        $this->similar          = data_get($data, 'similar');
+        $this->keywords         = data_get($data, 'keywords');
     }
 }
