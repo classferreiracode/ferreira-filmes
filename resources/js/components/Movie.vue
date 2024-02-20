@@ -131,15 +131,18 @@
             <h2 class="text-4xl font-semibold">
                 Recomendados
             </h2>
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
-                <div v-for="recommend in getRecommendations()" class="mt-8" :key="recommend.id">
+            <carousel :items-to-show="5" autoplay="2000" :wrap-around="true" :transition="500">
+                <slide v-for="recommend in getRecommendations()" class="mt-8" :key="recommend.id">
                     <a :href="'/movie/' + recommend.id">
                         <img :src="'https://image.tmdb.org/t/p/original/' + recommend.poster_path"
                             alt="{{ recommend.title }}"
-                            class="rounded hover:opacity-75 transition ease-in-out duration-150">
+                            class="rounded hover:opacity-75 transition ease-in-out duration-150 carousel__item">
                     </a>
-                </div>
-            </div>
+                </slide>
+                <template #addons>
+                    <navigation />
+                </template>
+            </carousel>
         </div>
     </div>
 
@@ -157,7 +160,8 @@
                             d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
                     </svg>
                     <span>
-                        Alguns filmes/séries podem conter anúncios ou conteúdos inapropriados. Caso uma janela de anúncio seja aberta, você pode clicar no botão de fechar.
+                        Alguns filmes/séries podem conter anúncios ou conteúdos inapropriados. Caso uma janela de anúncio
+                        seja aberta, você pode clicar no botão de fechar.
                     </span>
                 </div>
                 <div class="modal-action">
@@ -174,8 +178,8 @@
                 </form>
                 <h3 class="font-bold text-lg">{{ movie.videos.results[0].name }}</h3>
                 <object class="w-full overflow-hidden rounded-lg mt-4">
-                    <embed :src="'https://www.youtube.com/embed/' + movie.videos.results[0].key" autoplay
-                        class="w-full h-[500px]">
+                    <embed :src="'https://www.youtube.com/embed/' + movie.videos.results[0].key" autoplay controls
+                        allowfullscreen class="w-full h-[500px]">
                 </object>
             </div>
         </dialog>
@@ -194,6 +198,8 @@
 <script setup>
 import { onMounted } from 'vue';
 import { StarIcon } from '@heroicons/vue/24/solid'
+import { Carousel, Slide, Navigation } from 'vue3-carousel'
+import 'vue3-carousel/dist/carousel.css'
 
 const props = defineProps({
     movie: Object
@@ -245,3 +251,44 @@ function SuperFlixAPIPluginJS(imdb) {
     frame.innerHTML += '<iframe src="https://superflixapi.top/filme/' + imdb + '/#color:1a103d" scrolling="no" frameborder="0" allowfullscreen class="w-full h-[500px] rounded-xl"></iframe>';
 }
 </script>
+<style scoped>
+.carousel__slide {
+    padding: 5px;
+}
+
+.carousel__viewport {
+    perspective: 2000px;
+}
+
+.carousel__track {
+    transform-style: preserve-3d;
+}
+
+.carousel__slide--sliding {
+    transition: 0.5s;
+}
+
+.carousel__slide {
+    opacity: 0.9;
+    transform: rotateY(-20deg) scale(0.9);
+}
+
+.carousel__slide--active~.carousel__slide {
+    transform: rotateY(20deg) scale(0.9);
+}
+
+.carousel__slide--prev {
+    opacity: 1;
+    transform: rotateY(-10deg) scale(0.95);
+}
+
+.carousel__slide--next {
+    opacity: 1;
+    transform: rotateY(10deg) scale(0.95);
+}
+
+.carousel__slide--active {
+    opacity: 1;
+    transform: rotateY(0) scale(1.1);
+}
+</style>
