@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Services\Api\TheMovieDatabase\Endpoints;
+namespace App\Services\Api\TheMovieDatabase\Endpoints\Movie;
 
-use App\Services\Api\TheMovieDatabase\Entities\Popular;
 use App\Services\Api\TheMovieDatabase\Endpoints\BaseEndpoint;
+use App\Services\Api\TheMovieDatabase\Entities\Movie\Popular;
 
 class Populars extends BaseEndpoint
 {

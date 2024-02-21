@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Services\Api\TheMovieDatabase\Endpoints;
+namespace App\Services\Api\TheMovieDatabase\Endpoints\Person;
 
+use App\Services\Api\TheMovieDatabase\Endpoints\BaseEndpoint;
+use App\Services\Api\TheMovieDatabase\Entities\Person\Person;
 use App\Services\Api\TheMovieDatabase\TheMovieDatabase;
-use App\Services\Api\TheMovieDatabase\Entities\Person;
 
 class Persons extends BaseEndpoint
 {

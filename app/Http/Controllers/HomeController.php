@@ -20,8 +20,14 @@ class HomeController extends Controller
             ->popularMovies()
             ->get();
 
+        $popularTv = $this->service
+            ->popularSeries()
+            ->get();
+
+
         return view('welcome', [
-            'popularMovies' => $popularMovies
+            'popularMovies' => $popularMovies,
+            'popularTv' => $popularTv
         ]);
     }
 
@@ -45,6 +51,18 @@ class HomeController extends Controller
 
         return view('movie', [
             'movie' => $movie
+        ]);
+    }
+
+    public function series($id): View
+    {
+        $serie = $this->service
+            ->detailSerie()
+            ->fromSerie($id)
+            ->get();
+
+        return view('serie', [
+            'serie' => $serie
         ]);
     }
 }

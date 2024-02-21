@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Api\TheMovieDatabase\Entities;
+namespace App\Services\Api\TheMovieDatabase\Entities\Person;
 
 class Person
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Services\Api\TheMovieDatabase\Entities;
+namespace App\Services\Api\TheMovieDatabase\Entities\Movie;
 
-class Serie
+class Popular
 {
     public int $id;
     public string $title;

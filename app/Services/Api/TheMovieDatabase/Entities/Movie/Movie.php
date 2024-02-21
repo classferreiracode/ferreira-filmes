@@ -1,8 +1,6 @@
 <?php
 
-namespace App\Services\Api\TheMovieDatabase\Entities;
-
-use Illuminate\Support\Facades\Http;
+namespace App\Services\Api\TheMovieDatabase\Entities\Movie;
 
 class Movie
 {
@@ -25,8 +23,6 @@ class Movie
 
     public function __construct($data)
     {
-        ds($data);
-
         $this->id               = data_get($data, 'id');
         $this->imdb_id          = data_get($data, 'imdb_id');
         $this->title            = data_get($data, 'title');

@@ -17,3 +17,4 @@ use App\Http\Controllers\HomeController;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::post('/search', [HomeController::class, 'search'])->name('search');
 Route::get('/movie/{id}', [HomeController::class, 'movie'])->name('movie');
+Route::get('/serie/{id}', [HomeController::class, 'series'])->name('tv');
