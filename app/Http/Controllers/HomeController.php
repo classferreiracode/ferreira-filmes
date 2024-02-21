@@ -14,7 +14,7 @@ class HomeController extends Controller
     {
         $this->service = new TheMovieDatabaseService();
     }
-    public function index()
+    public function index() : View
     {
         $popularMovies = $this->service
             ->popularMovies()
@@ -28,7 +28,7 @@ class HomeController extends Controller
     public function search(Request $request)
     {
         if ($request->input('query') == '' || $request->input('query') == null) {
-            return '';
+            return response('Bad Request', 400);
         }
         return $this->service
             ->search()

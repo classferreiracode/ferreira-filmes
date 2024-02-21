@@ -3,18 +3,19 @@
 namespace App\Services\Api\TheMovieDatabase\Endpoints;
 
 use App\Services\Api\TheMovieDatabase\Entities\Search as OnSearch;
+use Illuminate\Support\Collection;
 
 class Search extends BaseEndpoint
 {
 
     private string $query;
 
-    public function fromSearch(string|OnSearch $query)
+    public function fromSearch(string|OnSearch $query) : self
     {
         $this->query = $query instanceof OnSearch ? $query->id : $query;
         return $this;
     }
-    public function get()
+    public function get() : Collection
     {
         return $this->transform(
             $this->service
