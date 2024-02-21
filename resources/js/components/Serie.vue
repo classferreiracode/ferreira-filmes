@@ -40,7 +40,7 @@
     }
 
     function SuperFlixAPIPluginJS(imdb) {
-        var frame = document.getElementById('SuperFlixAPIContainerVideo');
+        let frame = document.getElementById('SuperFlixAPIContainerVideo');
         frame.innerHTML += '<iframe src="https://superflixapi.top/serie/' + imdb + '/#color:1a103d" scrolling="no" frameborder="0" allowfullscreen class="w-full h-[500px] rounded-xl"></iframe>';
     }
 </script>
@@ -101,17 +101,7 @@
                 </div>
                 <div class="flex items-center justify-center md:justify-start gap-4 w-full">
                     <div class="mt-12">
-                        <button class="btn btn-block md:btn-wide btn-primary" onclick="my_modal_trailer.showModal()">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
-                                <path fill-rule="evenodd"
-                                      d="M4.5 5.653c0-1.427 1.529-2.33 2.779-1.643l11.54 6.347c1.295.712 1.295 2.573 0 3.286L7.28 19.99c-1.25.687-2.779-.217-2.779-1.643V5.653Z"
-                                      clip-rule="evenodd" />
-                            </svg>
-                            Trailer
-                        </button>
-                    </div>
-                    <div class="mt-12">
-                        <button class="btn btn-block md:btn-wide btn-accent" onclick="my_modal_warning.showModal()">
+                        <button class="btn btn-wide btn-accent" onclick="my_modal_warning.showModal()">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
                                 <path fill-rule="evenodd"
                                       d="M4.5 5.653c0-1.427 1.529-2.33 2.779-1.643l11.54 6.347c1.295.712 1.295 2.573 0 3.286L7.28 19.99c-1.25.687-2.779-.217-2.779-1.643V5.653Z"
