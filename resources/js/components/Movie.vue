@@ -171,7 +171,7 @@
                 </div>
             </div>
         </dialog>
-        <dialog id="my_modal_trailer" class="modal">
+        <!-- <dialog id="my_modal_trailer" class="modal">
             <div class="modal-box w-11/12 max-w-5xl">
                 <form method="dialog">
                     <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
@@ -182,7 +182,7 @@
                         allowfullscreen class="w-full h-[500px]">
                 </object>
             </div>
-        </dialog>
+        </dialog> -->
         <dialog id="my_modal_movie" class="modal">
             <div class="modal-box w-11/12 max-w-5xl">
                 <form method="dialog">

@@ -13,7 +13,7 @@ class Series extends BaseEndpoint
         return $this->transform(
             $this->service
             ->api
-            ->get('/tv/popular?include_adult=false&language=pt-BR&sort_by=popularity.desc')
+            ->get('/tv/top_rated?include_adult=true&language=pt-BR')
             ->json('results'),
             Popular::class);
     }

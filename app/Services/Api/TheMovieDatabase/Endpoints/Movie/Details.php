@@ -19,7 +19,7 @@ class Details extends BaseEndpoint
     {
         $json[] = $this->service
             ->api
-            ->get('/movie/' . $this->movieId . '?append_to_response=credits,videos,images,recommendations,similar,keywords&language=pt-BR')
+            ->get('/movie/' . $this->movieId . '?include_adult=true&append_to_response=credits,videos,images,recommendations,similar,keywords&language=pt-BR')
             ->json();
 
         return $this->transform($json, Movie::class)[0];

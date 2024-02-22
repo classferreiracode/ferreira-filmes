@@ -1,6 +1,6 @@
 <template>
     <div class="container mx-auto px-4 pt-8">
-        <div class="popular-movies mb-8 border-b border-gray-600">
+        <div class="popular-movies mb-8 border-b border-gray-600 pb-8">
             <h2 class="uppercase tracking-wider text-primary text-lg font-semibold">
                 Filmes Populares
             </h2>
