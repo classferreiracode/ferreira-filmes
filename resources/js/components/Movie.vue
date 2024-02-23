@@ -93,7 +93,7 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
                 <div v-for="cast in getCast()" class="mt-8 flex flex-col items-center text-center justify-center"
                     :key="cast.id">
-                    <a :href="'/actor/' + cast.id">
+                    <a :href="'/person/' + cast.id">
                         <div :class="cast.profile_path ? 'avatar' : 'avatar placeholder'">
                             <div class="w-16 rounded-full ring ring-accent ring-offset-warning ring-offset-2 my-4">
                                 <img v-if="cast.profile_path"
@@ -106,7 +106,7 @@
                         </div>
                     </a>
                     <div class="mt-2">
-                        <a href="#" class="text-md mt-2 hover:text-gray-300 duration-500">
+                        <a :href="'/person/' + cast.id" class="text-md mt-2 hover:text-gray-300 duration-500">
                             {{ cast.name }}
                         </a>
                         <div class="text-gray-400 text-sm mt-1">
@@ -234,7 +234,7 @@ function getInitials(name) {
 function traslateJob(job) {
     switch (job) {
         case 'Director':
-            return 'Diretor';
+            return 'Diretor(a)';
         case 'Screenplay':
             return 'Roteirista';
         default:

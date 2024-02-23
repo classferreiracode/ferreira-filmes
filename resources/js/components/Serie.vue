@@ -34,7 +34,6 @@
             .join('');
     }
 
-
     function getCast() {
         return props.serie.credits.cast.slice(0, 10);
     }
@@ -111,7 +110,6 @@
                         </button>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>

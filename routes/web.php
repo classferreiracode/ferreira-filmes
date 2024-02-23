@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PersonController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 
@@ -18,3 +19,9 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::post('/search', [HomeController::class, 'search'])->name('search');
 Route::get('/movie/{id}', [HomeController::class, 'movie'])->name('movie');
 Route::get('/serie/{id}', [HomeController::class, 'series'])->name('tv');
+
+//person prefix
+Route::prefix('person')->group(function () {
+    Route::get('/', [PersonController::class, 'index'])->name('persons');
+    Route::get('/{id}', [PersonController::class, 'profile'])->name('person');
+});

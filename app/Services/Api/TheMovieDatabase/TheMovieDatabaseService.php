@@ -2,6 +2,7 @@
 
 namespace App\Services\Api\TheMovieDatabase;
 
+use App\Services\Api\TheMovieDatabase\Endpoints\HasPerson;
 use App\Services\Api\TheMovieDatabase\Endpoints\HasPopularSeries;
 use App\Services\Api\TheMovieDatabase\Endpoints\HasSerieDetails;
 use Illuminate\Support\Facades\Http;
@@ -18,6 +19,7 @@ class TheMovieDatabaseService
     use HasDetailMovies;
     use HasSerieDetails;
     use HasPeopleList;
+    use HasPerson;
     use HasSearch;
 
     public PendingRequest $api;
