@@ -31,7 +31,7 @@ class HomeController extends Controller
         ]);
     }
 
-    public function search(Request $request)
+    public function search(Request $request) : Collection
     {
         if ($request->input('query') == '' || $request->input('query') == null) {
             return response('Bad Request', 400);
@@ -63,6 +63,18 @@ class HomeController extends Controller
 
         return view('serie', [
             'serie' => $serie
+        ]);
+    }
+
+    public function castingMovie(int $id): View
+    {
+        $casting = $this->service
+            ->creditMovies()
+            ->fromMovie($id)
+            ->get();
+
+        return view('casting', [
+            'casting' => $casting
         ]);
     }
 }

@@ -2,7 +2,7 @@
     <div class="movie-info border-b border-gray-600">
         <div class="container mx-auto px-4 py-8 flex flex-col md:flex-row">
             <div class="flex-none">
-                <img :src="movie.poster_path" alt="{{ movie.title }}" class="w-96">
+                <img :src="movie.poster_path" alt="{{ movie.title }}" class="w-96 rounded-lg">
             </div>
             <div class="md:ml-24">
                 <h2 class="text-4xl font-semibold mt-4 md:mt-0">
@@ -58,8 +58,8 @@
                 </div>
                 <div class="flex items-center justify-center md:justify-start gap-4 w-full">
                     <div class="mt-12">
-                        <button class="btn btn-block md:btn-wide btn-primary" onclick="my_modal_trailer.showModal()">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                        <button class="btn btn-block md:btn-wide btn-primary text-purple-950" onclick="my_modal_trailer.showModal()">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 fill-purple-950">
                                 <path fill-rule="evenodd"
                                     d="M4.5 5.653c0-1.427 1.529-2.33 2.779-1.643l11.54 6.347c1.295.712 1.295 2.573 0 3.286L7.28 19.99c-1.25.687-2.779-.217-2.779-1.643V5.653Z"
                                     clip-rule="evenodd" />
@@ -68,8 +68,8 @@
                         </button>
                     </div>
                     <div class="mt-12">
-                        <button class="btn btn-block md:btn-wide btn-accent" onclick="my_modal_warning.showModal()">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                        <button class="btn btn-block md:btn-wide btn-accent text-purple-950" onclick="my_modal_warning.showModal()">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 fill-purple-950">
                                 <path fill-rule="evenodd"
                                     d="M4.5 5.653c0-1.427 1.529-2.33 2.779-1.643l11.54 6.347c1.295.712 1.295 2.573 0 3.286L7.28 19.99c-1.25.687-2.779-.217-2.779-1.643V5.653Z"
                                     clip-rule="evenodd" />
@@ -171,18 +171,22 @@
                 </div>
             </div>
         </dialog>
-        <!-- <dialog id="my_modal_trailer" class="modal">
+        <dialog id="my_modal_trailer" class="modal" v-if="movie.videos !== '' || movie.videos !== null">
             <div class="modal-box w-11/12 max-w-5xl">
                 <form method="dialog">
                     <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
                 </form>
-                <h3 class="font-bold text-lg">{{ movie.videos.results[0].name }}</h3>
+                <h3 class="font-bold text-lg">{{ movie.title }}</h3>
                 <object class="w-full overflow-hidden rounded-lg mt-4">
-                    <embed :src="'https://www.youtube.com/embed/' + movie.videos.results[0].key" autoplay controls
+                    <embed v-if="movie.videos.results.length > 0"
+                        :src="'https://www.youtube.com/embed/' + movie.videos.results[0].key" autoplay controls
                         allowfullscreen class="w-full h-[500px]">
+                    <h4 v-else class="text-center mt-4 text-3xl">
+                        Nenhum Trailer encontrado
+                    </h4>
                 </object>
             </div>
-        </dialog> -->
+        </dialog>
         <dialog id="my_modal_movie" class="modal">
             <div class="modal-box w-11/12 max-w-5xl">
                 <form method="dialog">

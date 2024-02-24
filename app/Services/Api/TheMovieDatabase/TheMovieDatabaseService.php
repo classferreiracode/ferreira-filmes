@@ -2,6 +2,7 @@
 
 namespace App\Services\Api\TheMovieDatabase;
 
+use App\Services\Api\TheMovieDatabase\Endpoints\HasCreditMovies;
 use App\Services\Api\TheMovieDatabase\Endpoints\HasPerson;
 use App\Services\Api\TheMovieDatabase\Endpoints\HasPopularSeries;
 use App\Services\Api\TheMovieDatabase\Endpoints\HasSerieDetails;
@@ -16,6 +17,7 @@ class TheMovieDatabaseService
 {
     use HasPopularMovies;
     use HasPopularSeries;
+    use HasCreditMovies;
     use HasDetailMovies;
     use HasSerieDetails;
     use HasPeopleList;

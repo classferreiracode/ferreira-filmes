@@ -20,8 +20,15 @@ Route::post('/search', [HomeController::class, 'search'])->name('search');
 Route::get('/movie/{id}', [HomeController::class, 'movie'])->name('movie');
 Route::get('/serie/{id}', [HomeController::class, 'series'])->name('tv');
 
-//person prefix
 Route::prefix('person')->group(function () {
     Route::get('/', [PersonController::class, 'index'])->name('persons');
     Route::get('/{id}', [PersonController::class, 'profile'])->name('person');
+});
+
+Route::prefix('movie')->group(function () {
+    Route::get('/casting/{id}', [HomeController::class, 'castingMovie'])->name('movie.casting');
+});
+
+Route::prefix('tv')->group(function () {
+    Route::get('/casting/{id}', [HomeController::class, 'castingTv'])->name('tv.casting');
 });

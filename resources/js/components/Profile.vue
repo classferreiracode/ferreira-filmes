@@ -4,21 +4,13 @@
     const props = defineProps({
         person: Object
     })
-
-    function getInitials(name) {
-        return name.split(' ').map((n) => n[0]).join('');
-
-    }
-
-
-
 </script>
 
 <template>
     <div class="person-info border-b border-gray-600">
         <div class="container mx-auto px-4 py-8 flex flex-col md:flex-row">
             <div class="flex-none">
-                <img :src="person.profile_path" alt="{{ person.name }}" class="w-96">
+                <img :src="person.profile_path" alt="{{ person.name }}" class="w-96 rounded-lg">
             </div>
             <div class="md:ml-24">
                 <h2 class="text-4xl font-semibold mt-4 md:mt-0">
@@ -43,7 +35,6 @@
                 <div class="text-gray-400 text-sm my-8">
                     {{ person.biography }}
                 </div>
-
             </div>
         </div>
     </div>
@@ -57,10 +48,13 @@
                      :key="cast.id">
                     <a :href="cast.media_type == 'movie' ? '/movie/' + cast.id : '/serie/' + cast.id">
                         <div :class="cast.poster_path ? 'avatar' : 'avatar placeholder'">
-                            <div class="w-16 rounded-full ring ring-accent ring-offset-warning ring-offset-2 my-4">
+                            <div class="w-16 rounded my-4">
                                 <img v-if="cast.poster_path"
                                      :src="'https://image.tmdb.org/t/p/w235_and_h235_face/' + cast.poster_path"
-                                     :alt="cast.name" class="hover:opacity-75 transition ease-in-out duration-150" />
+                                     :alt="cast.title" class="hover:opacity-75 transition ease-in-out duration-150" />
+                                <img v-else
+                                     :src="'https://placehold.co/600x400?text=No+Image'"
+                                     :alt="cast.title" class="hover:opacity-75 transition ease-in-out duration-150" />
                             </div>
                         </div>
                     </a>
