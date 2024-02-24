@@ -77,4 +77,16 @@ class HomeController extends Controller
             'casting' => $casting
         ]);
     }
+
+    public function castingSerie(int $id): View
+    {
+        $casting = $this->service
+            ->creditSeries()
+            ->fromSerie($id)
+            ->get();
+
+        return view('casting', [
+            'casting' => $casting
+        ]);
+    }
 }

@@ -3,6 +3,7 @@
 namespace App\Services\Api\TheMovieDatabase;
 
 use App\Services\Api\TheMovieDatabase\Endpoints\HasCreditMovies;
+use App\Services\Api\TheMovieDatabase\Endpoints\HasCreditSeries;
 use App\Services\Api\TheMovieDatabase\Endpoints\HasPerson;
 use App\Services\Api\TheMovieDatabase\Endpoints\HasPopularSeries;
 use App\Services\Api\TheMovieDatabase\Endpoints\HasSerieDetails;
@@ -16,10 +17,11 @@ use App\Services\Api\TheMovieDatabase\Endpoints\HasPopularMovies;
 class TheMovieDatabaseService
 {
     use HasPopularMovies;
-    use HasPopularSeries;
-    use HasCreditMovies;
     use HasDetailMovies;
+    use HasCreditMovies;
+    use HasPopularSeries;
     use HasSerieDetails;
+    use HasCreditSeries;
     use HasPeopleList;
     use HasPerson;
     use HasSearch;

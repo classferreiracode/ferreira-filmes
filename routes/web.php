@@ -29,6 +29,6 @@ Route::prefix('movie')->group(function () {
     Route::get('/casting/{id}', [HomeController::class, 'castingMovie'])->name('movie.casting');
 });
 
-Route::prefix('tv')->group(function () {
-    Route::get('/casting/{id}', [HomeController::class, 'castingTv'])->name('tv.casting');
+Route::prefix('serie')->group(function () {
+    Route::get('/casting/{id}', [HomeController::class, 'castingSerie'])->name('serie.casting');
 });

@@ -3,12 +3,6 @@ const props = defineProps({
     casting: Object
 })
 
-function getInitials(name) {
-    return name
-        .split(' ')
-        .map((n) => n[0])
-        .join('');
-}
 </script>
 <template>
     <div class="container mx-auto px-4 pt-8">
