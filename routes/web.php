@@ -3,6 +3,7 @@
 use App\Http\Controllers\PersonController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +32,10 @@ Route::prefix('movie')->group(function () {
 
 Route::prefix('serie')->group(function () {
     Route::get('/casting/{id}', [HomeController::class, 'castingSerie'])->name('serie.casting');
+});
+
+Route::prefix('user')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'show'])->name('profile');
 });
 
 Auth::routes();

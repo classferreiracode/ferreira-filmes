@@ -60,24 +60,20 @@
                 </div>
                 <div class="flex items-center justify-center md:justify-start gap-4 w-full">
                     <div class="mt-12">
-                        <button class="btn btn-block md:btn-wide btn-primary text-purple-950" onclick="my_modal_trailer.showModal()">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 fill-purple-950">
-                                <path fill-rule="evenodd"
-                                    d="M4.5 5.653c0-1.427 1.529-2.33 2.779-1.643l11.54 6.347c1.295.712 1.295 2.573 0 3.286L7.28 19.99c-1.25.687-2.779-.217-2.779-1.643V5.653Z"
-                                    clip-rule="evenodd" />
-                            </svg>
-                            Trailer
+                        <button class="btn btn-wide btn-primary text-purple-950" onclick="my_modal_trailer.showModal()">
+                            Ver Trailer
                         </button>
                     </div>
                     <div class="mt-12">
-                        <button class="btn btn-block md:btn-wide btn-accent text-purple-950" onclick="my_modal_warning.showModal()">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 fill-purple-950">
-                                <path fill-rule="evenodd"
-                                    d="M4.5 5.653c0-1.427 1.529-2.33 2.779-1.643l11.54 6.347c1.295.712 1.295 2.573 0 3.286L7.28 19.99c-1.25.687-2.779-.217-2.779-1.643V5.653Z"
-                                    clip-rule="evenodd" />
-                            </svg>
-                            Assistir Online
-                        </button>
+                        <div class="tooltip" data-tip="Assistir Online">
+                            <button class="btn btn-circle btn-accent text-purple-950" onclick="my_modal_warning.showModal()">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 fill-purple-950">
+                                    <path fill-rule="evenodd"
+                                        d="M4.5 5.653c0-1.427 1.529-2.33 2.779-1.643l11.54 6.347c1.295.712 1.295 2.573 0 3.286L7.28 19.99c-1.25.687-2.779-.217-2.779-1.643V5.653Z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            </button>
+                        </div>
                     </div>
                 </div>
 
