@@ -73,8 +73,14 @@ class HomeController extends Controller
             ->fromMovie($id)
             ->get();
 
+        $movie = $this->service
+            ->detailMovies()
+            ->fromMovie($id)
+            ->get();
+
         return view('casting', [
-            'casting' => $casting
+            'casting' => $casting,
+            'movie' => $movie
         ]);
     }
 

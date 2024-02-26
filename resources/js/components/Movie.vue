@@ -39,12 +39,14 @@
                             v-for="crew in getDirectorAndScreenplay()">
                             <div :class="crew.profile_path ? 'avatar' : 'avatar placeholder'">
                                 <div class="w-16 rounded-full ring ring-accent ring-offset-warning ring-offset-2 my-4 ml-6">
-                                    <img v-if="crew.profile_path"
-                                        :src="'https://image.tmdb.org/t/p/w235_and_h235_face/' + crew.profile_path"
-                                        :alt="crew.name" />
-                                    <span v-else class="text-3xl">
-                                        {{ getInitials(crew.name) }}
-                                    </span>
+                                    <a :href="'/person/' + crew.id">
+                                        <img v-if="crew.profile_path"
+                                            :src="'https://image.tmdb.org/t/p/w235_and_h235_face/' + crew.profile_path"
+                                            :alt="crew.name" />
+                                        <span v-else class="text-3xl">
+                                            {{ getInitials(crew.name) }}
+                                        </span>
+                                    </a>
                                 </div>
                             </div>
                             <div class="text-sm ml-6">
@@ -118,7 +120,7 @@
                 </div>
             </div>
             <div class="w-full px-4 py-8 flex justify-center">
-                <a href="#" class="btn btn-block btn-secondary">
+                <a :href="'/movie/casting/' + movie.id" class="btn btn-block btn-secondary">
                     VER ELENCO COMPLETO
                 </a>
             </div>

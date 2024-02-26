@@ -19,7 +19,7 @@ class Detail
     {
         $this->id = data_get($json, 'id');
         $this->name = data_get($json, 'name');
-        $this->profile_path = 'https://media.themoviedb.org/t/p/w300_and_h450_bestv2/' . data_get($json, 'profile_path');
+        $this->profile_path = data_get($json, 'profile_path') === null || data_get($json, 'profile_path') === '' ? null : 'https://media.themoviedb.org/t/p/w300_and_h450_bestv2/' . data_get($json, 'profile_path');
         $this->biography = data_get($json, 'biography');
         $this->birthday = Carbon::parse(data_get($json, 'birthday'))->format('d/m/Y');
         $this->deathday = data_get($json, 'deathday') != null ? Carbon::parse(data_get($json, 'deathday'))->format('d/m/Y') : '';

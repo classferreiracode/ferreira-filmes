@@ -32,3 +32,7 @@ Route::prefix('movie')->group(function () {
 Route::prefix('serie')->group(function () {
     Route::get('/casting/{id}', [HomeController::class, 'castingSerie'])->name('serie.casting');
 });
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

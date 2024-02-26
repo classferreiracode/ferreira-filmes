@@ -44,32 +44,25 @@
                 Filmografia - {{ person.name }}
             </h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
-                <div v-for="cast in person.combined_credits" class="mt-8 flex flex-col items-center text-center justify-center"
-                     :key="cast.id">
-                    <a :href="cast.media_type == 'movie' ? '/movie/' + cast.id : '/serie/' + cast.id">
-                        <div :class="cast.poster_path ? 'avatar' : 'avatar placeholder'">
-                            <div class="w-16 rounded my-4">
-                                <img v-if="cast.poster_path"
-                                     :src="'https://image.tmdb.org/t/p/w235_and_h235_face/' + cast.poster_path"
-                                     :alt="cast.title" class="hover:opacity-75 transition ease-in-out duration-150" />
-                                <img v-else
-                                     :src="'https://placehold.co/600x400?text=No+Image'"
-                                     :alt="cast.title" class="hover:opacity-75 transition ease-in-out duration-150" />
-                            </div>
-                        </div>
+                <div class="mt-8" v-for="movie in person.combined_credits" :key="movie.id">
+                    <a v-if="movie.poster_path != null" :href="'/movie/' + movie.id">
+                        <img :src="'https://image.tmdb.org/t/p/original/' + movie.poster_path" alt="{{ movie.title }}" class=" rounded hover:opacity-75 transition ease-in-out duration-150">
+                    </a>
+                    <a v-else :href="'/movie/' + movie.id">
+                        <img src="https://placehold.co/350x528?text=No+image" alt="No image" class=" rounded hover:opacity-75 transition ease-in-out duration-150">
                     </a>
                     <div class="mt-2">
-                        <a :href="cast.media_type == 'movie' ? '/movie/' + cast.id : '/serie/' + cast.id" class="text-md mt-2 hover:text-gray-300 duration-500">
-                            <span v-if="cast.media_type=='movie'">
-                                {{ cast.title }}
-                            </span>
-                            <span v-else>
-                                {{ cast.name }}
-                            </span>
+                        <a href="#" class="text-lg mt-2 hover:text-gray-300 duration-500">
+                            {{ movie.title }}
                         </a>
-                        <div class="text-gray-400 text-sm mt-1">
+                        <div class="flex items-center text-gray-400 text-sm mt-1">
+                            <StarIcon class="h-5 w-5 fill-yellow-500" />
+                            <span class="ml-1">
+                                {{ movie.vote_average.toFixed(1) }}
+                            </span>
+                            <span class="mx-2">|</span>
                             <span>
-                                {{ cast.character }}
+                                {{ movie.release_date }}
                             </span>
                         </div>
                     </div>
@@ -80,5 +73,4 @@
 </template>
 
 <style scoped>
-
 </style>

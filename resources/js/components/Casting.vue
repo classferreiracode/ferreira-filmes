@@ -1,12 +1,40 @@
 <script setup>
+import { StarIcon } from '@heroicons/vue/24/solid'
+
 const props = defineProps({
-    casting: Object
+    casting: Object,
+    movie: Object
 })
 
 </script>
 <template>
     <div class="container mx-auto px-4 pt-8">
-        <div class="casting-info my-16">
+        <div class="flex flex-row items-center gap-4 mb-8 border-b border-gray-600 pb-8">
+            <div>
+                <img :src="movie.poster_path" alt="{{ movie.title }}" class="w-16 rounded-lg">
+            </div>
+            <div>
+                <h1 class="text-4xl font-semibold">
+                    {{ movie.title }}
+                </h1>
+                <div class="flex items-center text-gray-400 text-sm">
+                    <StarIcon class="h-5 w-5 fill-yellow-500" />
+                    <span class="ml-1">
+                        {{ movie.vote_average.toFixed(1) }}
+                    </span>
+                    <span class="mx-2">|</span>
+                    <span>
+                        {{ movie.release_date }}
+                    </span>
+                    <span class="mx-2">|</span>
+                    <span>
+                        {{ movie.runtime }}
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="casting-info mb-16">
             <!-- Elenco -->
             <h2 class="uppercase tracking-wider text-primary text-lg font-semibold">
                 Elenco

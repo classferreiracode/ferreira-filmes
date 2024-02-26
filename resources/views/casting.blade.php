@@ -3,8 +3,10 @@
 
 @section('content')
 <div>
-    @ds($casting)
-    <casting :casting="{{ json_encode($casting) }}" />
+    <casting
+        :casting="{{ json_encode($casting) }}"
+        :movie="{{ json_encode($movie) }}"
+    />
 </div>
 @endsection
 

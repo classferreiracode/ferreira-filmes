@@ -29,11 +29,9 @@ class Playground extends Command
     {
         $service = new TheMovieDatabaseService();
         $json = $service
-            ->creditMovies()
-            ->fromMovie(4935)
+            ->creditSeries()
+            ->fromSerie(87108)
             ->get();
-
-        ds($json);
         return Command::SUCCESS;
     }
 }

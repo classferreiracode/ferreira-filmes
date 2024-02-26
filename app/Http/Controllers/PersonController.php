@@ -31,6 +31,8 @@ class PersonController extends Controller
             ->fromPerson($id)
             ->get();
 
+        //dd($person);
+
         return view('profile', [
             'person' => $person
         ]);

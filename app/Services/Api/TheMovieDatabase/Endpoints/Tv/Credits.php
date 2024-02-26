@@ -20,7 +20,7 @@ class Credits extends BaseEndpoint
             ->api
             ->get('/tv/' . $this->serieId . '/credits?language=pt-BR')
             ->json();
-        ds($json);
+
         return $this->transform($json, Credit::class)[0];
     }
 

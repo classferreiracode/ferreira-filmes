@@ -33,27 +33,33 @@
             </div>
             <div class="flex-none gap-2">
                 <div class="form-control">
-                    <input type="text" placeholder="Pesquisar" class="input input-sm input-bordered w-24 md:w-auto" />
+                    <input type="text" placeholder="Pesquisar"
+                        class="input input-sm input-bordered w-24 md:w-auto" />
                 </div>
-                <div class="dropdown dropdown-end">
-                    <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
-                        <div class="w-8 rounded-full">
-                            <img alt="Avatar"
-                                src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                @auth
+                    <div class="dropdown dropdown-end">
+                        <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
+                            <div class="w-8 rounded-full">
+                                <img alt="Avatar"
+                                    src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                            </div>
                         </div>
+                        <ul tabindex="0"
+                            class="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
+                            <li>
+                                <a class="justify-between">
+                                    Perfil
+                                    {{-- <span class="badge">New</span> --}}
+                                </a>
+                            </li>
+                            <li><a>Config</a></li>
+                            <li><a>Logout</a></li>
+                        </ul>
                     </div>
-                    <ul tabindex="0"
-                        class="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
-                        <li>
-                            <a class="justify-between">
-                                Perfil
-                                {{-- <span class="badge">New</span> --}}
-                            </a>
-                        </li>
-                        <li><a>Config</a></li>
-                        <li><a>Logout</a></li>
-                    </ul>
-                </div>
+                @endauth
+                @guest
+                    <a href="#modal_login" class="btn btn-sm btn-outline btn-primary">Login</a>
+                @endguest
             </div>
         </div>
     </nav>
@@ -92,6 +98,183 @@
             </a>
         </nav>
     </footer>
+    <dialog id="modal_login" class="modal bg-black bg-opacity-95">
+        <div class="modal-box w-11/12 max-w-5xl">
+            <form method="dialog">
+                <a href="#" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</a>
+            </form>
+            <h3 class="font-bold text-lg">Login/Cadastro</h3>
+            <div role="tablist" class="tabs tabs-lifted">
+                <input type="radio" name="my_tabs_2" role="tab" class="tab" aria-label="Login" checked />
+                <div role="tabpanel" class="tab-content bg-base-300 border-base-300 rounded-box p-6">
+                    <div class="container mx-auto">
+                        <form method="POST" action="{{ route('login') }}">
+                            @csrf
+
+                            <div class="row mb-3">
+                                <label for="email"
+                                    class="col-md-4 col-form-label text-md-end">E-mail</label>
+
+                                <div class="col-md-6">
+                                    <input type="email" id="email" placeholder="Email"
+                                        class="input input-bordered input-primary w-full max-w-xs form-control @error('email') is-invalid @enderror"
+                                        name="email" value="{{ old('email') }}" required autocomplete="email"
+                                        autofocus class="" />
+                                    @error('email')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label for="password"
+                                    class="col-md-4 col-form-label text-md-end">Senha</label>
+
+                                <div class="col-md-6">
+                                    <input type="password" id="password" placeholder="Senha"
+                                        class="input input-bordered input-primary w-full max-w-xs form-control @error('password') is-invalid @enderror"
+                                        name="password" required autocomplete="current-password" />
+
+                                    @error('password')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-md-6 offset-md-4">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="remember"
+                                            id="remember" {{ old('remember') ? 'checked' : '' }}>
+
+                                        <label class="form-check-label" for="remember">
+                                            Lembrar-me
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row mb-0">
+                                <div class="col-md-8 offset-md-4">
+                                    <button type="submit" class="btn btn-primary">
+                                        {{ __('Login') }}
+                                    </button>
+
+                                    @if (Route::has('password.request'))
+                                        <a class="btn btn-link" href="{{ route('password.request') }}">
+                                            {{ __('Esqueceu a senha?') }}
+                                        </a>
+                                    @endif
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <input type="radio" name="my_tabs_2" role="tab" class="tab" aria-label="Cadastro" />
+                <div role="tabpanel" class="tab-content bg-base-100 border-base-300 rounded-box p-6">
+                    <div class="container">
+                        <form method="POST" action="{{ route('register') }}">
+                            @csrf
+
+                            <div class="row mb-3">
+                                <label for="name"
+                                    class="col-md-4 col-form-label text-md-end">{{ __('Name') }}</label>
+
+                                <div class="col-md-6">
+                                    <input
+                                    id="name"
+                                    name="name"
+                                    type="text"
+                                    placeholder="Type here"
+                                    class="@error('name') is-invalid @enderror input input-bordered input-primary w-full max-w-xs"
+                                    value="{{ old('name') }}"
+                                    required
+                                    autocomplete="name"
+                                    autofocus />
+                                    @error('name')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label for="email"
+                                    class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
+
+                                <div class="col-md-6">
+                                    <input
+                                        id="email"
+                                        name="email"
+                                        type="email"
+                                        placeholder="E-Mail"
+                                        class="input input-bordered input-primary w-full max-w-xs @error('email') is-invalid @enderror"
+                                        value="{{ old('email') }}" required autocomplete="email" />
+
+                                    @error('email')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label for="password"
+                                    class="col-md-4 col-form-label text-md-end">Senha</label>
+
+                                <div class="col-md-6">
+                                    <input
+                                        type="password"
+                                        id="password"
+                                        name="password"
+                                        placeholder="Type here"
+                                        class="@error('password') is-invalid @enderror input input-bordered input-primary w-full max-w-xs"
+                                        required autocomplete="new-password" />
+
+                                    @error('password')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label for="password-confirm"
+                                    class="col-md-4 col-form-label text-md-end">Confirme sua senha</label>
+
+                                <div class="col-md-6">
+                                    <input
+                                        type="password"
+                                        id="password-confirm"
+                                        name="password_confirmation"
+                                        placeholder="Confirme sua senha"
+                                        class="input input-bordered input-primary w-full max-w-xs"
+                                        required autocomplete="new-password" />
+                                </div>
+                            </div>
+
+                            <div class="row mb-0">
+                                <div class="col-md-6 offset-md-4">
+                                    <button type="submit" class="btn btn-primary">
+                                        Cadastre-se
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </dialog>
+    <script></script>
 </body>
 
 </html>
