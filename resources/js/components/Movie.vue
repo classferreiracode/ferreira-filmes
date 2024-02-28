@@ -38,7 +38,7 @@
                         <div class="flex flex-col items-center justify-center text-center"
                             v-for="crew in getDirectorAndScreenplay()">
                             <div :class="crew.profile_path ? 'avatar' : 'avatar placeholder'">
-                                <div class="w-16 rounded-full ring ring-accent ring-offset-warning ring-offset-2 my-4 ml-6">
+                                <div class="w-16 rounded-full my-4 ml-6">
                                     <a :href="'/person/' + crew.id">
                                         <img v-if="crew.profile_path"
                                             :src="'https://image.tmdb.org/t/p/w235_and_h235_face/' + crew.profile_path"
@@ -93,7 +93,7 @@
                     :key="cast.id">
                     <a :href="'/person/' + cast.id">
                         <div :class="cast.profile_path ? 'avatar' : 'avatar placeholder'">
-                            <div class="w-16 rounded-full ring ring-accent ring-offset-warning ring-offset-2 my-4">
+                            <div class="w-16 rounded-full my-4">
                                 <img v-if="cast.profile_path"
                                     :src="'https://image.tmdb.org/t/p/w235_and_h235_face/' + cast.profile_path"
                                     :alt="cast.name" class="hover:opacity-75 transition ease-in-out duration-150" />

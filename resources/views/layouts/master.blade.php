@@ -16,64 +16,64 @@
 </head>
 
 <body class="font-sans text-white">
-    <nav class="bg-base-300 w-full fixed z-10">
-        <div class="navbar w-full container mx-auto">
-            <div class="flex-1">
-                <a class="btn btn-ghost text-xl" href="{{ route('home') }}">
-                    <img src="{{ asset('img/favicon.png') }}" alt="icon" class="w-8" />
-                    F. Filmes
-                </a>
-            </div>
-            <div class="">
-                <ul class="menu menu-horizontal p-0">
-                    <li><a href="">Filmes</a></li>
-                    <li><a href="">Séries</a></li>
-                    <li><a href="{{ route('persons') }}">Pessoas</a></li>
-                </ul>
-            </div>
-            <div class="flex-none gap-2">
-                <div class="form-control">
-                    <input type="text" placeholder="Pesquisar"
-                        class="input input-sm input-bordered w-24 md:w-auto" />
+    <div id="app" class="">
+        <nav class="bg-base-300 w-full fixed z-10">
+            <div class="navbar w-full container mx-auto">
+                <div class="flex-1">
+                    <a class="btn btn-ghost text-xl" href="{{ route('home') }}">
+                        <img src="{{ asset('img/favicon.png') }}" alt="icon" class="w-8" />
+                        F. Filmes
+                    </a>
                 </div>
-                @auth
-                    <div class="dropdown dropdown-end">
-                        <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
-                            <div class="w-8 rounded-full">
-                                <img alt="Avatar"
-                                    src="https://placehold.co/600x400?text=FF" />
+                <div class="">
+                    <ul class="menu menu-horizontal p-0">
+                        <li><a href="">Filmes</a></li>
+                        <li><a href="">Séries</a></li>
+                        <li><a href="{{ route('persons') }}">Pessoas</a></li>
+                    </ul>
+                </div>
+                <div class="flex-none gap-2">
+                    {{-- <search /> --}}
+                    @auth
+                        <div class="dropdown dropdown-end">
+                            <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
+                                <div class="w-8 rounded-full">
+                                    <img alt="Avatar"
+                                        src="https://placehold.co/600x400?text=FF" />
+                                </div>
                             </div>
-                        </div>
-                        <ul tabindex="0"
-                            class="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
-                            <li>
-                                <a href="{{ route('profile') }}" class="justify-between">
-                                    Perfil
-                                </a>
-                            </li>
-                            {{-- <li><a>Config</a></li> --}}
-                            <li>
-                                <a class="dropdown-item" href="{{ route('logout') }}"
-                                    onclick="event.preventDefault();
-                                                document.getElementById('logout-form').submit();">
-                                    {{ __('Logout') }}
-                                </a>
+                            <ul tabindex="0"
+                                class="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
+                                <li>
+                                    <a href="{{ route('profile') }}" class="justify-between">
+                                        Perfil
+                                    </a>
+                                </li>
+                                {{-- <li><a>Config</a></li> --}}
+                                <li>
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
+                                                    document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
 
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                    @csrf
-                                </form>
-                            </li>
-                        </ul>
-                    </div>
-                @endauth
-                @guest
-                    <a href="#modal_login" class="btn btn-sm btn-outline btn-primary">Login</a>
-                @endguest
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                                </li>
+                            </ul>
+                        </div>
+                    @endauth
+                    @guest
+                        <a href="#modal_login" class="btn btn-sm btn-outline btn-primary">Login</a>
+                    @endguest
+                </div>
             </div>
-        </div>
-    </nav>
-    <div id="app" class="pt-16">
-        @yield('content')
+        </nav>
+
+        <main class="pt-16">
+            @yield('content')
+        </main>
     </div>
     <footer class="footer items-center p-4 bg-neutral text-neutral-content">
         <aside class="items-center grid-flow-col">
@@ -283,7 +283,6 @@
             </div>
         </div>
     </dialog>
-    <script></script>
 </body>
 
 </html>

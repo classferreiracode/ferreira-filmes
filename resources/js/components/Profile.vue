@@ -46,11 +46,9 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
                 <div class="mt-8" v-for="movie in person.combined_credits" :key="movie.id">
                     <a v-if="movie.poster_path != null" :href="'/movie/' + movie.id">
-                        <img :src="'https://image.tmdb.org/t/p/original/' + movie.poster_path" alt="{{ movie.title }}" class=" rounded hover:opacity-75 transition ease-in-out duration-150">
+                        <img :src="movie.poster_path == null ? 'https://via.placeholder.com/300x450' : 'https://image.tmdb.org/t/p/original/' + movie.poster_path" alt="{{ movie.title }}" class="rounded hover:opacity-75 transition ease-in-out duration-150">
                     </a>
-                    <a v-else :href="'/movie/' + movie.id">
-                        <img src="https://placehold.co/350x528?text=No+image" alt="No image" class=" rounded hover:opacity-75 transition ease-in-out duration-150">
-                    </a>
+
                     <div class="mt-2">
                         <a href="#" class="text-lg mt-2 hover:text-gray-300 duration-500">
                             {{ movie.title }}

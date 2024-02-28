@@ -12,6 +12,6 @@ class Person
     {
         $this->id = data_get($json, 'id');
         $this->name = data_get($json, 'name');
-        $this->profile_path = 'https://media.themoviedb.org/t/p/w300_and_h300_face' . data_get($json, 'profile_path');
+        $this->profile_path = data_get($json, 'profile_path') === null ? 'https://placehold.co/350?text=No+image' : 'https://media.themoviedb.org/t/p/w300_and_h300_face' . data_get($json, 'profile_path');
     }
 }
