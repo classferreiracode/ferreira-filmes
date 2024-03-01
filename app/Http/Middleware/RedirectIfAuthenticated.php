@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\FavoriteMovie;
 use App\Providers\RouteServiceProvider;
 use Closure;
 use Illuminate\Http\Request;

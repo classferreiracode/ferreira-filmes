@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\FavoriteMovie;
+use http\Env\Response;
 use Illuminate\Http\Request;
 use App\Services\Api\TheMovieDatabase\TheMovieDatabaseService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class HomeController extends Controller
 {
@@ -13,8 +17,9 @@ class HomeController extends Controller
     public function __construct()
     {
         $this->service = new TheMovieDatabaseService();
+
     }
-    public function index() : View
+    public function index()
     {
         $popularMovies = $this->service
             ->popularMovies()
@@ -24,6 +29,7 @@ class HomeController extends Controller
             ->popularSeries()
             ->get();
 
+        Session::put('favorites', FavoriteMovie::getMovieIdByUser());
 
         return view('welcome', [
             'popularMovies' => $popularMovies,
@@ -94,5 +100,21 @@ class HomeController extends Controller
         return view('casting', [
             'casting' => $casting
         ]);
+    }
+
+    public function favorites(int $id)
+    {
+        $fav = FavoriteMovie::class;
+
+        if ($fav::where('user_id', auth()->user()->id)->where('movie_id', $id)->exists()) {
+            $fav::where('user_id', auth()->user()->id)->where('movie_id', $id)->delete();
+            return response(['Favorite Removed', 'favorites' => FavoriteMovie::getMovieIdByUser()], 200)->header('Content-Type', 'application/json');
+        } else {
+            $fav::create([
+                'user_id' => auth()->user()->id,
+                'movie_id' => $id
+            ]);
+            return response(['Favorite Added', 'favorites' => FavoriteMovie::getMovieIdByUser()], 200)->header('Content-Type', 'application/json');
+        }
     }
 }

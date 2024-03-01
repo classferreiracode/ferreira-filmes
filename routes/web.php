@@ -38,6 +38,8 @@ Route::prefix('user')->group(function () {
     Route::get('/profile', [ProfileController::class, 'show'])->name('profile');
 });
 
+Route::get('/favorite/{id}', [HomeController::class, 'favorites'])->name('favorite');
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

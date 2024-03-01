@@ -5,9 +5,12 @@
                 <img :src="movie.poster_path" alt="{{ movie.title }}" class="w-96 rounded-lg">
             </div>
             <div class="md:ml-24">
-                <h2 class="text-4xl font-semibold mt-4 md:mt-0">
-                    {{ movie.title }}
-                </h2>
+                <div class="flex items-center text-gray-400 text-sm">
+                    <h2 class="text-4xl font-semibold mt-4 md:mt-0">
+                        {{ movie.title }}
+                    </h2>
+                    <HeartIcon class="h-5 fill-red-700 hover:fill-white transition ease-in-out duration-500" />
+                </div>
                 <div class="flex items-center text-gray-400 text-sm">
                     <StarIcon class="h-5 w-5 fill-yellow-500" />
                     <span class="ml-1">

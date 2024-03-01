@@ -2,15 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ProfileUpdateRequest;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use Illuminate\Http\Request;
+use App\Models\FavoriteMovie;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Redirect;
+use App\Http\Requests\ProfileUpdateRequest;
+use App\Services\Api\TheMovieDatabase\TheMovieDatabaseService;
 
 class ProfileController extends Controller
 {
+    private TheMovieDatabaseService $service;
+    public function __construct()
+    {
+        $this->service = new TheMovieDatabaseService();
+    }
     /**
      * Display the user's profile form.
      */
@@ -60,8 +67,23 @@ class ProfileController extends Controller
 
     public function show()
     {
+        $favorites = FavoriteMovie::getMovieIdByUser();
+        $movies = [];
+
+        foreach ($favorites as $favorite) {
+            $tmdb = $this->service
+                ->detailMovies()
+                ->fromMovie($favorite)
+                ->get();
+
+            $movies[] = $tmdb;
+        }
+
+        //ds($movies);
+
         return view('userProfile', [
             'user' => Auth::user(),
+            'movies' => $movies
         ]);
     }
 }

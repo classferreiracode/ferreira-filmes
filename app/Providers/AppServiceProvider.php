@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\FavoriteMovie;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider

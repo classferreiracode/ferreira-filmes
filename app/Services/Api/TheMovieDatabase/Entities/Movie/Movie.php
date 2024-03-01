@@ -19,6 +19,7 @@ class Movie
     public ?array $recommendations;
     public ?array $similar;
     public ?array $keywords;
+    public ?array $production_companies;
 
 
     public function __construct($data)
@@ -38,5 +39,6 @@ class Movie
         $this->recommendations  = data_get($data, 'recommendations');
         $this->similar          = data_get($data, 'similar');
         $this->keywords         = data_get($data, 'keywords');
+        $this->production_companies = data_get($data, 'production_companies');
     }
 }
