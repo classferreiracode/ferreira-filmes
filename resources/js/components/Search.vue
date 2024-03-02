@@ -12,7 +12,7 @@ export default {
     },
     methods: {
         customLabel(option) {
-            return `${option.name} - ${option.year}`
+            return option.name + ' (' + option.year + ')';
         },
         onSearchChange(searchQuery) {
             this.searchQuery = searchQuery;
@@ -51,7 +51,7 @@ export default {
 </script>
 <template>
     <div class="form-control">
-        <VueMultiselect class=" " v-model="selected" placeholder="Busque um filme/serie por nome" label="name" track-by="id"
+        <VueMultiselect v-model="selected" placeholder="Busque um filme/serie por nome" label="name" track-by="id"
             :options="options" :custom-label="customLabel" :show-labels="false" @search-change="onSearchChange"
             @input="onInput" @select="onSelect">
             <template #noResult>
@@ -60,10 +60,10 @@ export default {
             <template #noOptions>
                 Digite o nome do filme para iniciar a busca
             </template>
-            <template #option="{ option }">
-                <div class="flex items-center">
-                    <a :href="'/movie/' + option.id">
 
+            <template #option="{ option }">
+                <a :href="'/movie/' + option.id">
+                    <div class="flex items-center">
                         <img :src="option.image" :alt="option.name" class="h-16 mr-3" v-if="option.image" />
                         <div>
                             <div class="text-sm">
@@ -73,8 +73,8 @@ export default {
                                 {{ option.year }}
                             </div>
                         </div>
-                    </a>
-                </div>
+                    </div>
+                </a>
             </template>
             <template #selectedOption="{ option }">
                 <div>
@@ -87,7 +87,5 @@ export default {
                 </div>
             </template>
         </VueMultiselect>
-        <!-- <input type="text" id="search" v-model="search" @input="searchMovies" placeholder="Pesquisar"
-            class="input input-sm input-bordered w-24 md:w-auto" /> -->
     </div>
 </template>

@@ -68,21 +68,34 @@
 
 <script setup>
 import { HeartIcon, StarIcon } from '@heroicons/vue/24/solid'
-import { defineEmits, defineProps } from 'vue';
+import { onMounted, onUpdated, defineProps, ref } from 'vue';
 
 const props = defineProps({
     popular_movies: Object,
     popular_tv: Object,
-    favorites: Array
 })
 
-//const emit = defineEmits()
+onMounted(() => {
+    getFavorites()
+})
+
+const favorites = ref([]);
 
 const favoriteMovie = (id) => {
     axios.get('/favorite/' + id)
         .then(response => {
             console.log(response.data)
-            //emit('update-favorites')
+            getFavorites()
+        })
+        .catch(error => {
+            console.log(error)
+        })
+}
+
+const getFavorites = () => {
+    axios.get('/favorites')
+        .then(response => {
+            favorites.value = response.data
         })
         .catch(error => {
             console.log(error)

@@ -33,7 +33,6 @@
                     </ul>
                 </div>
                 <div class="flex-none gap-2">
-                    {{-- <search /> --}}
                     @auth
                         <div class="dropdown dropdown-end">
                             <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
@@ -70,7 +69,9 @@
                 </div>
             </div>
         </nav>
-
+        {{-- <div class="pt-24 px-32">
+            <search />
+        </div> --}}
         <main class="pt-16">
             @yield('content')
         </main>

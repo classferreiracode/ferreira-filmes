@@ -39,6 +39,7 @@ Route::prefix('user')->group(function () {
 });
 
 Route::get('/favorite/{id}', [HomeController::class, 'favorites'])->name('favorite');
+Route::get('/favorites', [HomeController::class, 'getFavorites'])->name('get-favorite');
 
 Auth::routes();
 
