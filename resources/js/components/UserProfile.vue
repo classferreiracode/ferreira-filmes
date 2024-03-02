@@ -52,7 +52,7 @@ function getDirectorAndScreenplay() {
                             <td>
                                 <div class="flex items-center gap-3">
                                     <div class="avatar">
-                                        <div class="mask mask-squircle w-12 h-12">
+                                        <div class="mask mask-squircle w-16">
                                             <img :src="movie.poster_path"
                                                 alt="{{ movie.title }}" />
                                         </div>
@@ -63,7 +63,7 @@ function getDirectorAndScreenplay() {
                             <td>
                                 <div>
                                     <div class="font-bold">{{ movie.title }}</div>
-                                    <div class="text-sm opacity-50">{{ movie.release_date }}</div>
+                                    <div class="text-md opacity-50">{{ movie.release_date }}</div>
                                 </div>
                             </td>
                             <td>

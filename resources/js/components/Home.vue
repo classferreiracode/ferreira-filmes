@@ -10,7 +10,7 @@
                         <img :src="movie.poster_path" alt="{{ movie.title }}" class=" rounded hover:opacity-75 transition ease-in-out duration-150">
                     </a>
                     <div class="mt-2">
-                        <a href="#" class="text-lg mt-2 hover:text-gray-300 duration-500">
+                        <a  class="text-lg mt-2 hover:text-gray-300 duration-500 cursor-pointer">
                             {{ movie.title }}
                         </a>
                         <div class="flex items-center justify-between text-gray-400 text-sm mt-1">
@@ -25,7 +25,7 @@
                                 </span>
                             </div>
                             <div class="flex items-center  text-gray-400 text-sm mt-1">
-                                <a href="#" @click="favoriteMovie(movie.id)">
+                                <a class="cursor-pointer" @click="favoriteMovie(movie.id)">
                                     <HeartIcon :class=" favorites.includes(movie.id) ? 'h-5 fill-white hover:fill-red-700 transition ease-in-out duration-500' : 'h-5 fill-red-700 hover:fill-white transition ease-in-out duration-500'"/>
                                 </a>
                             </div>
@@ -46,19 +46,27 @@
                         <img :src="serie.poster_path" alt="{{ serie.title }}" class=" rounded hover:opacity-75 transition ease-in-out duration-150">
                     </a>
                     <div class="mt-2">
-                        <a href="#" class="text-lg mt-2 hover:text-gray-300 duration-500">
+                        <a class="text-lg mt-2 hover:text-gray-300 duration-500 cursor-pointer">
                             {{ serie.title }}
                         </a>
-                        <div class="flex items-center text-gray-400 text-sm mt-1">
-                            <StarIcon class="h-5 w-5 fill-yellow-500" />
-                            <span class="ml-1">
-                                {{ serie.vote_average.toFixed(1) }}
-                            </span>
-                            <span class="mx-2">|</span>
-                            <span>
-                                {{ serie.release_date }}
-                            </span>
+                        <div class="flex items-center justify-between text-gray-400 text-sm mt-1">
+                            <div class="flex items-center text-gray-400 text-sm mt-1">
+                                <StarIcon class="h-5 w-5 fill-yellow-500" />
+                                <span class="ml-1">
+                                    {{ serie.vote_average.toFixed(1) }}
+                                </span>
+                                <span class="mx-2">|</span>
+                                <span>
+                                    {{ serie.release_date }}
+                                </span>
+                            </div>
+                            <div class="flex items-center  text-gray-400 text-sm mt-1">
+                                <a class="cursor-pointer" @click="favoriteMovie(serie.id)">
+                                    <HeartIcon :class="favorites.includes(serie.id) ? 'h-5 fill-white hover:fill-red-700 transition ease-in-out duration-500' : 'h-5 fill-red-700 hover:fill-white transition ease-in-out duration-500'"/>
+                                </a>
+                            </div>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -68,7 +76,7 @@
 
 <script setup>
 import { HeartIcon, StarIcon } from '@heroicons/vue/24/solid'
-import { onMounted, onUpdated, defineProps, ref } from 'vue';
+import { onMounted, defineProps, ref } from 'vue';
 
 const props = defineProps({
     popular_movies: Object,
@@ -86,6 +94,17 @@ const favoriteMovie = (id) => {
         .then(response => {
             console.log(response.data)
             getFavorites()
+            if (response.data === 'Favorite Removed') {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Filme foi removido dos seus favoritos',
+                })
+            } else if (response.data === 'Favorite Added') {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Filme foi adicionado aos seus favoritos',
+                })
+            }
         })
         .catch(error => {
             console.log(error)

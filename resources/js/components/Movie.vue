@@ -5,11 +5,13 @@
                 <img :src="movie.poster_path" alt="{{ movie.title }}" class="w-96 rounded-lg">
             </div>
             <div class="md:ml-24">
-                <div class="flex items-center text-gray-400 text-sm">
+                <div class="flex items-center justify-between text-gray-400 text-sm">
                     <h2 class="text-4xl font-semibold mt-4 md:mt-0">
                         {{ movie.title }}
                     </h2>
-                    <HeartIcon class="h-5 fill-red-700 hover:fill-white transition ease-in-out duration-500" />
+                    <a class="btn btn-circle btn-secondary cursor-pointer" @click="favoriteMovie(movie.id)">
+                        <HeartIcon :class="favorites.includes(movie.id) ? 'h-5 fill-white hover:fill-red-700 transition ease-in-out duration-500' : 'h-5 fill-red-700 hover:fill-white transition ease-in-out duration-500'"/>
+                    </a>
                 </div>
                 <div class="flex items-center text-gray-400 text-sm">
                     <StarIcon class="h-5 w-5 fill-yellow-500" />
@@ -201,8 +203,8 @@
 </template>
 
 <script setup>
-import { onMounted } from 'vue';
-import { StarIcon } from '@heroicons/vue/24/solid'
+import { onMounted, ref } from 'vue';
+import { StarIcon, HeartIcon } from '@heroicons/vue/24/solid'
 import { Carousel, Slide, Navigation } from 'vue3-carousel'
 import 'vue3-carousel/dist/carousel.css'
 
@@ -211,11 +213,35 @@ const props = defineProps({
 })
 
 onMounted(() => {
+    getFavorites();
     loadMovie();
     function loadMovie() {
         SuperFlixAPIPluginJS(props.movie.imdb_id);
     }
 })
+
+const favorites = ref([]);
+
+const favoriteMovie = (id) => {
+    axios.get('/favorite/' + id)
+        .then(response => {
+            console.log(response.data)
+            getFavorites()
+        })
+        .catch(error => {
+            console.log(error)
+        })
+}
+
+const getFavorites = () => {
+    axios.get('/favorites')
+        .then(response => {
+            favorites.value = response.data
+        })
+        .catch(error => {
+            console.log(error)
+        })
+}
 
 function replaceGenres() {
     return props.movie.genres.map((genre) => genre).join(', ');

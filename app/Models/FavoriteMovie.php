@@ -22,6 +22,6 @@ class FavoriteMovie extends Model
 
     public static function getMovieIdByUser()
     {
-        return FavoriteMovie::where('user_id', Auth::id())->pluck('movie_id')->toArray();
+        return FavoriteMovie::where('user_id', Auth::id())->orderBy('created_at', 'desc')->pluck('movie_id')->toArray();
     }
 }

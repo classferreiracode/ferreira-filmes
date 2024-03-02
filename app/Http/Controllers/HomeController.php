@@ -29,8 +29,6 @@ class HomeController extends Controller
             ->popularSeries()
             ->get();
 
-        Session::put('favorites', FavoriteMovie::getMovieIdByUser());
-
         return view('welcome', [
             'popularMovies' => $popularMovies,
             'popularTv' => $popularTv
@@ -108,16 +106,16 @@ class HomeController extends Controller
 
         if ($fav::where('user_id', auth()->user()->id)->where('movie_id', $id)->exists()) {
             $fav::where('user_id', auth()->user()->id)->where('movie_id', $id)->delete();
-            Session::put('favorites', FavoriteMovie::getMovieIdByUser());
+
             return response('Favorite Removed', 200)->header('Content-Type', 'application/json');
-        } else {
-            $fav::create([
-                'user_id' => auth()->user()->id,
-                'movie_id' => $id
-            ]);
-            Session::put('favorites', FavoriteMovie::getMovieIdByUser());
-            return response('Favorite Added', 200)->header('Content-Type', 'application/json');
         }
+
+        $fav::create([
+            'user_id' => auth()->user()->id,
+            'movie_id' => $id
+        ]);
+
+        return response('Favorite Added', 200)->header('Content-Type', 'application/json');
     }
 
     public function getFavorites()
