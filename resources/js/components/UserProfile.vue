@@ -1,20 +1,28 @@
 <script setup>
-import { HeartIcon } from '@heroicons/vue/24/solid';
+import { EyeIcon, UserCircleIcon, TrashIcon } from '@heroicons/vue/24/solid';
 
 const props = defineProps({
     user: Object,
     movies: Object
 })
 
-function getDirectorAndScreenplay() {
-
+function deleteFavorite(id) {
+    axios.get('/favorite/' + id)
+        .then(function (response) {
+            console.log(response);
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
 }
+
 </script>
 
 <template>
     <div class="movie-info border-b border-gray-600 h-screen">
         <div class="container mx-auto px-4 py-8 flex flex-col md:flex-row">
-            <div class="flex-none">
+            <div class="flex items-center gap-4">
+                <UserCircleIcon class="h-12 w-12 fill-sky-400"/>
                 <h1 class="text-4xl font-semibold">
                     {{ user.name }}
                 </h1>
@@ -23,7 +31,7 @@ function getDirectorAndScreenplay() {
         <div class="container w-full mx-auto px-4 py-8 flex flex-col md:flex-row">
             <div class="overflow-x-auto w-full">
                 <h4 class="text-white font-semibold text-2xl flex gap-4 items-center">
-                    <HeartIcon class="h-6 w-6 fill-red-700"/>
+                    <!-- <HeartIcon class="h-6 w-6 fill-red-700"/> -->
                     Lista de favoritos
                 </h4>
                 <table class="table w-full">
@@ -38,7 +46,7 @@ function getDirectorAndScreenplay() {
                             <th></th>
                             <th>Filme</th>
                             <th>Produção</th>
-                            <th></th>
+                            <th>Ações</th>
                         </tr>
                     </thead>
                     <tbody v-if="movies.length > 0">
@@ -73,9 +81,14 @@ function getDirectorAndScreenplay() {
                                 </div>
                             </td>
                             <th>
-                                <a :href="'/movie/' + movie.id" class="btn btn-secondary btn-sm">
-                                    Ver+
-                                </a>
+                                <div class="flex items-center gap-3">
+                                    <a :href="'/movie/' + movie.id" class="btn btn-primary btn-sm">
+                                        <EyeIcon class="h-6 w-6 fill-base-100 hover:fill-white transition ease-in-out duration-150"/>
+                                    </a>
+                                    <button @click="deleteFavorite(movie.id)" class="btn btn-secondary btn-sm">
+                                        <TrashIcon class="h-6 w-6"/>
+                                    </button>
+                                </div>
                             </th>
                         </tr>
                     </tbody>

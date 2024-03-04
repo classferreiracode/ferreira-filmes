@@ -10,7 +10,7 @@
                         {{ movie.title }}
                     </h2>
                     <a class="btn btn-circle btn-secondary cursor-pointer" @click="favoriteMovie(movie.id)">
-                        <HeartIcon :class="favorites.includes(movie.id) ? 'h-5 fill-white hover:fill-red-700 transition ease-in-out duration-500' : 'h-5 fill-red-700 hover:fill-white transition ease-in-out duration-500'"/>
+                        <HeartIcon :class="favorites.includes(movie.id) ? 'h-5 fill-white hover:fill-red-700 transition ease-in-out duration-150' : 'h-5 fill-red-700 hover:fill-white transition ease-in-out duration-150'"/>
                     </a>
                 </div>
                 <div class="flex items-center text-gray-400 text-sm">

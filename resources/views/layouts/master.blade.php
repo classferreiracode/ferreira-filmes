@@ -122,11 +122,11 @@
                             @csrf
 
                             <div class="row mb-3">
-                                <label for="email"
+                                <label for="email-login"
                                     class="col-md-4 col-form-label text-md-end">E-mail</label>
 
                                 <div class="col-md-6">
-                                    <input type="email" id="email" placeholder="Email"
+                                    <input type="email" id="email-login" placeholder="Email"
                                         class="input input-bordered input-primary w-full max-w-xs form-control @error('email') is-invalid @enderror"
                                         name="email" value="{{ old('email') }}" required autocomplete="email"
                                         autofocus class="" />
@@ -139,11 +139,11 @@
                             </div>
 
                             <div class="row mb-3">
-                                <label for="password"
+                                <label for="password_login"
                                     class="col-md-4 col-form-label text-md-end">Senha</label>
 
                                 <div class="col-md-6">
-                                    <input type="password" id="password" placeholder="Senha"
+                                    <input type="password" id="password_login" placeholder="Senha"
                                         class="input input-bordered input-primary w-full max-w-xs form-control @error('password') is-invalid @enderror"
                                         name="password" required autocomplete="current-password" />
 

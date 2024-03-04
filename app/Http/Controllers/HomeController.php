@@ -102,6 +102,10 @@ class HomeController extends Controller
 
     public function favorites(int $id)
     {
+        if (!Auth::check()) {
+            return response('Unauthorized', 401);
+        }
+        
         $fav = FavoriteMovie::class;
 
         if ($fav::where('user_id', auth()->user()->id)->where('movie_id', $id)->exists()) {

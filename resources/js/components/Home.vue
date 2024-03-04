@@ -26,7 +26,7 @@
                             </div>
                             <div class="flex items-center  text-gray-400 text-sm mt-1">
                                 <a class="cursor-pointer" @click="favoriteMovie(movie.id)">
-                                    <HeartIcon :class=" favorites.includes(movie.id) ? 'h-5 fill-white hover:fill-red-700 transition ease-in-out duration-500' : 'h-5 fill-red-700 hover:fill-white transition ease-in-out duration-500'"/>
+                                    <HeartIcon :class=" favorites.includes(movie.id) ? 'h-5 fill-white hover:fill-red-700 transition ease-in-out duration-150' : 'h-5 fill-red-700 hover:fill-white transition ease-in-out duration-150'"/>
                                 </a>
                             </div>
                         </div>
@@ -62,7 +62,7 @@
                             </div>
                             <div class="flex items-center  text-gray-400 text-sm mt-1">
                                 <a class="cursor-pointer" @click="favoriteMovie(serie.id)">
-                                    <HeartIcon :class="favorites.includes(serie.id) ? 'h-5 fill-white hover:fill-red-700 transition ease-in-out duration-500' : 'h-5 fill-red-700 hover:fill-white transition ease-in-out duration-500'"/>
+                                    <HeartIcon :class="favorites.includes(serie.id) ? 'h-5 fill-white hover:fill-red-700 transition ease-in-out duration-150' : 'h-5 fill-red-700 hover:fill-white transition ease-in-out duration-150'"/>
                                 </a>
                             </div>
                         </div>
@@ -97,17 +97,23 @@ const favoriteMovie = (id) => {
             if (response.data === 'Favorite Removed') {
                 Swal.fire({
                     icon: 'success',
-                    title: 'Filme foi removido dos seus favoritos',
+                    title: 'Filme/Serie foi removido dos seus favoritos',
                 })
             } else if (response.data === 'Favorite Added') {
                 Swal.fire({
                     icon: 'success',
-                    title: 'Filme foi adicionado aos seus favoritos',
+                    title: 'Filme/Serie foi adicionado aos seus favoritos',
                 })
             }
         })
         .catch(error => {
             console.log(error)
+            if (error.response.data === 'Unauthorized') {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Por favor, realize o login',
+                })
+            }
         })
 }
 
