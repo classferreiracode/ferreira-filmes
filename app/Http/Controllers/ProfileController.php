@@ -71,6 +71,7 @@ class ProfileController extends Controller
     {
         $favorites = FavoriteMovie::getMovieIdByUser();
         $movies = [];
+        $series = [];
 
         foreach ($favorites as $favorite) {
             $tmdb = $this->service

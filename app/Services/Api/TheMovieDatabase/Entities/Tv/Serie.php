@@ -39,8 +39,8 @@ class Serie
         $this->vote_average = data_get($data, 'vote_average');
         $this->release_date = substr(data_get($data, 'first_air_date'), 0, 4);
         $this->genres = collect(data_get($data, 'genres'))->pluck('name')->toArray();
-        $this->backdrop_path = data_get($data, 'backdrop_path') ?? 'https://image.tmdb.org/t/p/original'.data_get($data, 'backdrop_path');
-        $this->poster_path = data_get($data, 'poster_path') ?? 'https://image.tmdb.org/t/p/w300_and_h450_bestv2'.data_get($data, 'poster_path');
+        $this->backdrop_path = data_get($data, 'backdrop_path') ? 'https://image.tmdb.org/t/p/original'.data_get($data, 'backdrop_path') : null;
+        $this->poster_path = data_get($data, 'poster_path') ? 'https://image.tmdb.org/t/p/w300_and_h450_bestv2'.data_get($data, 'poster_path') : null;
         $this->credits = data_get($data, 'credits');
         $this->recommendations = data_get($data, 'recommendations');
         $this->similar = data_get($data, 'similar');
