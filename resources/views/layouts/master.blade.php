@@ -109,19 +109,19 @@
         </nav>
     </footer>
     <dialog id="modal_login" class="modal bg-black bg-opacity-95">
-        <div class="modal-box w-11/12 max-w-5xl">
+        <div class="modal-box w-11/12 max-w-sm">
             <form method="dialog">
                 <a href="#" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</a>
             </form>
-            <h3 class="font-bold text-lg">Login/Cadastro</h3>
+            <h3 class="font-bold text-2xl mb-5 text-center">Login e Cadastro</h3>
             <div role="tablist" class="tabs tabs-lifted">
                 <input type="radio" name="my_tabs_2" role="tab" class="tab" aria-label="Login" checked />
-                <div role="tabpanel" class="tab-content bg-base-300 border-base-300 rounded-box p-6">
+                <div role="tabpanel" class="tab-content border-base-300 rounded-box p-6">
                     <div class="container mx-auto">
                         <form method="POST" action="{{ route('login') }}">
                             @csrf
 
-                            <div class="row mb-3">
+                            <div class="row mb-3 ">
                                 <label for="email-login"
                                     class="col-md-4 col-form-label text-md-end">E-mail</label>
 
@@ -193,14 +193,14 @@
 
                             <div class="row mb-3">
                                 <label for="name"
-                                    class="col-md-4 col-form-label text-md-end">{{ __('Name') }}</label>
+                                    class="col-md-4 col-form-label text-md-end">Nome</label>
 
                                 <div class="col-md-6">
                                     <input
                                     id="name"
                                     name="name"
                                     type="text"
-                                    placeholder="Type here"
+                                    placeholder="Digite seu ome"
                                     class="@error('name') is-invalid @enderror input input-bordered input-primary w-full max-w-xs"
                                     value="{{ old('name') }}"
                                     required
@@ -216,14 +216,14 @@
 
                             <div class="row mb-3">
                                 <label for="email"
-                                    class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
+                                    class="col-md-4 col-form-label text-md-end">E-Mail</label>
 
                                 <div class="col-md-6">
                                     <input
                                         id="email"
                                         name="email"
                                         type="email"
-                                        placeholder="E-Mail"
+                                        placeholder="Digite seu melhor E-Mail"
                                         class="input input-bordered input-primary w-full max-w-xs @error('email') is-invalid @enderror"
                                         value="{{ old('email') }}" required autocomplete="email" />
 
@@ -244,7 +244,7 @@
                                         type="password"
                                         id="password"
                                         name="password"
-                                        placeholder="Type here"
+                                        placeholder="Digite sua senha"
                                         class="@error('password') is-invalid @enderror input input-bordered input-primary w-full max-w-xs"
                                         required autocomplete="new-password" />
 
@@ -271,9 +271,9 @@
                                 </div>
                             </div>
 
-                            <div class="row mb-0">
-                                <div class="col-md-6 offset-md-4">
-                                    <button type="submit" class="btn btn-primary">
+                            <div class="mt-8">
+                                <div class="flex items-center justify-center">
+                                    <button type="submit" class="btn btn-secondary btn-block">
                                         Cadastre-se
                                     </button>
                                 </div>

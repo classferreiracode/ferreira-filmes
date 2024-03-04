@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Services\Api\TheMovieDatabase\Endpoints\Tv;
 
 use App\Services\Api\TheMovieDatabase\Endpoints\BaseEndpoint;
@@ -11,6 +12,7 @@ class Credits extends BaseEndpoint
     public function fromSerie(int|Credit $serie)
     {
         $this->serieId = $serie instanceof Credit ? $serie->id : $serie;
+
         return $this;
     }
 
@@ -18,10 +20,9 @@ class Credits extends BaseEndpoint
     {
         $json[] = $this->service
             ->api
-            ->get('/tv/' . $this->serieId . '/credits?language=pt-BR')
+            ->get('/tv/'.$this->serieId.'/credits?language=pt-BR')
             ->json();
 
         return $this->transform($json, Credit::class)[0];
     }
-
 }

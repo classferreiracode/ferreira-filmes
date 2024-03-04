@@ -1,11 +1,13 @@
 <?php
-namespace App\Services\Api\TheMovieDatabase\Entities\Tv;
 
+namespace App\Services\Api\TheMovieDatabase\Entities\Tv;
 
 class Credit
 {
     public $id;
+
     public $cast;
+
     public $crew;
 
     public function __construct($json)

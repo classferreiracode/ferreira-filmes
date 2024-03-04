@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Services\Api\TheMovieDatabase\TheMovieDatabaseService;
-use Illuminate\Http\Request;
 
 class PersonController extends Controller
 {
     private TheMovieDatabaseService $service;
+
     public function __construct()
     {
         $this->service = new TheMovieDatabaseService();
@@ -20,7 +20,7 @@ class PersonController extends Controller
             ->get();
 
         return view('persons', [
-            'persons' => $persons
+            'persons' => $persons,
         ]);
     }
 
@@ -34,7 +34,7 @@ class PersonController extends Controller
         //dd($person);
 
         return view('profile', [
-            'person' => $person
+            'person' => $person,
         ]);
     }
 }

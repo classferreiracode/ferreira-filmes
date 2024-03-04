@@ -1,8 +1,9 @@
 <?php
+
 namespace App\Services\Api\ViaCep\Endpoints;
 
-use Illuminate\Support\Collection;
 use App\Services\Api\ViaCep\ViaCepService;
+use Illuminate\Support\Collection;
 
 class BaseEndpoint
 {

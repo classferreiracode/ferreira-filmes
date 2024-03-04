@@ -6,7 +6,7 @@ use App\Services\Api\TheMovieDatabase\Endpoints\Tv\Series;
 
 trait HasPopularSeries
 {
-    public function popularSeries() : Series
+    public function popularSeries(): Series
     {
         return new Series();
     }

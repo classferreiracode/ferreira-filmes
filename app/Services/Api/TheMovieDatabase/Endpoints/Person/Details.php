@@ -12,6 +12,7 @@ class Details extends BaseEndpoint
     public function fromPerson(int|Detail $person)
     {
         $this->personId = $person instanceof Detail ? $person->id : $person;
+
         return $this;
     }
 
@@ -19,11 +20,9 @@ class Details extends BaseEndpoint
     {
         $json[] = $this->service
             ->api
-            ->get('/person/' . $this->personId . '?append_to_response=combined_credits,images&language=pt-BR')
+            ->get('/person/'.$this->personId.'?append_to_response=combined_credits,images&language=pt-BR')
             ->json();
 
         return $this->transform($json, Detail::class)[0];
     }
-
-
 }

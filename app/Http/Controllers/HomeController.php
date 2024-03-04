@@ -3,22 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\Models\FavoriteMovie;
-use http\Env\Response;
-use Illuminate\Http\Request;
 use App\Services\Api\TheMovieDatabase\TheMovieDatabaseService;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Session;
 
 class HomeController extends Controller
 {
     private $service;
+
     public function __construct()
     {
         $this->service = new TheMovieDatabaseService();
 
     }
+
     public function index()
     {
         $popularMovies = $this->service
@@ -31,7 +31,7 @@ class HomeController extends Controller
 
         return view('welcome', [
             'popularMovies' => $popularMovies,
-            'popularTv' => $popularTv
+            'popularTv' => $popularTv,
         ]);
     }
 
@@ -40,6 +40,7 @@ class HomeController extends Controller
         if ($request->input('query') == '' || $request->input('query') == null) {
             return response('Bad Request', 400);
         }
+
         return $this->service
             ->search()
             ->fromSearch($request->input('query'))
@@ -54,7 +55,7 @@ class HomeController extends Controller
             ->get();
 
         return view('movie', [
-            'movie' => $movie
+            'movie' => $movie,
         ]);
     }
 
@@ -66,7 +67,7 @@ class HomeController extends Controller
             ->get();
 
         return view('serie', [
-            'serie' => $serie
+            'serie' => $serie,
         ]);
     }
 
@@ -84,7 +85,7 @@ class HomeController extends Controller
 
         return view('casting', [
             'casting' => $casting,
-            'movie' => $movie
+            'movie' => $movie,
         ]);
     }
 
@@ -96,16 +97,16 @@ class HomeController extends Controller
             ->get();
 
         return view('casting', [
-            'casting' => $casting
+            'casting' => $casting,
         ]);
     }
 
     public function favorites(int $id)
     {
-        if (!Auth::check()) {
+        if (! Auth::check()) {
             return response('Unauthorized', 401);
         }
-        
+
         $fav = FavoriteMovie::class;
 
         if ($fav::where('user_id', auth()->user()->id)->where('movie_id', $id)->exists()) {
@@ -116,7 +117,7 @@ class HomeController extends Controller
 
         $fav::create([
             'user_id' => auth()->user()->id,
-            'movie_id' => $id
+            'movie_id' => $id,
         ]);
 
         return response('Favorite Added', 200)->header('Content-Type', 'application/json');

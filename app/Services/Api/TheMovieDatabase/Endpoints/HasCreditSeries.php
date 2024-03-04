@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Services\Api\TheMovieDatabase\Endpoints;
 
 use App\Services\Api\TheMovieDatabase\Endpoints\Tv\Credits;
@@ -9,5 +10,4 @@ trait HasCreditSeries
     {
         return new Credits();
     }
-
 }

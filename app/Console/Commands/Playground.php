@@ -2,9 +2,8 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
 use App\Services\Api\TheMovieDatabase\TheMovieDatabaseService;
-use App\Services\Api\ViaCep\ViaCepService;
+use Illuminate\Console\Command;
 
 class Playground extends Command
 {
