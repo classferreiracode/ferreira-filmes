@@ -30,6 +30,8 @@ class Serie
 
     public ?array $keywords;
 
+    public ?array $production_companies;
+
     public function __construct(mixed $data)
     {
         $this->id = data_get($data, 'id');
@@ -45,5 +47,6 @@ class Serie
         $this->recommendations = data_get($data, 'recommendations');
         $this->similar = data_get($data, 'similar');
         $this->keywords = data_get($data, 'keywords');
+        $this->production_companies = data_get($data, 'production_companies');
     }
 }

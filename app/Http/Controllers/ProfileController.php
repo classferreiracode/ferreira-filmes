@@ -17,6 +17,7 @@ class ProfileController extends Controller
 
     public function __construct()
     {
+        $this->middleware('auth');
         $this->service = new TheMovieDatabaseService();
     }
 
@@ -74,19 +75,28 @@ class ProfileController extends Controller
         $series = [];
 
         foreach ($favorites as $favorite) {
-            $tmdb = $this->service
-                ->detailMovies()
-                ->fromMovie($favorite)
-                ->get();
+            if($favorite->type === 'tv') {
+                $tmdb = $this->service
+                    ->detailSerie()
+                    ->fromSerie($favorite->movie_id)
+                    ->get();
 
-            $movies[] = $tmdb;
+                $series[] = $tmdb;
+            }
+            if($favorite->type === 'movie') {
+                $tmdb = $this->service
+                    ->detailMovies()
+                    ->fromMovie($favorite->movie_id)
+                    ->get();
+
+                $movies[] = $tmdb;
+            }
         }
-
-        //ds($movies);
 
         return view('userProfile', [
             'user' => Auth::user(),
             'movies' => $movies,
+            'series' => $series
         ]);
     }
 }

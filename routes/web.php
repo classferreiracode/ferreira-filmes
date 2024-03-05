@@ -36,10 +36,11 @@ Route::prefix('serie')->group(function () {
 
 Route::prefix('user')->group(function () {
     Route::get('/profile', [ProfileController::class, 'show'])->name('profile');
-});
+})->middleware(['auth']);
 
-Route::get('/favorite/{id}', [HomeController::class, 'favorites'])->name('favorite');
-Route::get('/favorites', [HomeController::class, 'getFavorites'])->name('get-favorite');
+
+Route::get('/favorite/{id}', [HomeController::class, 'favorites'])->name('favorite')->middleware(['auth']);
+Route::get('/favorites', [HomeController::class, 'getFavorites'])->name('get-favorite')->middleware(['auth']);
 
 Auth::routes();
 
