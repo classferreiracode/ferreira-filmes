@@ -53,8 +53,6 @@ function deleteFavorite(id) {
                         <tbody v-if="movies.length > 0">
                             <!-- row 1 -->
                             <tr v-for="movie in movies" :key="movie.id" class="hover">
-
-
                                 <th>
                                     <label>
                                         <input type="checkbox" class="checkbox" />

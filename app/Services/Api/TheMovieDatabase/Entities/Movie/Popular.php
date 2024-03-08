@@ -18,6 +18,8 @@ class Popular
 
     public float $vote_average;
 
+    public string $type;
+
     public function __construct(mixed $data)
     {
         $this->id = data_get($data, 'id');
@@ -27,5 +29,6 @@ class Popular
         $this->poster_path = data_get($data, 'poster_path') === null ? 'https://placehold.co/300x450?text=No+image' : 'https://media.themoviedb.org/t/p/w300_and_h450_bestv2'.data_get($data, 'poster_path');
         $this->overview = data_get($data, 'overview');
         $this->vote_average = data_get($data, 'vote_average');
+        $this->type = 'movie';
     }
 }

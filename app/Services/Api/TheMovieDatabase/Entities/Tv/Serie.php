@@ -32,6 +32,8 @@ class Serie
 
     public ?array $production_companies;
 
+    public string $type = 'tv';
+
     public function __construct(mixed $data)
     {
         $this->id = data_get($data, 'id');

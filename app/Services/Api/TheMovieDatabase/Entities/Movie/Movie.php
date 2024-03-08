@@ -36,6 +36,8 @@ class Movie
 
     public ?array $production_companies;
 
+    public string $type = 'movie';
+
     public function __construct($data)
     {
         $this->id = data_get($data, 'id');

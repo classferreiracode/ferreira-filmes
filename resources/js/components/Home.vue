@@ -7,10 +7,11 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
                 <div class="mt-8" v-for="movie in popular_movies" :key="movie.id">
                     <a :href="'/movie/' + movie.id">
-                        <img :src="movie.poster_path" alt="{{ movie.title }}" class=" rounded hover:opacity-75 transition ease-in-out duration-150">
+                        <img :src="movie.poster_path" alt="{{ movie.title }}"
+                            class=" rounded hover:opacity-75 transition ease-in-out duration-150">
                     </a>
                     <div class="mt-2">
-                        <a  class="text-lg mt-2 hover:text-gray-300 duration-500 cursor-pointer">
+                        <a class="text-lg mt-2 hover:text-gray-300 duration-500 cursor-pointer">
                             {{ movie.title }}
                         </a>
                         <div class="flex items-center justify-between text-gray-400 text-sm mt-1">
@@ -25,8 +26,12 @@
                                 </span>
                             </div>
                             <div class="flex items-center  text-gray-400 text-sm mt-1">
-                                <a class="cursor-pointer" @click="favoriteMovie(movie.id)">
-                                    <HeartIcon :class=" favorites.includes(movie.id) ? 'h-5 fill-white hover:fill-red-700 transition ease-in-out duration-150' : 'h-5 fill-red-700 hover:fill-white transition ease-in-out duration-150'"/>
+                                <a class="cursor-pointer" @click="favoriteMovie(movie.id, movie.type)">
+                                    <HeartIcon v-if="favorites.includes(movie.id)"
+                                        class="h-5 fill-red-700 hover:fill-white transition ease-in-out duration-150" />
+
+                                    <HeartIconOutline v-else
+                                        class="h-5 stroke-white hover:stroke-red-700 transition ease-in-out duration-150" />
                                 </a>
                             </div>
                         </div>
@@ -43,7 +48,8 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
                 <div class="mt-8" v-for="serie in popular_tv" :key="serie.id">
                     <a :href="'/serie/' + serie.id">
-                        <img :src="serie.poster_path" alt="{{ serie.title }}" class=" rounded hover:opacity-75 transition ease-in-out duration-150">
+                        <img :src="serie.poster_path" alt="{{ serie.title }}"
+                            class=" rounded hover:opacity-75 transition ease-in-out duration-150">
                     </a>
                     <div class="mt-2">
                         <a class="text-lg mt-2 hover:text-gray-300 duration-500 cursor-pointer">
@@ -61,8 +67,9 @@
                                 </span>
                             </div>
                             <div class="flex items-center  text-gray-400 text-sm mt-1">
-                                <a class="cursor-pointer" @click="favoriteMovie(serie.id)">
-                                    <HeartIcon :class="favorites.includes(serie.id) ? 'h-5 fill-white hover:fill-red-700 transition ease-in-out duration-150' : 'h-5 fill-red-700 hover:fill-white transition ease-in-out duration-150'"/>
+                                <a class="cursor-pointer" @click="favoriteMovie(serie.id, serie.type)">
+                                    <HeartIcon
+                                        :class="favorites.includes(serie.id) ? 'h-5 fill-white hover:fill-red-700 transition ease-in-out duration-150' : 'h-5 fill-red-700 hover:fill-white transition ease-in-out duration-150'" />
                                 </a>
                             </div>
                         </div>
@@ -76,6 +83,7 @@
 
 <script setup>
 import { HeartIcon, StarIcon } from '@heroicons/vue/24/solid'
+import { HeartIcon as HeartIconOutline } from '@heroicons/vue/24/outline'
 import { onMounted, defineProps, ref } from 'vue';
 
 const props = defineProps({
@@ -83,14 +91,17 @@ const props = defineProps({
     popular_tv: Object,
 })
 
+
+
 onMounted(() => {
     getFavorites()
 })
 
 const favorites = ref([]);
 
-const favoriteMovie = (id) => {
-    axios.get('/favorite/' + id)
+console.log(favorites)
+const favoriteMovie = (id, type) => {
+    axios.get('/favorite/' + id + '/' + type)
         .then(response => {
             console.log(response.data)
             getFavorites()
@@ -120,10 +131,15 @@ const favoriteMovie = (id) => {
 const getFavorites = () => {
     axios.get('/favorites')
         .then(response => {
-            favorites.value = response.data
+            favorites.value = mapMovieId(response.data) || response.data
+            console.log(favorites.value)
         })
         .catch(error => {
             console.log(error)
         })
+}
+
+function mapMovieId(movies) {
+    return movies.map(item => item.movie_id)
 }
 </script>

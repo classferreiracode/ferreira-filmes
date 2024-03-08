@@ -101,7 +101,7 @@ class HomeController extends Controller
         ]);
     }
 
-    public function favorites(int $id)
+    public function favorites(int $id, $type)
     {
         if (! Auth::check()) {
             return response('Unauthorized', 401);
@@ -118,6 +118,7 @@ class HomeController extends Controller
         $fav::create([
             'user_id' => auth()->user()->id,
             'movie_id' => $id,
+            'type' => $type
         ]);
 
         return response('Favorite Added', 200)->header('Content-Type', 'application/json');
