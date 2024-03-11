@@ -36,6 +36,7 @@ Route::prefix('serie')->group(function () {
 
 Route::prefix('user')->group(function () {
     Route::get('/profile', [ProfileController::class, 'show'])->name('profile');
+    Route::get('/favorites/movie', [ProfileController::class, 'favoriteMovie'])->name('favorite.movie');
 })->middleware(['auth']);
 
 

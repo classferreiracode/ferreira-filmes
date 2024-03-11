@@ -6,13 +6,14 @@ import { createApp } from 'vue';
 import Swal from 'sweetalert2';
 window.Swal = Swal;
 
-const Toast = Swal.mixin({
+const toastMixin = Swal.mixin({
     toast: true,
     position: 'top-end',
     showConfirmButton: false,
     timer: 3000,
     timerProgressBar: true,
 })
+window.Toast = toastMixin
 
 const app = createApp({});
 

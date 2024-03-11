@@ -26,13 +26,7 @@
                                 </span>
                             </div>
                             <div class="flex items-center  text-gray-400 text-sm mt-1">
-                                <a class="cursor-pointer" @click="favoriteMovie(movie.id, movie.type)">
-                                    <HeartIcon v-if="favorites.includes(movie.id)"
-                                        class="h-5 fill-red-700 hover:fill-white transition ease-in-out duration-150" />
-
-                                    <HeartIconOutline v-else
-                                        class="h-5 stroke-white hover:stroke-red-700 transition ease-in-out duration-150" />
-                                </a>
+                                <Favorite :data="movie" :size="5" />
                             </div>
                         </div>
                     </div>
@@ -67,10 +61,7 @@
                                 </span>
                             </div>
                             <div class="flex items-center  text-gray-400 text-sm mt-1">
-                                <a class="cursor-pointer" @click="favoriteMovie(serie.id, serie.type)">
-                                    <HeartIcon
-                                        :class="favorites.includes(serie.id) ? 'h-5 fill-white hover:fill-red-700 transition ease-in-out duration-150' : 'h-5 fill-red-700 hover:fill-white transition ease-in-out duration-150'" />
-                                </a>
+                                <Favorite :data="serie" :size="5" />
                             </div>
                         </div>
 
@@ -84,62 +75,12 @@
 <script setup>
 import { HeartIcon, StarIcon } from '@heroicons/vue/24/solid'
 import { HeartIcon as HeartIconOutline } from '@heroicons/vue/24/outline'
-import { onMounted, defineProps, ref } from 'vue';
+import { defineProps } from 'vue';
+import Swal from 'sweetalert2';
 
 const props = defineProps({
     popular_movies: Object,
     popular_tv: Object,
 })
 
-
-
-onMounted(() => {
-    getFavorites()
-})
-
-const favorites = ref([]);
-
-console.log(favorites)
-const favoriteMovie = (id, type) => {
-    axios.get('/favorite/' + id + '/' + type)
-        .then(response => {
-            console.log(response.data)
-            getFavorites()
-            if (response.data === 'Favorite Removed') {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Filme/Serie foi removido dos seus favoritos',
-                })
-            } else if (response.data === 'Favorite Added') {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Filme/Serie foi adicionado aos seus favoritos',
-                })
-            }
-        })
-        .catch(error => {
-            console.log(error)
-            if (error.response.data === 'Unauthorized') {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Por favor, realize o login',
-                })
-            }
-        })
-}
-
-const getFavorites = () => {
-    axios.get('/favorites')
-        .then(response => {
-            favorites.value = mapMovieId(response.data) || response.data
-            console.log(favorites.value)
-        })
-        .catch(error => {
-            console.log(error)
-        })
-}
-
-function mapMovieId(movies) {
-    return movies.map(item => item.movie_id)
-}
 </script>

@@ -1,3 +1,60 @@
+<script setup>
+import { onMounted } from 'vue';
+import { StarIcon } from '@heroicons/vue/24/solid'
+import { Carousel, Slide, Navigation } from 'vue3-carousel'
+import 'vue3-carousel/dist/carousel.css'
+
+const props = defineProps({
+    movie: Object
+})
+
+onMounted(() => {
+    loadMovie();
+    function loadMovie() {
+        SuperFlixAPIPluginJS(props.movie.imdb_id);
+    }
+})
+
+function replaceGenres() {
+    return props.movie.genres.map((genre) => genre).join(', ');
+}
+
+function getDirectorAndScreenplay() {
+    return props.movie.credits.crew.filter((crew) => crew.job === 'Director' || crew.job === 'Screenplay');
+}
+
+function getRecommendations() {
+    return props.movie.recommendations.results > 0 ? props.movie.recommendations.results : props.movie.similar.results;
+}
+
+function getInitials(name) {
+    return name
+        .split(' ')
+        .map((n) => n[0])
+        .join('');
+}
+
+function traslateJob(job) {
+    switch (job) {
+        case 'Director':
+            return 'Diretor(a)';
+        case 'Screenplay':
+            return 'Roteirista';
+        default:
+            return job;
+    }
+}
+
+function getCast() {
+    return props.movie.credits.cast.slice(0, 10);
+}
+
+function SuperFlixAPIPluginJS(imdb) {
+    var frame = document.getElementById('SuperFlixAPIContainerVideo');
+    frame.innerHTML += '<iframe src="https://superflixapi.top/filme/' + imdb + '/#color:1a103d" scrolling="no" frameborder="0" allowfullscreen class="w-full h-[500px] rounded-xl"></iframe>';
+}
+</script>
+
 <template>
     <div class="movie-info border-b border-gray-600">
         <div class="container mx-auto px-4 py-8 flex flex-col md:flex-row">
@@ -9,9 +66,7 @@
                     <h2 class="text-4xl font-semibold mt-4 md:mt-0">
                         {{ movie.title }}
                     </h2>
-                    <a class="btn btn-circle btn-secondary cursor-pointer" @click="favoriteMovie(movie.id)">
-                        <HeartIcon :class="favorites.includes(movie.id) ? 'h-5 fill-white hover:fill-red-700 transition ease-in-out duration-150' : 'h-5 fill-red-700 hover:fill-white transition ease-in-out duration-150'"/>
-                    </a>
+                    <Favorite :data="movie" :size="8" />
                 </div>
                 <div class="flex items-center text-gray-400 text-sm">
                     <StarIcon class="h-5 w-5 fill-yellow-500" />
@@ -71,8 +126,10 @@
                     </div>
                     <div class="mt-12">
                         <div class="tooltip" data-tip="Assistir Online">
-                            <button class="btn btn-circle btn-accent text-purple-950" onclick="my_modal_warning.showModal()">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 fill-purple-950">
+                            <button class="btn btn-circle btn-accent text-purple-950"
+                                onclick="my_modal_warning.showModal()">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                    class="w-6 h-6 fill-purple-950">
                                     <path fill-rule="evenodd"
                                         d="M4.5 5.653c0-1.427 1.529-2.33 2.779-1.643l11.54 6.347c1.295.712 1.295 2.573 0 3.286L7.28 19.99c-1.25.687-2.779-.217-2.779-1.643V5.653Z"
                                         clip-rule="evenodd" />
@@ -163,13 +220,14 @@
                             d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
                     </svg>
                     <span>
-                        Alguns filmes/séries podem conter anúncios ou conteúdos inapropriados. Caso uma janela de anúncio
+                        Alguns filmes/séries podem conter anúncios ou conteúdos inapropriados. Caso uma janela de
+                        anúncio
                         seja aberta, você pode clicar no botão de fechar.
                     </span>
                 </div>
                 <div class="modal-action">
                     <form method="dialog">
-                        <button class="btn" onclick="my_modal_movie.showModal()">Close</button>
+                        <button class="btn" onclick="my_modal_movie.showModal()">Ok! Continuar...</button>
                     </form>
                 </div>
             </div>
@@ -202,86 +260,7 @@
     </Teleport>
 </template>
 
-<script setup>
-import { onMounted, ref } from 'vue';
-import { StarIcon, HeartIcon } from '@heroicons/vue/24/solid'
-import { Carousel, Slide, Navigation } from 'vue3-carousel'
-import 'vue3-carousel/dist/carousel.css'
 
-const props = defineProps({
-    movie: Object
-})
-
-onMounted(() => {
-    getFavorites();
-    loadMovie();
-    function loadMovie() {
-        SuperFlixAPIPluginJS(props.movie.imdb_id);
-    }
-})
-
-const favorites = ref([]);
-
-const favoriteMovie = (id) => {
-    axios.get('/favorite/' + id)
-        .then(response => {
-            console.log(response.data)
-            getFavorites()
-        })
-        .catch(error => {
-            console.log(error)
-        })
-}
-
-const getFavorites = () => {
-    axios.get('/favorites')
-        .then(response => {
-            favorites.value = response.data
-        })
-        .catch(error => {
-            console.log(error)
-        })
-}
-
-function replaceGenres() {
-    return props.movie.genres.map((genre) => genre).join(', ');
-}
-
-function getDirectorAndScreenplay() {
-    return props.movie.credits.crew.filter((crew) => crew.job === 'Director' || crew.job === 'Screenplay');
-}
-
-function getRecommendations() {
-    return props.movie.recommendations.results;
-}
-
-function getInitials(name) {
-    return name
-        .split(' ')
-        .map((n) => n[0])
-        .join('');
-}
-
-function traslateJob(job) {
-    switch (job) {
-        case 'Director':
-            return 'Diretor(a)';
-        case 'Screenplay':
-            return 'Roteirista';
-        default:
-            return job;
-    }
-}
-
-function getCast() {
-    return props.movie.credits.cast.slice(0, 10);
-}
-
-function SuperFlixAPIPluginJS(imdb) {
-    var frame = document.getElementById('SuperFlixAPIContainerVideo');
-    frame.innerHTML += '<iframe src="https://superflixapi.top/filme/' + imdb + '/#color:1a103d" scrolling="no" frameborder="0" allowfullscreen class="w-full h-[500px] rounded-xl"></iframe>';
-}
-</script>
 <style scoped>
 .carousel__slide {
     padding: 5px;

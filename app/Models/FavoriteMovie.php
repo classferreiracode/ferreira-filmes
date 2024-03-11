@@ -21,8 +21,11 @@ class FavoriteMovie extends Model
         return $this->belongsTo(User::class);
     }
 
-    public static function getMovieIdByUser()
+    public static function getMovieIdByUser($where = 'movie')
     {
-        return FavoriteMovie::select('movie_id', 'type')->where('user_id', Auth::user()->id)->get();
+        return FavoriteMovie::select('movie_id', 'type')
+            ->where('user_id', Auth::user()->id)
+            ->where('type', $where)
+            ->get();
     }
 }

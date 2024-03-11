@@ -40,7 +40,6 @@ class HomeController extends Controller
         if ($request->input('query') == '' || $request->input('query') == null) {
             return response('Bad Request', 400);
         }
-
         return $this->service
             ->search()
             ->fromSearch($request->input('query'))

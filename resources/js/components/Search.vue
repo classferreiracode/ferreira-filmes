@@ -7,12 +7,27 @@ export default {
             options: [],
             searching: false,
             result: null,
-            select_id: null
+            select_id: null,
+            media_type: null
         }
     },
     methods: {
         customLabel(option) {
-            return option.name + ' (' + option.year + ')';
+            if (option.image != null && option.media_type != 'person') {
+                return option.name + ' (' + option.year + ') - ' + option.media_type;
+            }
+        },
+        translateMediaType(media_type) {
+            switch (media_type) {
+                case 'movie':
+                    return 'Filme';
+                case 'tv':
+                    return 'Serie';
+                case 'person':
+                    return 'Personagem';
+                default:
+                    return media_type
+            }
         },
         onSearchChange(searchQuery) {
             this.searchQuery = searchQuery;
@@ -28,7 +43,10 @@ export default {
         },
         search() {
             this.searching = true;
-            axios.post('/search', { query: this.searchQuery })
+            axios.post('/search', {
+                query: this.searchQuery,
+                media_type: this.media_type
+            })
                 .then(response => {
                     if (response.data.length > 0) {
                         response.data = response.data.filter(option => option.name !== null);
@@ -53,7 +71,7 @@ export default {
     <div class="form-control">
         <VueMultiselect v-model="selected" placeholder="Busque um filme/serie por nome" label="name" track-by="id"
             :options="options" :custom-label="customLabel" :show-labels="false" @search-change="onSearchChange"
-            @input="onInput" @select="onSelect">
+            @input="onInput" @select="onSelect" :close-on-select="true">
             <template #noResult>
                 Oops! Nenhum resultado encontrado para <b>{{ selected }}</b>
             </template>
@@ -62,12 +80,13 @@ export default {
             </template>
 
             <template #option="{ option }">
-                <a :href="'/movie/' + option.id">
+                <a :href="option.media_type == 'movie' ? '/movie/' + option.id : '/serie/' + option.id" :key="option"
+                    v-if="option.image != null && option.media_type !== 'person'">
                     <div class="flex items-center">
                         <img :src="option.image" :alt="option.name" class="h-16 mr-3" v-if="option.image" />
                         <div>
                             <div class="text-sm">
-                                {{ option.name }}
+                                {{ option.id }} | {{ option.name }} - {{ translateMediaType(option.media_type) }}
                             </div>
                             <div class="text-xs text-gray-500">
                                 {{ option.year }}
@@ -75,16 +94,6 @@ export default {
                         </div>
                     </div>
                 </a>
-            </template>
-            <template #selectedOption="{ option }">
-                <div>
-                    <div class="text-sm">
-                        {{ option.name }}
-                    </div>
-                    <div class="text-xs text-gray-500">
-                        {{ option.year }}
-                    </div>
-                </div>
             </template>
         </VueMultiselect>
     </div>

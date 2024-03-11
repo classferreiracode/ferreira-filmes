@@ -37,8 +37,7 @@
                         <div class="dropdown dropdown-end">
                             <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
                                 <div class="w-8 rounded-full">
-                                    <img alt="Avatar"
-                                        src="https://placehold.co/600x400?text=FF" />
+                                    <img alt="Avatar" src="https://placehold.co/600x400?text=FF" />
                                 </div>
                             </div>
                             <ul tabindex="0"
@@ -47,6 +46,17 @@
                                     <a href="{{ route('profile') }}" class="justify-between">
                                         Perfil
                                     </a>
+                                </li>
+                                <li>
+                                    <details>
+                                        <summary>
+                                            Favoritos
+                                        </summary>
+                                        <ul class="p-2 bg-base-100 rounded-t-none">
+                                            <li><a>Filmes</a></li>
+                                            <li><a>Series</a></li>
+                                        </ul>
+                                    </details>
                                 </li>
                                 {{-- <li><a>Config</a></li> --}}
                                 <li>
@@ -69,9 +79,12 @@
                 </div>
             </div>
         </nav>
-        {{-- <div class="pt-24 px-32">
-            <search />
-        </div> --}}
+        @if (!request()->is('user/*'))
+            <div class="pt-24 px-32">
+                <search />
+            </div>
+        @endif
+
         <main class="pt-16">
             @yield('content')
         </main>
@@ -122,8 +135,7 @@
                             @csrf
 
                             <div class="row mb-3 ">
-                                <label for="email-login"
-                                    class="col-md-4 col-form-label text-md-end">E-mail</label>
+                                <label for="email-login" class="col-md-4 col-form-label text-md-end">E-mail</label>
 
                                 <div class="col-md-6">
                                     <input type="email" id="email-login" placeholder="Email"
@@ -139,8 +151,7 @@
                             </div>
 
                             <div class="row mb-3">
-                                <label for="password_login"
-                                    class="col-md-4 col-form-label text-md-end">Senha</label>
+                                <label for="password_login" class="col-md-4 col-form-label text-md-end">Senha</label>
 
                                 <div class="col-md-6">
                                     <input type="password" id="password_login" placeholder="Senha"
@@ -192,20 +203,12 @@
                             @csrf
 
                             <div class="row mb-3">
-                                <label for="name"
-                                    class="col-md-4 col-form-label text-md-end">Nome</label>
+                                <label for="name" class="col-md-4 col-form-label text-md-end">Nome</label>
 
                                 <div class="col-md-6">
-                                    <input
-                                    id="name"
-                                    name="name"
-                                    type="text"
-                                    placeholder="Digite seu ome"
-                                    class="@error('name') is-invalid @enderror input input-bordered input-primary w-full max-w-xs"
-                                    value="{{ old('name') }}"
-                                    required
-                                    autocomplete="name"
-                                    autofocus />
+                                    <input id="name" name="name" type="text" placeholder="Digite seu ome"
+                                        class="@error('name') is-invalid @enderror input input-bordered input-primary w-full max-w-xs"
+                                        value="{{ old('name') }}" required autocomplete="name" autofocus />
                                     @error('name')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -215,14 +218,10 @@
                             </div>
 
                             <div class="row mb-3">
-                                <label for="email"
-                                    class="col-md-4 col-form-label text-md-end">E-Mail</label>
+                                <label for="email" class="col-md-4 col-form-label text-md-end">E-Mail</label>
 
                                 <div class="col-md-6">
-                                    <input
-                                        id="email"
-                                        name="email"
-                                        type="email"
+                                    <input id="email" name="email" type="email"
                                         placeholder="Digite seu melhor E-Mail"
                                         class="input input-bordered input-primary w-full max-w-xs @error('email') is-invalid @enderror"
                                         value="{{ old('email') }}" required autocomplete="email" />
@@ -236,14 +235,10 @@
                             </div>
 
                             <div class="row mb-3">
-                                <label for="password"
-                                    class="col-md-4 col-form-label text-md-end">Senha</label>
+                                <label for="password" class="col-md-4 col-form-label text-md-end">Senha</label>
 
                                 <div class="col-md-6">
-                                    <input
-                                        type="password"
-                                        id="password"
-                                        name="password"
+                                    <input type="password" id="password" name="password"
                                         placeholder="Digite sua senha"
                                         class="@error('password') is-invalid @enderror input input-bordered input-primary w-full max-w-xs"
                                         required autocomplete="new-password" />
@@ -257,17 +252,14 @@
                             </div>
 
                             <div class="row mb-3">
-                                <label for="password-confirm"
-                                    class="col-md-4 col-form-label text-md-end">Confirme sua senha</label>
+                                <label for="password-confirm" class="col-md-4 col-form-label text-md-end">Confirme sua
+                                    senha</label>
 
                                 <div class="col-md-6">
-                                    <input
-                                        type="password"
-                                        id="password-confirm"
-                                        name="password_confirmation"
+                                    <input type="password" id="password-confirm" name="password_confirmation"
                                         placeholder="Confirme sua senha"
-                                        class="input input-bordered input-primary w-full max-w-xs"
-                                        required autocomplete="new-password" />
+                                        class="input input-bordered input-primary w-full max-w-xs" required
+                                        autocomplete="new-password" />
                                 </div>
                             </div>
 

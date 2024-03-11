@@ -1,6 +1,6 @@
 <script setup>
-import { onMounted, ref } from 'vue';
-import { StarIcon, HeartIcon } from '@heroicons/vue/24/solid'
+import { onMounted } from 'vue';
+import { StarIcon } from '@heroicons/vue/24/solid'
 import 'vue3-carousel/dist/carousel.css'
 
 const props = defineProps({
@@ -13,29 +13,6 @@ onMounted(() => {
         SuperFlixAPIPluginJS(props.serie.external_ids.imdb_id);
     }
 })
-
-const favorites = ref([]);
-
-const favoriteMovie = (id) => {
-    axios.get('/favorite/' + id)
-        .then(response => {
-            window.alert(response.data)
-            getFavorites()
-        })
-        .catch(error => {
-            console.log(error)
-        })
-}
-
-const getFavorites = () => {
-    axios.get('/favorites')
-        .then(response => {
-            favorites.value = response.data
-        })
-        .catch(error => {
-            console.log(error)
-        })
-}
 
 function replaceGenres() {
     return props.serie.genres.map((genre) => genre).join(' | ');
@@ -63,6 +40,7 @@ function getCast() {
 function SuperFlixAPIPluginJS(imdb) {
     let frame = document.getElementById('SuperFlixAPIContainerVideo');
     frame.innerHTML += '<iframe src="https://superflixapi.top/serie/' + imdb + '/#color:1a103d" scrolling="no" frameborder="0" allowfullscreen class="w-full h-[500px] rounded-xl"></iframe>';
+
 }
 </script>
 
@@ -77,10 +55,7 @@ function SuperFlixAPIPluginJS(imdb) {
                     <h2 class="text-4xl font-semibold mt-4 md:mt-0">
                         {{ serie.title }}
                     </h2>
-                    <a class="btn btn-circle btn-secondary cursor-pointer" @click="favoriteMovie(serie.id)">
-                        <HeartIcon
-                            :class="favorites.includes(serie.id) ? 'h-5 fill-white hover:fill-red-700 transition ease-in-out duration-150' : 'h-5 fill-red-700 hover:fill-white transition ease-in-out duration-150'" />
-                    </a>
+                    <Favorite :data="serie" :size="8" />
                 </div>
 
                 <div class="flex items-center text-gray-400 text-sm">

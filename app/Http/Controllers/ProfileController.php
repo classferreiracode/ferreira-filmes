@@ -99,4 +99,13 @@ class ProfileController extends Controller
             'series' => $series
         ]);
     }
+
+    public function favoriteMovie(): View
+    {
+        $favorites = FavoriteMovie::getMovieIdByUser();
+
+        return view('profile.favoriteMovie',[
+            'movies' => $favorites
+        ]);
+    }
 }
