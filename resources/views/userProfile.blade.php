@@ -3,6 +3,5 @@
 @section('title', $user->name)
 
 @section('content')
-    <user-profile :user="{{ json_encode($user) }}" :movies="{{ json_encode($movies) }}"
-        :series="{{ json_encode($series) }}" />
+    <user-profile :user="{{ json_encode($user) }}" />
 @endsection
