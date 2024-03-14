@@ -40,6 +40,7 @@ class HomeController extends Controller
         if ($request->input('query') == '' || $request->input('query') == null) {
             return response('Bad Request', 400);
         }
+
         return $this->service
             ->search()
             ->fromSearch($request->input('query'))
@@ -117,7 +118,7 @@ class HomeController extends Controller
         $fav::create([
             'user_id' => auth()->user()->id,
             'movie_id' => $id,
-            'type' => $type
+            'type' => $type,
         ]);
 
         return response('Favorite Added', 200)->header('Content-Type', 'application/json');
@@ -125,6 +126,6 @@ class HomeController extends Controller
 
     public function getFavorites()
     {
-        return response()->json(FavoriteMovie::getMovieIdByUser());
+        return response()->json(FavoriteMovie::getAllContentIdByUser());
     }
 }

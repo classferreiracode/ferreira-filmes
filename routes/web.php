@@ -40,7 +40,6 @@ Route::prefix('user')->group(function () {
     Route::get('/favorites/serie', [ProfileController::class, 'favoriteSerie'])->name('favorite.serie');
 })->middleware(['auth']);
 
-
 Route::get('/favorite/{id}/{type}', [HomeController::class, 'favorites'])->name('favorite')->middleware(['auth']);
 Route::get('/favorites', [HomeController::class, 'getFavorites'])->name('get-favorite')->middleware(['auth']);
 

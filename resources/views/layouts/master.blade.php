@@ -53,8 +53,8 @@
                                             Favoritos
                                         </summary>
                                         <ul class="p-2 bg-base-100 rounded-t-none">
-                                            <li><a>Filmes</a></li>
-                                            <li><a>Series</a></li>
+                                            <li><a href="{{ route('favorite.movie') }}">Filmes</a></li>
+                                            <li><a href="{{ route('favorite.serie') }}">Series</a></li>
                                         </ul>
                                     </details>
                                 </li>

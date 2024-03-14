@@ -28,4 +28,11 @@ class FavoriteMovie extends Model
             ->where('type', $where)
             ->get();
     }
+
+    public static function getAllContentIdByUser()
+    {
+        return FavoriteMovie::select('movie_id', 'type')
+            ->where('user_id', Auth::user()->id)
+            ->get();
+    }
 }

@@ -40,6 +40,9 @@ class Movie
 
     public function __construct($data)
     {
+        if (data_get($data, 'id') === null) {
+            dd($data);
+        }
         $this->id = data_get($data, 'id');
         $this->imdb_id = data_get($data, 'imdb_id');
         $this->title = data_get($data, 'title');

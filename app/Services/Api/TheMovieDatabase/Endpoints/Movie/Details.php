@@ -20,7 +20,7 @@ class Details extends BaseEndpoint
     {
         $json[] = $this->service
             ->api
-            ->get('/movie/'.$this->movieId.'?append_to_response=credits,videos,images,recommendations,similar,keywords&language=pt-BR')
+            ->get('/movie/'.$this->movieId.'?append_to_response=credits,videos,images,recommendations,similar,keywords&language=pt-BR&api_key='.env('TMDB_API_KEY'))
             ->json();
 
         return $this->transform($json, Movie::class)[0];

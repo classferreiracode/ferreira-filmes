@@ -1,7 +1,6 @@
 <script setup>
 import { EyeIcon, TrashIcon } from '@heroicons/vue/24/solid';
 
-
 const props = defineProps({
     movies: Object
 })
@@ -56,8 +55,9 @@ function deleteFavorite(id, type) {
                                         <td>
                                             <div class="flex items-center gap-3">
                                                 <div class="avatar">
-                                                    <div class="mask mask-squircle w-16">
-                                                        <img :src="movie.poster_path" alt="{{ movie.title }}" />
+                                                    <div class="rounded h-16">
+                                                        <img :src="movie.poster_path" alt="{{ movie.title }}"
+                                                            class="cover " />
                                                     </div>
                                                 </div>
 

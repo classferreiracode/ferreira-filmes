@@ -36,6 +36,9 @@ class Serie
 
     public function __construct(mixed $data)
     {
+        if (data_get($data, 'id') === null) {
+            dd($data);
+        }
         $this->id = data_get($data, 'id');
         $this->external_ids = data_get($data, 'external_ids');
         $this->title = data_get($data, 'name');

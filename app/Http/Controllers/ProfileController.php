@@ -70,42 +70,47 @@ class ProfileController extends Controller
 
     public function show()
     {
-        $favorites = FavoriteMovie::getMovieIdByUser();
-        $movies = [];
-        $series = [];
-
-        foreach ($favorites as $favorite) {
-            if($favorite->type === 'tv') {
-                $tmdb = $this->service
-                    ->detailSerie()
-                    ->fromSerie($favorite->movie_id)
-                    ->get();
-
-                $series[] = $tmdb;
-            }
-            if($favorite->type === 'movie') {
-                $tmdb = $this->service
-                    ->detailMovies()
-                    ->fromMovie($favorite->movie_id)
-                    ->get();
-
-                $movies[] = $tmdb;
-            }
-        }
-
         return view('userProfile', [
             'user' => Auth::user(),
-            'movies' => $movies,
-            'series' => $series
         ]);
     }
 
     public function favoriteMovie(): View
     {
-        $favorites = FavoriteMovie::getMovieIdByUser();
+        $favorites = FavoriteMovie::getMovieIdByUser('movie');
+        $movies = [];
 
-        return view('profile.favoriteMovie',[
-            'movies' => $favorites
+        foreach ($favorites as $favorite) {
+            $tmdb = $this->service
+                ->detailMovies()
+                ->fromMovie($favorite->movie_id)
+                ->get();
+
+            $movies[] = $tmdb;
+        }
+
+        return view('profile.favoriteMovie', [
+            'movies' => $movies,
+        ]);
+    }
+
+    public function favoriteSerie(): View
+    {
+        $favorites = FavoriteMovie::getMovieIdByUser('tv');
+        $series = [];
+
+        foreach ($favorites as $favorite) {
+            $tmdb = $this->service
+                ->detailSerie()
+                ->fromSerie($favorite->movie_id)
+                ->get();
+
+            $series[] = $tmdb;
+
+        }
+
+        return view('profile.favoriteSerie', [
+            'series' => $series,
         ]);
     }
 }
