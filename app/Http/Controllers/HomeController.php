@@ -128,4 +128,41 @@ class HomeController extends Controller
     {
         return response()->json(FavoriteMovie::getAllContentIdByUser());
     }
+
+    public function favoriteMovie()
+    {
+        $favorites = FavoriteMovie::getMovieIdByUser('movie');
+        $movies = [];
+
+        foreach ($favorites as $favorite) {
+            //dd($favorite);
+            $tmdb = $this->service
+                ->detailMovies()
+                ->fromMovie($favorite->movie_id)
+                ->get();
+
+            $movies[] = $tmdb;
+        }
+        //dd($movies);
+
+        return response()->json($movies);
+    }
+
+    public function favoriteSerie()
+    {
+        $favorites = FavoriteMovie::getMovieIdByUser('tv');
+        $series = [];
+
+        foreach ($favorites as $favorite) {
+            $tmdb = $this->service
+                ->detailSerie()
+                ->fromSerie($favorite->movie_id)
+                ->get();
+
+            $series[] = $tmdb;
+
+        }
+
+        return response()->json($series);
+    }
 }

@@ -3,6 +3,6 @@
 
 @section('content')
     <div>
-        <favorite-movie :movies="{{ json_encode($movies) }}">
+        <favorite-movie>
     </div>
 @endsection

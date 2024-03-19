@@ -24,13 +24,13 @@ class Movie
 
     public ?string $runtime;
 
-    public ?array $credits;
+    //public ?array $credits;
 
     public ?array $videos;
 
-    public ?array $recommendations;
+    //public ?array $recommendations;
 
-    public ?array $similar;
+    //public ?array $similar;
 
     public ?array $keywords;
 
@@ -53,10 +53,10 @@ class Movie
         $this->backdrop_path = 'https://image.tmdb.org/t/p/original'.data_get($data, 'backdrop_path');
         $this->poster_path = 'https://image.tmdb.org/t/p/w300_and_h450_bestv2'.data_get($data, 'poster_path');
         $this->runtime = data_get($data, 'runtime').' min';
-        $this->credits = data_get($data, 'credits');
+        //$this->credits = data_get($data, 'credits');
         $this->videos = data_get($data, 'videos');
-        $this->recommendations = data_get($data, 'recommendations');
-        $this->similar = data_get($data, 'similar');
+        //$this->recommendations = data_get($data, 'recommendations');
+        //$this->similar = data_get($data, 'similar');
         $this->keywords = data_get($data, 'keywords');
         $this->production_companies = data_get($data, 'production_companies');
     }

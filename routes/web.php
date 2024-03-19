@@ -42,6 +42,8 @@ Route::prefix('user')->group(function () {
 
 Route::get('/favorite/{id}/{type}', [HomeController::class, 'favorites'])->name('favorite')->middleware(['auth']);
 Route::get('/favorites', [HomeController::class, 'getFavorites'])->name('get-favorite')->middleware(['auth']);
+Route::get('/favorites/movie', [HomeController::class, 'favoriteMovie'])->name('get-favorite.movie');
+Route::get('/favorites/serie', [HomeController::class, 'favoriteSerie'])->name('get-favorite.serie');
 
 Auth::routes();
 

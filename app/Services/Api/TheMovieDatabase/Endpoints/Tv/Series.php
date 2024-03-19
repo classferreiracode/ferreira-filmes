@@ -13,7 +13,7 @@ class Series extends BaseEndpoint
         return $this->transform(
             $this->service
                 ->api
-                ->get('/tv/top_rated?include_adult=true&language=pt-BR&api_key='.env('TMDB_API_KEY'))
+                ->get('/tv/top_rated?include_adult=true&language=pt-BR')
                 ->json('results'),
             Popular::class);
     }

@@ -1,9 +1,35 @@
 <script setup>
 import { EyeIcon, TrashIcon } from '@heroicons/vue/24/solid';
+import { onMounted, ref } from 'vue';
 
-const props = defineProps({
-    movies: Object
-})
+const movies = ref([]);
+
+const getMovies = () => {
+    axios.get('/favorites/movie')
+        .then(response => {
+            movies.value = response.data
+        })
+        .catch(error => {
+            //location.reload()
+            console.log(error)
+        })
+}
+
+onMounted(() => {
+    getMovies();
+});
+
+const getFavorites = () => {
+    axios.get('/favorites')
+        .then(response => {
+            favorites.value = mapMovieId(response.data) || response.data
+        })
+        .catch(error => {
+            console.log(error)
+            //location.reload()
+        })
+}
+
 
 function deleteFavorite(id, type) {
     axios.get('/favorite/' + id + '/' + type)
@@ -12,6 +38,7 @@ function deleteFavorite(id, type) {
                 icon: 'success',
                 title: 'O filme foi removido dos seus favoritos',
             })
+            getMovies()
         })
         .catch(function (error) {
             console.log(error);
