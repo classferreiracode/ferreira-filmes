@@ -1,32 +1,24 @@
 <script setup>
 import { EyeIcon, TrashIcon } from '@heroicons/vue/24/solid';
-import { onMounted, ref } from 'vue';
+import { onMounted, reactive } from 'vue';
 
-const movies = ref([]);
-
-const getMovies = () => {
-    axios.get('/favorites/movie')
-        .then(response => {
-            movies.value = response.data
-        })
-        .catch(error => {
-            //location.reload()
-            console.log(error)
-        })
-}
+const state = reactive(
+    {
+        movies: []
+    }
+);
 
 onMounted(() => {
     getMovies();
 });
 
-const getFavorites = () => {
-    axios.get('/favorites')
+const getMovies = () => {
+    axios.get('/favorites/movie')
         .then(response => {
-            favorites.value = mapMovieId(response.data) || response.data
+            state.movies = response.data
         })
         .catch(error => {
             console.log(error)
-            //location.reload()
         })
 }
 
@@ -34,13 +26,20 @@ const getFavorites = () => {
 function deleteFavorite(id, type) {
     axios.get('/favorite/' + id + '/' + type)
         .then(function (response) {
-            Swal.fire({
+            state.movies = state.movies.filter(movie => movie.id !== id)
+
+            Toast.fire({
                 icon: 'success',
                 title: 'O filme foi removido dos seus favoritos',
             })
-            getMovies()
         })
         .catch(function (error) {
+            Toast.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Algo deu errado',
+            })
+
             console.log(error);
         });
 }
@@ -71,9 +70,9 @@ function deleteFavorite(id, type) {
                                         <th>Ações</th>
                                     </tr>
                                 </thead>
-                                <tbody v-if="movies.length > 0">
-                                    <!-- row 1 -->
-                                    <tr v-for="movie in movies" :key="movie.id" class="hover">
+                                <tbody v-if="state.movies.length > 0">
+                                    <tr v-for="movie in state.movies" :key="movie.id" class="hover">
+
                                         <th>
                                             <label>
                                                 <input type="checkbox" class="checkbox" />

@@ -135,7 +135,6 @@ class HomeController extends Controller
         $movies = [];
 
         foreach ($favorites as $favorite) {
-            //dd($favorite);
             $tmdb = $this->service
                 ->detailMovies()
                 ->fromMovie($favorite->movie_id)
@@ -143,7 +142,6 @@ class HomeController extends Controller
 
             $movies[] = $tmdb;
         }
-        //dd($movies);
 
         return response()->json($movies);
     }
