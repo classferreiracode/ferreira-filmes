@@ -31,15 +31,11 @@ export default {
         },
         onSearchChange(searchQuery) {
             this.searchQuery = searchQuery;
-            if (!this.searching) {
-                this.search();
-            }
+            this.search();
         },
         onInput(selectedOption) {
             if (selectedOption != null || selectedOption != [] || selectedOption != '')
                 this.selected = selectedOption;
-
-            this.searching = false;
         },
         search() {
             this.searching = true;
@@ -62,7 +58,6 @@ export default {
         },
         onSelect(selectedOption) {
             this.select_id = selectedOption.id;
-
         }
     },
 }
@@ -70,11 +65,9 @@ export default {
 <template>
     <div class="form-control">
         <VueMultiselect v-model="selected" placeholder="Busque um filme/serie por nome" label="name" track-by="id"
-            :options="options" :custom-label="customLabel" :show-labels="false" @search-change="onSearchChange"
-            @input="onInput" @select="onSelect" :close-on-select="true">
-            <template #noResult>
-                Oops! Nenhum resultado encontrado para <b>{{ selected }}</b>
-            </template>
+            :options="options" :custom-label="customLabel" :show-labels="false" :searchable="true" :loading="searching"
+            :delay="300" @search-change="search" @input="onInput" :close-on-select="true">
+
             <template #noOptions>
                 Digite o nome do filme para iniciar a busca
             </template>

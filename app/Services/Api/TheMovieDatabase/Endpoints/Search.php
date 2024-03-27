@@ -8,10 +8,18 @@ use Illuminate\Support\Collection;
 class Search extends BaseEndpoint
 {
     private string $query;
+    private string $type = 'multi';
 
     public function fromSearch(string|OnSearch $query): self
     {
         $this->query = $query instanceof OnSearch ? $query->id : $query;
+
+        return $this;
+    }
+
+    public function fromType(string $type): self
+    {
+        $this->type = $type;
 
         return $this;
     }
@@ -21,7 +29,7 @@ class Search extends BaseEndpoint
         return $this->transform(
             $this->service
                 ->api
-                ->get('search/multi?query='.$this->query.'&language=pt-BR&include_adult=false')
+                ->get('search/'.$this->type.'?query='.$this->query.'&language=pt-BR')
                 ->json('results'),
             OnSearch::class
         );
