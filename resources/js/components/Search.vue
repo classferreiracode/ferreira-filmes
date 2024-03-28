@@ -13,9 +13,7 @@ export default {
     },
     methods: {
         customLabel(option) {
-            if (option.image != null && option.media_type != 'person') {
-                return option.name + ' (' + option.year + ') - ' + option.media_type;
-            }
+            return option.name + ' (' + option.year + ') - ' + option.media_type;
         },
         translateMediaType(media_type) {
             switch (media_type) {
@@ -44,6 +42,7 @@ export default {
                 media_type: this.media_type
             })
                 .then(response => {
+                    console.log(response.data);
                     if (response.data.length > 0) {
                         response.data = response.data.filter(option => option.name !== null);
                         this.options = response.data;
@@ -64,19 +63,30 @@ export default {
 </script>
 <template>
     <div class="form-control">
-        <VueMultiselect v-model="selected" placeholder="Busque um filme/serie por nome" label="name" track-by="id"
-            :options="options" :custom-label="customLabel" :show-labels="false" :searchable="true" :loading="searching"
-            :delay="300" @search-change="search" @input="onInput" :close-on-select="true">
+        <VueMultiselect
+            v-debounce:300="onSearchChange"
+            v-model="selected"
+            placeholder="Busque um filme/serie por nome"
+            label="name"
+            track-by="id"
+            :options="options"
+            :custom-label="customLabel"
+            :show-labels="false"
+            :searchable="true"
+            :loading="searching"
+            :delay="300"
+            @search-change="search"
+            @input="onInput"
+            :close-on-select="true">
 
             <template #noOptions>
-                Digite o nome do filme para iniciar a busca
+                Digite o nome do filme/serie para iniciar a busca
             </template>
 
             <template #option="{ option }">
-                <a :href="option.media_type == 'movie' ? '/movie/' + option.id : '/serie/' + option.id" :key="option"
-                    v-if="option.image != null && option.media_type !== 'person'">
+                <a :href="option.media_type == 'movie' ? '/movie/' + option.id : '/serie/' + option.id" :key="option">
                     <div class="flex items-center">
-                        <img :src="option.image" :alt="option.name" class="h-16 mr-3" v-if="option.image" />
+                        <img :src="option.image" :alt="option.name" class="h-16 mr-3" />
                         <div>
                             <div class="text-sm">
                                 {{ option.id }} | {{ option.name }} - {{ translateMediaType(option.media_type) }}

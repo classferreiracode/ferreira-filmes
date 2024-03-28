@@ -1,11 +1,51 @@
 <script setup>
-import sidenav from './profile/sidenav.vue';
-import HeaderProfile from './profile/HeaderProfile.vue';
+import sidenav from '../components/profile/Sidenav.vue';
+import HeaderProfile from '../components/profile/HeaderProfile.vue';
+import { reactive } from 'vue';
 
 const props = defineProps({
     user: Object
 })
 
+const state = reactive(
+    {
+        user: props.user
+    }
+);
+
+function onFileChange(e) {
+    const file = e.target.files || e.dataTransfer.files;
+
+    if (!file.length)
+        return;
+
+    state.user.avatar = file[0]
+}
+function updateProfile() {
+
+    axios.post('./profile/update', {
+        avatar: state.user.avatar,
+        name: state.user.name,
+        email: state.user.email
+    },
+        {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        })
+        .then((response) => {
+            Toast.fire({
+                icon: 'success',
+                title: 'Seu perfil foi atualizado'
+            })
+        })
+        .catch((error) => {
+            Toast.fire({
+                icon: 'error',
+                title: 'Algo deu errado'
+            })
+        })
+}
 </script>
 
 <template>
@@ -20,43 +60,32 @@ const props = defineProps({
                     </div>
                     <div>
                         <div class="rounded-b-lg bg-base-300 p-4">
-                            <form id="edit-profile" class="flex flex-col gap-4 px-8">
+                            <form @submit.prevent="updateProfile" id="edit-profile" class="flex flex-col gap-4 px-8">
                                 <div class="form-control">
                                     <label class="label">
                                         <span class="label-text">Avatar</span>
                                     </label>
-                                    <input type="file"
+                                    <input type="file" placeholder="Avatar" @change="onFileChange($event)"
+                                        accept="image/*" name="avatar"
                                         class="file-input file-input-sm file-input-bordered w-full max-w-xs" />
                                 </div>
                                 <div class="form-control">
                                     <label class="label">
                                         <span class="label-text">Nome</span>
                                     </label>
-                                    <input type="text" placeholder="Nome" v-model="user.name"
+                                    <input type="text" placeholder="Nome" v-model="state.user.name"
                                         class="input input-sm input-bordered" />
                                 </div>
                                 <div class="form-control">
                                     <label class="label">
                                         <span class="label-text">Email</span>
                                     </label>
-                                    <input type="email" placeholder="Email" v-model="user.email"
+                                    <input type="email" placeholder="Email" v-model="state.user.email"
                                         class="input input-sm input-bordered" disabled />
-                                </div>
-                                <div class="form-control">
-                                    <label class="label">
-                                        <span class="label-text">Senha</span>
-                                    </label>
-                                    <input type="password" placeholder="Senha" class="input input-sm input-bordered" />
-                                </div>
-                                <div class="form-control">
-                                    <label class="label">
-                                        <span class="label-text">Nova Senha</span>
-                                    </label>
-                                    <input type="password" placeholder="Nova Senha"
-                                        class="input input-sm input-bordered" />
+
                                 </div>
                                 <div class="form-control mt-6">
-                                    <button class="btn btn-primary">Salvar</button>
+                                    <button type="submit" class="btn btn-primary">Salvar</button>
                                 </div>
                             </form>
                         </div>

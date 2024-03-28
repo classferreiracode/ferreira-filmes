@@ -7,7 +7,6 @@ class Search
     public int $id;
 
     public ?string $name;
-
     public ?string $year;
 
     public ?string $image;
@@ -19,7 +18,7 @@ class Search
         $this->id = data_get($data, 'id');
         $this->name = data_get($data, 'name') == '' ? data_get($data, 'title') : data_get($data, 'name');
         $this->year = date('Y', strtotime(data_get($data, 'release_date')));
-        $this->image = data_get($data, 'poster_path') == '' || data_get($data, 'profile_path') == null ? data_get($data, 'profile_path') : 'https://image.tmdb.org/t/p/original/'.data_get($data, 'poster_path');
+        $this->image = 'https://image.tmdb.org/t/p/original'.data_get($data, 'poster_path');
         $this->media_type = data_get($data, 'media_type');
     }
 }

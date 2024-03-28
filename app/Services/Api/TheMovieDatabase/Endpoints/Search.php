@@ -8,7 +8,7 @@ use Illuminate\Support\Collection;
 class Search extends BaseEndpoint
 {
     private string $query;
-    private string $type = 'multi';
+    private string $type;
 
     public function fromSearch(string|OnSearch $query): self
     {

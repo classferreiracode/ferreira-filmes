@@ -1,19 +1,44 @@
 <script setup>
 import { EyeIcon, TrashIcon } from '@heroicons/vue/24/solid';
+import { onMounted, reactive } from 'vue';
 
-const props = defineProps({
-    series: Object
-})
+const state = reactive(
+    {
+        series: []
+    }
+);
+
+onMounted(() => {
+    getMovies();
+});
+
+const getMovies = () => {
+    axios.get('/favorites/serie')
+        .then(response => {
+            state.series = response.data
+        })
+        .catch(error => {
+            console.log(error)
+        })
+}
 
 function deleteFavorite(id, type) {
     axios.get('/favorite/' + id + '/' + type)
         .then(function (response) {
-            Swal.fire({
+            state.series = state.series.filter(serie => serie.id !== id)
+
+            Toast.fire({
                 icon: 'success',
                 title: 'A serie foi removido dos seus favoritos',
             })
         })
         .catch(function (error) {
+            Toast.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Algo deu errado',
+            })
+
             console.log(error);
         });
 }
@@ -43,9 +68,9 @@ function deleteFavorite(id, type) {
                                         <th>Ações</th>
                                     </tr>
                                 </thead>
-                                <tbody v-if="series.length > 0">
+                                <tbody v-if="state.series.length > 0">
                                     <!-- row 1 -->
-                                    <tr v-for="serie in series" :key="serie.id" class="hover">
+                                    <tr v-for="serie in state.series" :key="serie.id" class="hover">
 
 
                                         <th>

@@ -40,6 +40,7 @@ class HomeController extends Controller
         return $this->service
             ->search()
             ->fromSearch($request->input('query'))
+            ->fromType($request->input('media_type') ?? 'multi')
             ->get();
     }
 
