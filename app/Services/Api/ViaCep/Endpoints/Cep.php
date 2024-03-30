@@ -1,15 +1,17 @@
 <?php
+
 namespace App\Services\Api\ViaCep\Endpoints;
 
 use App\Services\Api\ViaCep\Entities\OnCep;
-use App\Services\Api\ViaCep\Endpoints\BaseEndpoint;
 
 class Cep extends BaseEndpoint
 {
     private string $query;
+
     public function fromCep(string|OnCep $query)
     {
         $this->query = $query instanceof OnCep ? $query->cep : $query;
+
         return $this;
     }
 
@@ -17,7 +19,7 @@ class Cep extends BaseEndpoint
     {
         $json[] = $this->service
             ->api
-            ->get($this->query . '/json')
+            ->get($this->query.'/json')
             ->json();
 
         $result = $this->transform($json, OnCep::class)[0];

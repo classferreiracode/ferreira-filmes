@@ -7,21 +7,27 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
                 <div class="mt-8" v-for="movie in popular_movies" :key="movie.id">
                     <a :href="'/movie/' + movie.id">
-                        <img :src="movie.poster_path" alt="{{ movie.title }}" class=" rounded hover:opacity-75 transition ease-in-out duration-150">
+                        <img :src="movie.poster_path" alt="{{ movie.title }}"
+                            class=" rounded hover:opacity-75 transition ease-in-out duration-150">
                     </a>
                     <div class="mt-2">
-                        <a href="#" class="text-lg mt-2 hover:text-gray-300 duration-500">
+                        <a class="text-lg mt-2 hover:text-gray-300 duration-500 cursor-pointer">
                             {{ movie.title }}
                         </a>
-                        <div class="flex items-center text-gray-400 text-sm mt-1">
-                            <StarIcon class="h-5 w-5 fill-yellow-500" />
-                            <span class="ml-1">
-                                {{ movie.vote_average.toFixed(1) }}
-                            </span>
-                            <span class="mx-2">|</span>
-                            <span>
-                                {{ movie.release_date }}
-                            </span>
+                        <div class="flex items-center justify-between text-gray-400 text-sm mt-1">
+                            <div class="flex items-center text-gray-400 text-sm mt-1">
+                                <StarIcon class="h-5 w-5 fill-yellow-500" />
+                                <span class="ml-1">
+                                    {{ movie.vote_average.toFixed(1) }}
+                                </span>
+                                <span class="mx-2">|</span>
+                                <span>
+                                    {{ movie.release_date }}
+                                </span>
+                            </div>
+                            <div class="flex items-center  text-gray-400 text-sm mt-1">
+                                <Favorite :data="movie" :size="5" />
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -36,35 +42,45 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
                 <div class="mt-8" v-for="serie in popular_tv" :key="serie.id">
                     <a :href="'/serie/' + serie.id">
-                        <img :src="serie.poster_path" alt="{{ serie.title }}" class=" rounded hover:opacity-75 transition ease-in-out duration-150">
+                        <img :src="serie.poster_path" alt="{{ serie.title }}"
+                            class=" rounded hover:opacity-75 transition ease-in-out duration-150">
                     </a>
                     <div class="mt-2">
-                        <a href="#" class="text-lg mt-2 hover:text-gray-300 duration-500">
+                        <a class="text-lg mt-2 hover:text-gray-300 duration-500 cursor-pointer">
                             {{ serie.title }}
                         </a>
-                        <div class="flex items-center text-gray-400 text-sm mt-1">
-                            <StarIcon class="h-5 w-5 fill-yellow-500" />
-                            <span class="ml-1">
-                                {{ serie.vote_average.toFixed(1) }}
-                            </span>
-                            <span class="mx-2">|</span>
-                            <span>
-                                {{ serie.release_date }}
-                            </span>
+                        <div class="flex items-center justify-between text-gray-400 text-sm mt-1">
+                            <div class="flex items-center text-gray-400 text-sm mt-1">
+                                <StarIcon class="h-5 w-5 fill-yellow-500" />
+                                <span class="ml-1">
+                                    {{ serie.vote_average.toFixed(1) }}
+                                </span>
+                                <span class="mx-2">|</span>
+                                <span>
+                                    {{ serie.release_date }}
+                                </span>
+                            </div>
+                            <div class="flex items-center  text-gray-400 text-sm mt-1">
+                                <Favorite :data="serie" :size="5" />
+                            </div>
                         </div>
+
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
 </template>
 
 <script setup>
-import { StarIcon } from '@heroicons/vue/24/solid'
+import { HeartIcon, StarIcon } from '@heroicons/vue/24/solid'
+import { HeartIcon as HeartIconOutline } from '@heroicons/vue/24/outline'
+import { defineProps } from 'vue';
+import Swal from 'sweetalert2';
 
 const props = defineProps({
     popular_movies: Object,
-    popular_tv: Object
+    popular_tv: Object,
 })
+
 </script>

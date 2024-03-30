@@ -4,7 +4,6 @@ namespace App\Services\Api\TheMovieDatabase\Endpoints\Person;
 
 use App\Services\Api\TheMovieDatabase\Endpoints\BaseEndpoint;
 use App\Services\Api\TheMovieDatabase\Entities\Person\Person;
-use App\Services\Api\TheMovieDatabase\TheMovieDatabase;
 
 class Persons extends BaseEndpoint
 {

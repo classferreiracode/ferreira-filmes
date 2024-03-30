@@ -12,6 +12,7 @@ class Details extends BaseEndpoint
     public function fromMovie(int|Movie $movie)
     {
         $this->movieId = $movie instanceof Movie ? $movie->id : $movie;
+
         return $this;
     }
 
@@ -19,7 +20,7 @@ class Details extends BaseEndpoint
     {
         $json[] = $this->service
             ->api
-            ->get('/movie/' . $this->movieId . '?include_adult=true&append_to_response=credits,videos,images,recommendations,similar,keywords&language=pt-BR')
+            ->get('/movie/'.$this->movieId.'?append_to_response=credits,videos,images,recommendations,similar,keywords&language=pt-BR')
             ->json();
 
         return $this->transform($json, Movie::class)[0];

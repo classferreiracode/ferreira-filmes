@@ -2,8 +2,8 @@
 
 namespace App\Services\Api\TheMovieDatabase\Endpoints;
 
-use Illuminate\Support\Collection;
 use App\Services\Api\TheMovieDatabase\TheMovieDatabaseService;
+use Illuminate\Support\Collection;
 
 class BaseEndpoint
 {

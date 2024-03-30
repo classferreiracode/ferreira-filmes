@@ -1,14 +1,19 @@
 <?php
-namespace App\Services\Api\ViaCep\Entities;
 
+namespace App\Services\Api\ViaCep\Entities;
 
 class OnCep
 {
     public $cep;
+
     public $logradouro;
+
     public $complemento;
+
     public $bairro;
+
     public $localidade;
+
     public $uf;
 
     public function __construct($json)
@@ -20,5 +25,4 @@ class OnCep
         $this->localidade = data_get($json, 'localidade');
         $this->uf = data_get($json, 'uf');
     }
-
 }
