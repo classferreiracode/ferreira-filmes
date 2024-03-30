@@ -37,7 +37,8 @@
                         <div class="dropdown dropdown-end">
                             <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
                                 <div class="w-8 rounded-full">
-                                    <img alt="Avatar" src="https://placehold.co/600x400?text=FF" />
+                                    <img alt="Avatar"
+                                        src="{{ asset('storage/img/profile/' . Auth::user()->avatar) ?? 'https://placehold.co/600x400?text=FF' }}" />
                                 </div>
                             </div>
                             <ul tabindex="0"

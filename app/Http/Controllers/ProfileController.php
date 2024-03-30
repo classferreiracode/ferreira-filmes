@@ -49,7 +49,7 @@ class ProfileController extends Controller
         }
 
         $request->user()->forceFill([
-            'name' => $request->name,
+            'name'  => $request->name,
             'email' => $request->email,
             'avatar' => $request->user()->avatar,
         ])->save();
