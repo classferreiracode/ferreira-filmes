@@ -39,11 +39,11 @@ class ProfileController extends Controller
         $request->validate([
             'name' => ['string', 'max:255'],
             'email' => ['email', 'max:120', 'unique:users,email,' . $request->user()->id],
-            'avatar' => ['image'],
         ]);
 
-        //upload image
-        if ($request->hasFile('avatar')) {
+        $validExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+
+        if ($request->hasFile('avatar') && in_array($request->file('avatar')->extension(), $validExtensions)) {
             $request->file('avatar')->storeAs('public/img/profile', $request->user()->id . '.' . $request->file('avatar')->extension());
             $request->user()->avatar = $request->user()->id . '.' . $request->file('avatar')->extension();
         }
@@ -54,7 +54,7 @@ class ProfileController extends Controller
             'avatar' => $request->user()->avatar,
         ])->save();
 
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+        return response('Profile Updated', 200, ['Content-Type' => 'application/json']);
     }
 
     /**

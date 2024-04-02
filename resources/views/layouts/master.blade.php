@@ -17,69 +17,7 @@
 
 <body class="font-sans text-white">
     <div id="app" class="">
-        <nav class="bg-base-300 w-full fixed z-10">
-            <div class="navbar w-full container mx-auto">
-                <div class="flex-1">
-                    <a class="btn btn-ghost text-xl" href="{{ route('home') }}">
-                        <img src="{{ asset('img/favicon.png') }}" alt="icon" class="w-8" />
-                        F. Filmes
-                    </a>
-                </div>
-                <div class="">
-                    <ul class="menu menu-horizontal p-0">
-                        <li><a href="">Filmes</a></li>
-                        <li><a href="">Séries</a></li>
-                        <li><a href="{{ route('persons') }}">Pessoas</a></li>
-                    </ul>
-                </div>
-                <div class="flex-none gap-2">
-                    @auth
-                        <div class="dropdown dropdown-end">
-                            <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
-                                <div class="w-8 rounded-full">
-                                    <img alt="Avatar"
-                                        src="{{ asset('storage/img/profile/' . Auth::user()->avatar) ?? 'https://placehold.co/600x400?text=FF' }}" />
-                                </div>
-                            </div>
-                            <ul tabindex="0"
-                                class="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
-                                <li>
-                                    <a href="{{ route('profile') }}" class="justify-between">
-                                        Perfil
-                                    </a>
-                                </li>
-                                <li>
-                                    <details>
-                                        <summary>
-                                            Favoritos
-                                        </summary>
-                                        <ul class="p-2 bg-base-100 rounded-t-none">
-                                            <li><a href="{{ route('favorite.movie') }}">Filmes</a></li>
-                                            <li><a href="{{ route('favorite.serie') }}">Series</a></li>
-                                        </ul>
-                                    </details>
-                                </li>
-                                {{-- <li><a>Config</a></li> --}}
-                                <li>
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                        onclick="event.preventDefault();
-                                                    document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </li>
-                            </ul>
-                        </div>
-                    @endauth
-                    @guest
-                        <a href="#modal_login" class="btn btn-sm btn-outline btn-primary">Login</a>
-                    @endguest
-                </div>
-            </div>
-        </nav>
+        @include('layouts.partials.navbar')
         @if (!request()->is('user/*'))
             <div class="pt-24 px-32">
                 <search />
@@ -170,8 +108,8 @@
                             <div class="row mb-3">
                                 <div class="col-md-6 offset-md-4">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="remember"
-                                            id="remember" {{ old('remember') ? 'checked' : '' }}>
+                                        <input class="form-check-input" type="checkbox" name="remember" id="remember"
+                                            {{ old('remember') ? 'checked' : '' }}>
 
                                         <label class="form-check-label" for="remember">
                                             Lembrar-me

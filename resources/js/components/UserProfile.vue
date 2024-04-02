@@ -14,36 +14,50 @@ const state = reactive(
 );
 
 function onFileChange(e) {
-    const file = e.target.files || e.dataTransfer.files;
+    const file = e.target.files
 
-    if (!file.length)
+    if (file === null) {
+        console.log('null na image')
         return;
+    }
 
     state.user.avatar = file[0]
 }
 function updateProfile() {
+    var fd = new FormData();
+    fd.append('avatar', state.user.avatar);
+    fd.append('name', state.user.name);
+    fd.append('email', state.user.email);
+    axios({
+        method: 'post',
+        url: './profile/update',
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        },
+        data: fd
 
-    axios.post('./profile/update', {
-        avatar: state.user.avatar,
-        name: state.user.name,
-        email: state.user.email
-    },
-        {
-            headers: {
-                'Content-Type': 'multipart/form-data'
+    })
+        .then((response) => {
+            console.log("🚀 ~ .then ~ response.data:", response.data)
+            if (response.data === "Formato") {
+                Toast.fire({
+                    icon: 'warning',
+                    title: 'Perfil atualizado, porém avatar não enviado ou com formato inválido',
+                    timer: 6000
+                })
+            } else {
+                Toast.fire({
+                    icon: 'success',
+                    title: 'Seu perfil foi atualizado'
+                })
             }
         })
-        .then((response) => {
-            Toast.fire({
-                icon: 'success',
-                title: 'Seu perfil foi atualizado'
-            })
-        })
         .catch((error) => {
-            Toast.fire({
-                icon: 'error',
-                title: 'Algo deu errado'
-            })
+            console.log(error)
+            // Toast.fire({
+            //     icon: 'error',
+            //     title: 'Algo deu errado'
+            // })
         })
 }
 </script>
