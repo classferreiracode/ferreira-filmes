@@ -17,7 +17,6 @@
             @auth
                 <div class="dropdown dropdown-end">
                     <profile-avatar :user_avatar="{{ json_encode(auth()->user()->avatar) }}" />
-
                 </div>
             @endauth
             @guest
