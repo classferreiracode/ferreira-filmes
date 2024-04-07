@@ -17,7 +17,6 @@ function onFileChange(e) {
     const file = e.target.files
 
     if (file === null) {
-        console.log('null na image')
         return;
     }
 
@@ -38,7 +37,6 @@ function updateProfile() {
 
     })
         .then((response) => {
-            console.log("🚀 ~ .then ~ response.data:", response.data)
             if (response.data === "Formato") {
                 Toast.fire({
                     icon: 'warning',
@@ -53,11 +51,11 @@ function updateProfile() {
             }
         })
         .catch((error) => {
-            console.log(error)
-            // Toast.fire({
-            //     icon: 'error',
-            //     title: 'Algo deu errado'
-            // })
+            Toast.fire({
+                icon: 'error',
+                title: 'Algo deu errado',
+                text: error.response.data.message
+            })
         })
 }
 </script>
@@ -95,7 +93,7 @@ function updateProfile() {
                                         <span class="label-text">Email</span>
                                     </label>
                                     <input type="email" placeholder="Email" v-model="state.user.email"
-                                        class="input input-sm input-bordered" disabled />
+                                        class="input input-sm input-bordered" />
 
                                 </div>
                                 <div class="form-control mt-6">

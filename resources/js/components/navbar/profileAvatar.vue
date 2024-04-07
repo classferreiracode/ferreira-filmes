@@ -10,7 +10,7 @@ const props = defineProps(
     <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
         <div class="w-8 rounded-full">
             <img alt="Avatar"
-                :src="'../storage/img/profile/' + props.user_avatar ?? 'https://placehold.co/600x600?text=FF'" />
+                :src="props.user_avatar !== null ? '../storage/img/profile/' + props.user_avatar : 'https://placehold.co/600x600?text=FF'" />
         </div>
     </div>
     <ul tabindex="0" class="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
@@ -25,8 +25,8 @@ const props = defineProps(
                     Favoritos
                 </summary>
                 <ul class="p-2 bg-base-100 rounded-t-none">
-                    <li><a href="">Filmes</a></li>
-                    <li><a href="">Series</a></li>
+                    <li><a href="/user/favorites/movie">Filmes</a></li>
+                    <li><a href="/user/favorites/serie">Series</a></li>
                 </ul>
             </details>
         </li>

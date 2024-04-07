@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fe3e03055541e0dd424a0cc2b7e8d84b",
+    "content-hash": "00067b60112598aa295a5fd8d0c02077",
     "packages": [
         {
             "name": "brick/math",
@@ -1436,6 +1436,76 @@
             "time": "2023-11-08T14:08:06+00:00"
         },
         {
+            "name": "laravel/socialite",
+            "version": "v5.12.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/socialite.git",
+                "reference": "7dae1b072573809f32ab6dcf4aebb57c8b3e8acf"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel/socialite/zipball/7dae1b072573809f32ab6dcf4aebb57c8b3e8acf",
+                "reference": "7dae1b072573809f32ab6dcf4aebb57c8b3e8acf",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "guzzlehttp/guzzle": "^6.0|^7.0",
+                "illuminate/contracts": "^6.0|^7.0|^8.0|^9.0|^10.0|^11.0",
+                "illuminate/http": "^6.0|^7.0|^8.0|^9.0|^10.0|^11.0",
+                "illuminate/support": "^6.0|^7.0|^8.0|^9.0|^10.0|^11.0",
+                "league/oauth1-client": "^1.10.1",
+                "php": "^7.2|^8.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.0",
+                "orchestra/testbench": "^4.0|^5.0|^6.0|^7.0|^8.0|^9.0",
+                "phpstan/phpstan": "^1.10",
+                "phpunit/phpunit": "^8.0|^9.3|^10.4"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "5.x-dev"
+                },
+                "laravel": {
+                    "providers": [
+                        "Laravel\\Socialite\\SocialiteServiceProvider"
+                    ],
+                    "aliases": {
+                        "Socialite": "Laravel\\Socialite\\Facades\\Socialite"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Laravel\\Socialite\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Taylor Otwell",
+                    "email": "taylor@laravel.com"
+                }
+            ],
+            "description": "Laravel wrapper around OAuth 1 & OAuth 2 libraries.",
+            "homepage": "https://laravel.com",
+            "keywords": [
+                "laravel",
+                "oauth"
+            ],
+            "support": {
+                "issues": "https://github.com/laravel/socialite/issues",
+                "source": "https://github.com/laravel/socialite"
+            },
+            "time": "2024-02-16T08:58:20+00:00"
+        },
+        {
             "name": "laravel/tinker",
             "version": "v2.9.0",
             "source": {
@@ -1956,6 +2026,82 @@
                 }
             ],
             "time": "2024-01-28T23:22:08+00:00"
+        },
+        {
+            "name": "league/oauth1-client",
+            "version": "v1.10.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/thephpleague/oauth1-client.git",
+                "reference": "d6365b901b5c287dd41f143033315e2f777e1167"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/thephpleague/oauth1-client/zipball/d6365b901b5c287dd41f143033315e2f777e1167",
+                "reference": "d6365b901b5c287dd41f143033315e2f777e1167",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "ext-openssl": "*",
+                "guzzlehttp/guzzle": "^6.0|^7.0",
+                "guzzlehttp/psr7": "^1.7|^2.0",
+                "php": ">=7.1||>=8.0"
+            },
+            "require-dev": {
+                "ext-simplexml": "*",
+                "friendsofphp/php-cs-fixer": "^2.17",
+                "mockery/mockery": "^1.3.3",
+                "phpstan/phpstan": "^0.12.42",
+                "phpunit/phpunit": "^7.5||9.5"
+            },
+            "suggest": {
+                "ext-simplexml": "For decoding XML-based responses."
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev",
+                    "dev-develop": "2.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "League\\OAuth1\\Client\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ben Corlett",
+                    "email": "bencorlett@me.com",
+                    "homepage": "http://www.webcomm.com.au",
+                    "role": "Developer"
+                }
+            ],
+            "description": "OAuth 1.0 Client Library",
+            "keywords": [
+                "Authentication",
+                "SSO",
+                "authorization",
+                "bitbucket",
+                "identity",
+                "idp",
+                "oauth",
+                "oauth1",
+                "single sign on",
+                "trello",
+                "tumblr",
+                "twitter"
+            ],
+            "support": {
+                "issues": "https://github.com/thephpleague/oauth1-client/issues",
+                "source": "https://github.com/thephpleague/oauth1-client/tree/v1.10.1"
+            },
+            "time": "2022-04-15T14:02:14+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -6021,33 +6167,33 @@
         },
         {
             "name": "laradumps/laradumps",
-            "version": "v2.5.1",
+            "version": "v3.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laradumps/laradumps.git",
-                "reference": "ad6fc052630b18d12ea82cd841bcafa784ac57e8"
+                "reference": "c70f5a7b7c5cd9f4d76002cf97d2d52e192d964f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laradumps/laradumps/zipball/ad6fc052630b18d12ea82cd841bcafa784ac57e8",
-                "reference": "ad6fc052630b18d12ea82cd841bcafa784ac57e8",
+                "url": "https://api.github.com/repos/laradumps/laradumps/zipball/c70f5a7b7c5cd9f4d76002cf97d2d52e192d964f",
+                "reference": "c70f5a7b7c5cd9f4d76002cf97d2d52e192d964f",
                 "shasum": ""
             },
             "require": {
-                "illuminate/mail": "^9.0|^10.0|^11.0",
-                "illuminate/support": "^9.0|^10.0|^11.0",
-                "laradumps/laradumps-core": "^1.2",
+                "illuminate/mail": "^10.0|^11.0",
+                "illuminate/support": "^10.0|^11.0",
+                "laradumps/laradumps-core": "^2.0",
                 "nunomaduro/termwind": "^1.15.1|^2.0.0",
                 "php": "^8.1"
             },
             "require-dev": {
                 "larastan/larastan": "^2.7",
-                "laravel/framework": "^11.0",
+                "laravel/framework": "^10.0|^11.0",
                 "laravel/pint": "^1.13.7",
                 "mockery/mockery": "^1.6",
-                "orchestra/testbench-core": "^7.0",
-                "pestphp/pest": "^2.32",
-                "symfony/var-dumper": "^5.4.0|^6.4.0|^7.0.3"
+                "orchestra/testbench-core": "^8.0|^9.0",
+                "pestphp/pest": "^2.28.1",
+                "symfony/var-dumper": "^6.4.0|^7.0.3"
             },
             "type": "library",
             "extra": {
@@ -6080,7 +6226,7 @@
             "homepage": "https://github.com/laradumps/laradumps",
             "support": {
                 "issues": "https://github.com/laradumps/laradumps/issues",
-                "source": "https://github.com/laradumps/laradumps/tree/v2.5.1"
+                "source": "https://github.com/laradumps/laradumps/tree/v3.0.0"
             },
             "funding": [
                 {
@@ -6088,33 +6234,33 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-03-05T13:01:59+00:00"
+            "time": "2024-03-28T23:02:21+00:00"
         },
         {
             "name": "laradumps/laradumps-core",
-            "version": "v1.2.5",
+            "version": "v2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laradumps/laradumps-core.git",
-                "reference": "fca5ee84431e60232407831890871d4294d248dc"
+                "reference": "65869be98780cb0c2d0e4411f4abcdb3031173a7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laradumps/laradumps-core/zipball/fca5ee84431e60232407831890871d4294d248dc",
-                "reference": "fca5ee84431e60232407831890871d4294d248dc",
+                "url": "https://api.github.com/repos/laradumps/laradumps-core/zipball/65869be98780cb0c2d0e4411f4abcdb3031173a7",
+                "reference": "65869be98780cb0c2d0e4411f4abcdb3031173a7",
                 "shasum": ""
             },
             "require": {
                 "ext-curl": "*",
-                "nunomaduro/termwind": "^1.0|^2.0",
+                "nunomaduro/termwind": "^1.15|^2.0",
                 "php": "^8.1",
                 "ramsey/uuid": "^4.7.5",
-                "spatie/backtrace": "^1.0",
-                "symfony/console": "^5.0|^6.0|^7.0",
-                "symfony/finder": "^5.0|^6.0|^7.0",
-                "symfony/process": "^5.0|^6.0|^7.0",
-                "symfony/var-dumper": "^5.0|^6.0|^7.0",
-                "vlucas/phpdotenv": "^5.6"
+                "spatie/backtrace": "^1.5",
+                "symfony/console": "^5.4|^6.4|^7.0",
+                "symfony/finder": "^5.4|^6.4|^7.0",
+                "symfony/process": "^5.4|^6.4|^7.0",
+                "symfony/var-dumper": "^5.4|^6.4|^7.0",
+                "symfony/yaml": "^5.4|^6.4|^7.0"
             },
             "require-dev": {
                 "illuminate/support": "^10.43",
@@ -6145,11 +6291,11 @@
                     "role": "Developer"
                 }
             ],
-            "description": "A dump component for php code.",
+            "description": "LaraDumps is a friendly app designed to boost your Laravel / PHP coding and debugging experience.",
             "homepage": "https://github.com/laradumps/laradumps-core",
             "support": {
                 "issues": "https://github.com/laradumps/laradumps-core/issues",
-                "source": "https://github.com/laradumps/laradumps-core/tree/v1.2.5"
+                "source": "https://github.com/laradumps/laradumps-core/tree/v2.0.0"
             },
             "funding": [
                 {
@@ -6157,7 +6303,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-03-05T12:20:51+00:00"
+            "time": "2024-03-22T13:22:58+00:00"
         },
         {
             "name": "laravel/pint",

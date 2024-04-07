@@ -39,6 +39,10 @@ class ProfileController extends Controller
         $request->validate([
             'name' => ['string', 'max:255'],
             'email' => ['email', 'max:120', 'unique:users,email,' . $request->user()->id],
+        ],[
+            'email.unique' => 'Esse email ja foi registrado',
+            'email.max' => 'O email pode ter no maximo 120 caracteres',
+            'email.email' => 'Email inválido ou não informado',
         ]);
 
         $validExtensions = ['jpg', 'jpeg', 'png', 'gif'];
