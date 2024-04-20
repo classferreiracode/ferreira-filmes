@@ -1,20 +1,10 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PersonController;
 use App\Http\Controllers\ProfileController;
-use Illuminate\Support\Facades\Route;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::post('/search', [HomeController::class, 'search'])->name('search');
@@ -45,6 +35,10 @@ Route::get('/favorite/{id}/{type}', [HomeController::class, 'favorites'])->name(
 Route::get('/favorites', [HomeController::class, 'getFavorites'])->name('get-favorite')->middleware(['auth']);
 Route::get('/favorites/movie', [HomeController::class, 'favoriteMovie'])->name('get-favorite.movie');
 Route::get('/favorites/serie', [HomeController::class, 'favoriteSerie'])->name('get-favorite.serie');
+
+Route::prefix()->group(function () {
+
+});
 
 Auth::routes();
 

@@ -51,7 +51,7 @@ class HomeController extends Controller
             ->fromMovie($id)
             ->get();
 
-        return view('movie', [
+        return view('details-movie', [
             'movie' => $movie,
         ]);
     }
@@ -63,7 +63,7 @@ class HomeController extends Controller
             ->fromSerie($id)
             ->get();
 
-        return view('serie', [
+        return view('datails-serie', [
             'serie' => $serie,
         ]);
     }

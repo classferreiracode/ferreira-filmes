@@ -20,6 +20,7 @@ class Details extends BaseEndpoint
     {
         $json[] = $this->service
             ->api
+            ->retry(10, 1000, throw: false)
             ->get('/movie/'.$this->movieId.'?append_to_response=credits,videos,images,recommendations,similar,keywords&language=pt-BR')
             ->json();
 

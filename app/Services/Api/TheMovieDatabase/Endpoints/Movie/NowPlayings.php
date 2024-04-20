@@ -2,20 +2,19 @@
 
 namespace App\Services\Api\TheMovieDatabase\Endpoints\Movie;
 
+use App\Services\Api\TheMovieDatabase\Entities\Movie\NowPlaying;
 use App\Services\Api\TheMovieDatabase\Endpoints\BaseEndpoint;
-use App\Services\Api\TheMovieDatabase\Entities\Movie\Popular;
 
-class Populars extends BaseEndpoint
+class NowPlayings extends BaseEndpoint
 {
     public function get()
     {
         return $this->transform(
             $this->service
                 ->api
-                ->retry(10, 1000, throw: false)
-                ->get('/movie/popular?include_adult=false&language=pt-BR&sort_by=popularity.desc')
+                ->get('/movie/now_playing?language=pt-BR&page=1&include_adult=false')
                 ->json('results'),
-            Popular::class
+            NowPlaying::class
         );
     }
 }

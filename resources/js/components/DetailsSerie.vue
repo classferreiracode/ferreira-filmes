@@ -39,7 +39,7 @@ function getCast() {
 
 function SuperFlixAPIPluginJS(imdb) {
     let frame = document.getElementById('SuperFlixAPIContainerVideo');
-    frame.innerHTML += '<iframe src="https://superflixapi.top/serie/' + imdb + '/#color:1a103d" scrolling="no" frameborder="0" allowfullscreen class="w-full h-[500px] rounded-xl"></iframe>';
+    frame.innerHTML += '<iframe src="https://embed.warezcdn.com/serie/' + imdb + '" scrolling="no" frameborder="0" allowfullscreen class="w-full h-[500px] rounded-xl"></iframe>';
 
 }
 </script>

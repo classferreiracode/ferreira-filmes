@@ -11,6 +11,12 @@ use App\Services\Api\TheMovieDatabase\Endpoints\HasPopularMovies;
 use App\Services\Api\TheMovieDatabase\Endpoints\HasPopularSeries;
 use App\Services\Api\TheMovieDatabase\Endpoints\HasSearch;
 use App\Services\Api\TheMovieDatabase\Endpoints\HasSerieDetails;
+// use App\Services\Api\TheMovieDatabase\Endpoints\HasUpcomingMovies;
+// use App\Services\Api\TheMovieDatabase\Endpoints\HasTopRatedMovies;
+// use App\Services\Api\TheMovieDatabase\Endpoints\HasNowPlayingMovies;
+// use App\Services\Api\TheMovieDatabase\Endpoints\HasUpcomingSeries;
+// use App\Services\Api\TheMovieDatabase\Endpoints\HasTopRatedSeries;
+// use App\Services\Api\TheMovieDatabase\Endpoints\HasNowPlayingSeries;
 use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Support\Facades\Http;
 
@@ -25,6 +31,12 @@ class TheMovieDatabaseService
     use HasPopularSeries;
     use HasSearch;
     use HasSerieDetails;
+    // use HasUpcomingMovies;
+    // use HasTopRatedMovies;
+    // use HasNowPlayingMovies;
+    // use HasUpcomingSeries;
+    // use HasTopRatedSeries;
+    // use HasNowPlayingSeries;
 
     public PendingRequest $api;
 
@@ -33,6 +45,7 @@ class TheMovieDatabaseService
         $this->api = Http::withHeaders([
             'Authorization' => 'Bearer '.env('TMDB_API_TOKEN'),
             'accept' => 'application/json',
-        ])->baseUrl('https://api.themoviedb.org/3');
+        ])
+        ->baseUrl('https://api.themoviedb.org/3');
     }
 }

@@ -34,7 +34,6 @@
             </div>
         </div>
 
-
         <div class="popular-movies mb-8 border-b border-gray-600">
             <h2 class="uppercase tracking-wider text-primary text-lg font-semibold">
                 Series Populares
@@ -75,7 +74,6 @@
 <script setup>
 import { HeartIcon, StarIcon } from '@heroicons/vue/24/solid'
 import { HeartIcon as HeartIconOutline } from '@heroicons/vue/24/outline'
-import { defineProps } from 'vue';
 import Swal from 'sweetalert2';
 
 const props = defineProps({
