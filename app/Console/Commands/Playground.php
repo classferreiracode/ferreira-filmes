@@ -29,7 +29,7 @@ class Playground extends Command
         $service = new TheMovieDatabaseService();
 
          $json = $service
-             ->nowPlaying()
+             ->popularSeries()
              ->get();
 
          ds($json);

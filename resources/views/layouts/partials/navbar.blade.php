@@ -8,8 +8,8 @@
         </div>
         <div class="">
             <ul class="menu menu-horizontal p-0">
-                <li><a href="">Filmes</a></li>
-                <li><a href="">Séries</a></li>
+                <li><a href="{{ route('movies') }}">Filmes</a></li>
+                <li><a href="{{ route('series') }}">Séries</a></li>
                 <li><a href="{{ route('persons') }}">Pessoas</a></li>
             </ul>
         </div>

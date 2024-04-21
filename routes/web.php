@@ -3,13 +3,19 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MoviesController;
 use App\Http\Controllers\PersonController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SeriesController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::post('/search', [HomeController::class, 'search'])->name('search');
 Route::get('/movie/{id}', [HomeController::class, 'movie'])->name('movie');
+Route::get('/movies', [MoviesController::class, 'index'])->name('movies');
+Route::get('/movies/{page}', [MoviesController::class, 'setPage'])->name('page.movies');
 Route::get('/serie/{id}', [HomeController::class, 'series'])->name('tv');
+Route::get('/series', [SeriesController::class, 'index'])->name('series');
+Route::get('/series/{page}', [SeriesController::class, 'setPage'])->name('page.series');
 
 Route::prefix('person')->group(function () {
     Route::get('/', [PersonController::class, 'index'])->name('persons');

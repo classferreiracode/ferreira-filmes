@@ -8,12 +8,20 @@ use Illuminate\Support\Collection;
 
 class Series extends BaseEndpoint
 {
+    private ?int $page = 1;
+
+    public function fromPage(int $page)
+    {
+        $this->page = $page;
+        return $this;
+    }
+
     public function get(): Collection
     {
         return $this->transform(
             $this->service
                 ->api
-                ->get('/tv/top_rated?include_adult=true&language=pt-BR')
+                ->get('/tv/popular?include_adult=true&language=pt-BR&page=' . $this->page)
                 ->json('results'),
             Popular::class);
     }
