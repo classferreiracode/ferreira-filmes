@@ -11,12 +11,12 @@ use App\Services\Api\TheMovieDatabase\Endpoints\HasPopularMovies;
 use App\Services\Api\TheMovieDatabase\Endpoints\HasPopularSeries;
 use App\Services\Api\TheMovieDatabase\Endpoints\HasSearch;
 use App\Services\Api\TheMovieDatabase\Endpoints\HasSerieDetails;
-// use App\Services\Api\TheMovieDatabase\Endpoints\HasUpcomingMovies;
-// use App\Services\Api\TheMovieDatabase\Endpoints\HasTopRatedMovies;
-// use App\Services\Api\TheMovieDatabase\Endpoints\HasNowPlayingMovies;
-// use App\Services\Api\TheMovieDatabase\Endpoints\HasUpcomingSeries;
-// use App\Services\Api\TheMovieDatabase\Endpoints\HasTopRatedSeries;
-// use App\Services\Api\TheMovieDatabase\Endpoints\HasNowPlayingSeries;
+use App\Services\Api\TheMovieDatabase\Endpoints\HasUpcomingMovies;
+use App\Services\Api\TheMovieDatabase\Endpoints\HasTopRatedMovies;
+use App\Services\Api\TheMovieDatabase\Endpoints\HasNowPlayingMovies;
+use App\Services\Api\TheMovieDatabase\Endpoints\HasUpcomingSeries;
+use App\Services\Api\TheMovieDatabase\Endpoints\HasTopRatedSeries;
+use App\Services\Api\TheMovieDatabase\Endpoints\HasNowPlayingSeries;
 use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Support\Facades\Http;
 
@@ -31,18 +31,18 @@ class TheMovieDatabaseService
     use HasPopularSeries;
     use HasSearch;
     use HasSerieDetails;
-    // use HasUpcomingMovies;
-    // use HasTopRatedMovies;
-    // use HasNowPlayingMovies;
-    // use HasUpcomingSeries;
-    // use HasTopRatedSeries;
-    // use HasNowPlayingSeries;
+    use HasUpcomingMovies;
+    use HasTopRatedMovies;
+    use HasNowPlayingMovies;
+    use HasUpcomingSeries;
+    use HasTopRatedSeries;
+    use HasNowPlayingSeries;
 
     public PendingRequest $api;
 
     public function __construct()
     {
-        $this->api = Http::withHeaders([
+        $this->api = Http::retry(30, 100, throw: false)->withHeaders([
             'Authorization' => 'Bearer '.env('TMDB_API_TOKEN'),
             'accept' => 'application/json',
         ])

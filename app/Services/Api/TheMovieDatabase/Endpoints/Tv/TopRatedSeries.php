@@ -3,8 +3,8 @@
 namespace App\Services\Api\TheMovieDatabase\Endpoints\Tv;
 
 use App\Services\Api\TheMovieDatabase\Endpoints\BaseEndpoint;
-use App\Services\Api\TheMovieDatabase\Entities\Tv\TopRated;
-class TopRatedes extends BaseEndpoint
+use App\Services\Api\TheMovieDatabase\Entities\Tv\TopRated as TopRatedSerie;
+class TopRatedSeries extends BaseEndpoint
 {
     public function get()
     {
@@ -13,7 +13,7 @@ class TopRatedes extends BaseEndpoint
                 ->api
                 ->get('/tv/top_rated?language=pt-BR&page=1&')
                 ->json('results'),
-            TopRated::class
+            TopRatedSerie::class
         );
     }
 

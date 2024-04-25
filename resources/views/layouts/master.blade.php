@@ -131,6 +131,18 @@
                                     @endif
                                 </div>
                             </div>
+                            <div class="flex justify-center gap-4 mt-4">
+                                <div class="w-1/2">
+                                    <a href="{{ route('google.login') }}"
+                                        class="btn btn-primary btn-block text-white">
+                                        Google
+                                    </a>
+                                </div>
+                                <div class="w-1/2">
+                                    <a href="{{ route('facebook.login') }}"
+                                        class="btn btn-secondary btn-block text-white"> Facebook</a>
+                                </div>
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -207,6 +219,18 @@
                                     <button type="submit" class="btn btn-secondary btn-block">
                                         Cadastre-se
                                     </button>
+                                </div>
+                            </div>
+                            <div class="flex justify-center gap-4 mt-4">
+                                <div class="w-1/2">
+                                    <a href="{{ route('google.login') }}"
+                                        class="btn btn-primary btn-block text-white">Cadastre-se com
+                                        Google</a>
+                                </div>
+                                <div class="w-1/2">
+                                    <a href="{{ route('facebook.login') }}"
+                                        class="btn btn-secondary btn-block text-white">Cadastre-se com
+                                        Facebook</a>
                                 </div>
                             </div>
                         </form>

@@ -5,8 +5,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MoviesController;
 use App\Http\Controllers\PersonController;
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SeriesController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\GoogleLoginController;
+use App\Http\Controllers\FacebookLoginController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::post('/search', [HomeController::class, 'search'])->name('search');
@@ -47,6 +49,12 @@ Route::prefix()->group(function () {
 });
 
 Auth::routes();
+
+Route::get('/google', [GoogleLoginController::class, 'redirectToGoogle'])->name('google.login');
+Route::get('/google/callback', [GoogleLoginController::class, 'handleGoogleCallback'])->name('google.callback');
+
+Route::get('/facebook', [FacebookLoginController::class, 'redirectToFacebook'])->name('facebook.login');
+Route::get('/facebook/callback', [FacebookLoginController::class, 'handleFacebookCallback'])->name('facebook.callback');
 
 Route::get('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
 

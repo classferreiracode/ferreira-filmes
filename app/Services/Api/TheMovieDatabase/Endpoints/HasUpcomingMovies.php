@@ -6,7 +6,7 @@ use App\Services\Api\TheMovieDatabase\Endpoints\Movie\Upcomings;
 trait HasUpcomingMovies
 {
 
-    public function upcoming()
+    public function upcomingMovies()
     {
         return new Upcomings();
     }

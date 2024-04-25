@@ -20,7 +20,7 @@ class Populars extends BaseEndpoint
             $this->service
                 ->api
                 ->retry(10, 1000, throw: false)
-                ->get('/movie/popular?include_adult=false&language=pt-BR&sort_by=popularity.desc&page=' . $this->page)
+                ->get('/movie/popular?include_adult=true&language=pt-BR&sort_by=popularity.desc&page=' . $this->page)
                 ->json('results'),
             Popular::class
         );

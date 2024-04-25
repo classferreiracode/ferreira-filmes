@@ -2,13 +2,13 @@
 
 namespace App\Services\Api\TheMovieDatabase\Endpoints;
 
-use App\Services\Api\TheMovieDatabase\Endpoints\Tv\TopRatedes;
+use App\Services\Api\TheMovieDatabase\Endpoints\Tv\TopRatedSeries;
 
 trait HasTopRatedSeries
 {
-    public function topRated()
+    public function topRatedSeries()
     {
-        return new TopRatedes();
+        return new TopRatedSeries();
     }
 
 }

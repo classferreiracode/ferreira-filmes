@@ -6,7 +6,7 @@ use App\Services\Api\TheMovieDatabase\Endpoints\Tv\NowPlayings;
 
 trait HasNowPlayingSeries
 {
-    public function nowPlaying()
+    public function nowPlayingSeries()
     {
         return new NowPlayings();
     }
