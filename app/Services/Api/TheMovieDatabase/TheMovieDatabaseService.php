@@ -5,6 +5,7 @@ namespace App\Services\Api\TheMovieDatabase;
 use App\Services\Api\TheMovieDatabase\Endpoints\HasCreditMovies;
 use App\Services\Api\TheMovieDatabase\Endpoints\HasCreditSeries;
 use App\Services\Api\TheMovieDatabase\Endpoints\HasDetailMovies;
+use App\Services\Api\TheMovieDatabase\Endpoints\HasMovieGenreList;
 use App\Services\Api\TheMovieDatabase\Endpoints\HasPeopleList;
 use App\Services\Api\TheMovieDatabase\Endpoints\HasPerson;
 use App\Services\Api\TheMovieDatabase\Endpoints\HasPopularMovies;
@@ -37,6 +38,7 @@ class TheMovieDatabaseService
     use HasUpcomingSeries;
     use HasTopRatedSeries;
     use HasNowPlayingSeries;
+    use HasMovieGenreList;
 
     public PendingRequest $api;
 

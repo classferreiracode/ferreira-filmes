@@ -19,8 +19,13 @@
     <div id="app" class="">
         @include('layouts.partials.navbar')
         @if (!request()->is('user/*'))
-            <div class="pt-24 px-32">
-                <search />
+            <div class="flex justify-center flex-col items-center w-full">
+                <div class="pt-24 px-32 w-full">
+                    <search />
+                </div>
+                <div class="pt-4 px-32 w-full">
+                    <filters :data="{{ json_encode($genres) }}" />
+                </div>
             </div>
         @endif
 
