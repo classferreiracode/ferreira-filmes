@@ -20,6 +20,7 @@ class Credits extends BaseEndpoint
     {
         $json[] = $this->service
             ->api
+            ->retry(10, 1000, throw: false)
             ->get('/movie/'.$this->movieId.'/credits?language=pt-BR')
             ->json();
 

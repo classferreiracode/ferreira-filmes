@@ -26,22 +26,13 @@ class Playground extends Command
      */
     public function handle()
     {
-        //$ids = ['767', '87107', '550'];
         $service = new TheMovieDatabaseService();
 
-        // foreach ($ids as $id) {
-        //     $json = $service
-        //         ->detailMovies()
-        //         ->fromMovie($id)
-        //         ->get();
+         $json = $service
+             ->movieGenreList()
+             ->get();
 
-        //         ds($json);
-        // }
-
-        // $json = $service
-        //     ->detailMovies()
-        //     ->fromMovie(87108)
-        //     ->get();
+         ds($json);
         return Command::SUCCESS;
     }
 }

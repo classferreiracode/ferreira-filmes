@@ -5,44 +5,29 @@ namespace App\Services\Api\TheMovieDatabase\Entities\Movie;
 class Movie
 {
     public int $id;
-
     public ?string $imdb_id;
-
     public ?string $title;
-
     public ?string $release_date;
-
     public ?float $vote_average;
-
     public ?string $overview;
-
     public ?array $genres;
-
     public ?string $backdrop_path;
-
     public ?string $poster_path;
-
     public ?string $runtime;
-
     public ?array $credits;
-
     public ?array $videos;
-
     public ?array $recommendations;
-
     public ?array $similar;
-
     public ?array $keywords;
-
     public ?array $production_companies;
-
     public string $type = 'movie';
 
-    public function __construct($data)
+    public function __construct(mixed $data)
     {
         if (data_get($data, 'id') === null) {
-            dd($data);
+            abort(500);
         }
+
         $this->id = data_get($data, 'id');
         $this->imdb_id = data_get($data, 'imdb_id');
         $this->title = data_get($data, 'title');

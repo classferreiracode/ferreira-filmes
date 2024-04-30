@@ -51,7 +51,7 @@ function getCast() {
 
 function SuperFlixAPIPluginJS(imdb) {
     var frame = document.getElementById('SuperFlixAPIContainerVideo');
-    frame.innerHTML += '<iframe src="https://superflixapi.top/filme/' + imdb + '/#color:1a103d" scrolling="no" frameborder="0" allowfullscreen class="w-full h-[500px] rounded-xl"></iframe>';
+    frame.innerHTML += '<iframe src="https://embed.warezcdn.com/filme/' + imdb + '" scrolling="no" frameborder="0" allowfullscreen class="w-full h-[500px] rounded-xl"></iframe>';
 }
 </script>
 

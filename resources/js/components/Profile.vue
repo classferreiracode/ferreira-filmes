@@ -1,9 +1,9 @@
 <script setup>
-    import { MapPinIcon, StarIcon } from '@heroicons/vue/24/solid'
+import { MapPinIcon, StarIcon } from '@heroicons/vue/24/solid'
 
-    const props = defineProps({
-        person: Object
-    })
+const props = defineProps({
+    person: Object
+})
 </script>
 
 <template>
@@ -45,8 +45,10 @@
             </h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
                 <div class="mt-8" v-for="movie in person.combined_credits" :key="movie.id">
-                    <a v-if="movie.poster_path != null" :href="'/movie/' + movie.id">
-                        <img :src="movie.poster_path == null ? 'https://via.placeholder.com/300x450' : 'https://image.tmdb.org/t/p/original/' + movie.poster_path" alt="{{ movie.title }}" class="rounded hover:opacity-75 transition ease-in-out duration-150">
+                    <a :href="'/movie/' + movie.id">
+                        <img :src="movie.poster_path === null ? 'https://placehold.co/300x450?text=FFilmes' : 'https://image.tmdb.org/t/p/original/' + movie.poster_path"
+                            alt="{{ movie.title }}"
+                            class="rounded hover:opacity-75 transition ease-in-out duration-150">
                     </a>
 
                     <div class="mt-2">
@@ -70,5 +72,4 @@
     </div>
 </template>
 
-<style scoped>
-</style>
+<style scoped></style>
