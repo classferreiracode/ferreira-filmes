@@ -50,6 +50,9 @@ Route::prefix()->group(function () {
 
 Auth::routes();
 
+Route::get('/policy', function () { return view('politicas'); })->name('policy');
+Route::get('/terms', function () { return view('termos'); })->name('terms');
+
 Route::get('/google', [GoogleLoginController::class, 'redirectToGoogle'])->name('google.login');
 Route::get('/google/callback', [GoogleLoginController::class, 'handleGoogleCallback'])->name('google.callback');
 
