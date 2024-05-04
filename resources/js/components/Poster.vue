@@ -1,14 +1,23 @@
 <script setup>
-import {StarIcon} from "@heroicons/vue/24/solid/index.js";
+import { StarIcon } from "@heroicons/vue/24/solid/index.js";
 
 const props = defineProps({
     data: Object
 });
+
+const mapTypes = (type) => {
+    switch (type) {
+        case 'tv':
+            return 'serie';
+        default:
+            return 'movie';
+    }
+}
 </script>
 
 <template>
     <div>
-        <a :href="'/movie/' + data.id">
+        <a :href="'/' + mapTypes(data.type) + '/' + data.id">
             <img :src="data.poster_path" alt="{{ data.title }}"
                  class=" rounded hover:opacity-75 transition ease-in-out duration-150">
         </a>
@@ -35,6 +44,4 @@ const props = defineProps({
     </div>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>
