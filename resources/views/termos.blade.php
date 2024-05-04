@@ -4,7 +4,8 @@
 
 @section('content')
     <div class="container mx-auto px-4 pt-8 text-justify leading-9 mb-8">
-        <h2 class="uppercase tracking-wider text-primary text-lg font-semibold mb-8">1. Termos</h2>
+        <h2 class="uppercase tracking-wider text-primary text-lg font-semibold mb-8">Termos de uso</h2>
+        <p>1. Termos</p>
         <p>Ao acessar ao site <a href="https://www.ffilmes.com.br">FFilmes</a>, concorda em
             cumprir estes termos de serviço, todas as leis e regulamentos aplicáveis ​​e concorda que é responsável pelo
             cumprimento de todas as leis locais aplicáveis. Se você não concordar com algum desses termos, está proibido de
