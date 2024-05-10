@@ -63,21 +63,9 @@ export default {
 </script>
 <template>
     <div class="form-control">
-        <VueMultiselect
-            v-debounce:300="onSearchChange"
-            v-model="selected"
-            placeholder="Busque um filme/serie por nome"
-            label="name"
-            track-by="id"
-            :options="options"
-            :custom-label="customLabel"
-            :show-labels="false"
-            :searchable="true"
-            :loading="searching"
-            :delay="300"
-            @search-change="search"
-            @input="onInput"
-            :close-on-select="true">
+        <VueMultiselect v-debounce:750="onSearchChange" v-model="selected" placeholder="Busque um filme/serie por nome"
+                        label="name" track-by="id" :options="options" :custom-label="customLabel" :show-labels="false"
+                        :searchable="true" :loading="searching" @input="onInput" :close-on-select="true">
 
             <template #noOptions>
                 Digite o nome do filme/serie para iniciar a busca

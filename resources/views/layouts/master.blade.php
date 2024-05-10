@@ -23,7 +23,7 @@
                 <div class="pt-24 px-32 w-full">
                     <search />
                 </div>
-                <div class="pt-4 px-32 w-full">
+                <div class="pt-8 px-32 w-full">
                     <filters :data="{{ json_encode($genres) }}" />
                 </div>
             </div>
