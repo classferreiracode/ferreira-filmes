@@ -44,6 +44,18 @@ class HomeController extends Controller
             ->get();
     }
 
+    public function discoverMovie(int $id): View
+    {
+        $result = $this->service
+            ->discoverMovie()
+            ->fromGenre($id)
+            ->get();
+
+        return view('discover-movie', [
+            'result' => $result,
+        ]);
+    }
+
     public function movie($id): View
     {
         $movie = $this->service

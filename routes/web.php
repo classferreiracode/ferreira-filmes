@@ -26,6 +26,7 @@ Route::prefix('person')->group(function () {
 
 Route::prefix('movie')->group(function () {
     Route::get('/casting/{id}', [HomeController::class, 'castingMovie'])->name('movie.casting');
+    Route::get('/discover/{genre}' , [HomeController::class, 'discoverMovie'])->name('discover.movie');
 });
 
 Route::prefix('serie')->group(function () {
