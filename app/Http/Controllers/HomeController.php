@@ -44,16 +44,15 @@ class HomeController extends Controller
             ->get();
     }
 
-    public function discoverMovie(int $id): View
+    public function discoverMovie($id)
     {
+
         $result = $this->service
             ->discoverMovie()
             ->fromGenre($id)
             ->get();
 
-        return view('discover-movie', [
-            'result' => $result,
-        ]);
+        return $result;
     }
 
     public function movie($id): View

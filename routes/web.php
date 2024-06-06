@@ -18,15 +18,18 @@ Route::get('/movies/{page}', [MoviesController::class, 'setPage'])->name('page.m
 Route::get('/serie/{id}', [HomeController::class, 'series'])->name('tv');
 Route::get('/series', [SeriesController::class, 'index'])->name('series');
 Route::get('/series/{page}', [SeriesController::class, 'setPage'])->name('page.series');
+Route::get('/discover/movie', function () {
+    return view('discover-movie');
+})->name('discoverMovie');
 
 Route::prefix('person')->group(function () {
     Route::get('/', [PersonController::class, 'index'])->name('persons');
-    Route::get('/{id}', [PersonController::class, 'profile'])->name('person');
+    Route::post('/{id}', [PersonController::class, 'profile'])->name('person');
 });
 
 Route::prefix('movie')->group(function () {
     Route::get('/casting/{id}', [HomeController::class, 'castingMovie'])->name('movie.casting');
-    Route::get('/discover/{genre}' , [HomeController::class, 'discoverMovie'])->name('discover.movie');
+    Route::get('/discover/{id}' , [HomeController::class, 'discoverMovie'])->name('discover.movie');
 });
 
 Route::prefix('serie')->group(function () {

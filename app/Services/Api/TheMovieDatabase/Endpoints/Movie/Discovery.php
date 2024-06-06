@@ -31,7 +31,7 @@ class Discovery extends BaseEndpoint
         return $this->transform(
             $this->service
                 ->api
-                ->get('/discover/movie?include_adult=false&language=pt-BR&sort_by=popularity.desc&with_genres=' . $this->genreId)
+                ->get('/discover/movie?include_adult=false&language=pt-BR&with_genres=' . $this->genreId)
                 ->json('results'),
             Discover::class
         );
