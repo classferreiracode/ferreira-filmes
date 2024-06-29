@@ -16,22 +16,13 @@ class HomeController extends Controller
     public function __construct()
     {
         $this->service = new TheMovieDatabaseService();
-
     }
 
     public function index()
     {
-        $popularMovies = $this->service
-            ->popularMovies()
-            ->get();
-
-        $popularTv = $this->service
-            ->popularSeries()
-            ->get();
-
         return view('welcome', [
-            'popularMovies' => $popularMovies,
-            'popularTv' => $popularTv,
+            'popularMovies' => $this->service->popularMovies()->get(),
+            'popularTv' => $this->service->popularSeries()->get(),
         ]);
     }
 
@@ -46,72 +37,45 @@ class HomeController extends Controller
 
     public function discoverMovie($id)
     {
-
-        $result = $this->service
+        return $this->service
             ->discoverMovie()
             ->fromGenre($id)
             ->get();
-
-        return $result;
     }
 
     public function movie($id): View
     {
-        $movie = $this->service
-            ->detailMovies()
-            ->fromMovie($id)
-            ->get();
-
         return view('details-movie', [
-            'movie' => $movie,
+            'movie' => $this->service->detailMovies()->fromMovie($id)->get(),
         ]);
     }
 
     public function series($id): View
     {
-        $serie = $this->service
-            ->detailSerie()
-            ->fromSerie($id)
-            ->get();
-
         return view('datails-serie', [
-            'serie' => $serie,
+            'serie' => $this->service->detailSerie()->fromSerie($id)->get(),
         ]);
     }
 
     public function castingMovie(int $id): View
     {
-        $casting = $this->service
-            ->creditMovies()
-            ->fromMovie($id)
-            ->get();
-
-        $movie = $this->service
-            ->detailMovies()
-            ->fromMovie($id)
-            ->get();
-
         return view('casting', [
-            'casting' => $casting,
-            'movie' => $movie,
+            'casting' => $this->service->creditMovies()->fromMovie($id)->get(),
+            'movie' => $this->service->detailMovies()->fromMovie($id)->get(),
         ]);
     }
 
     public function castingSerie(int $id): View
     {
-        $casting = $this->service
-            ->creditSeries()
-            ->fromSerie($id)
-            ->get();
-
         return view('casting', [
-            'casting' => $casting,
+            'casting' => $this->service->creditSeries()->fromSerie($id)->get(),
+            'serie' => $this->service->detailSerie()->fromSerie($id)->get(),
         ]);
     }
 
     public function favorites(int $id, $type)
     {
-        if (! Auth::check()) {
+        if (!Auth::check()) {
             return response('Unauthorized', 401);
         }
 
@@ -166,7 +130,6 @@ class HomeController extends Controller
                 ->get();
 
             $series[] = $tmdb;
-
         }
 
         return response()->json($series);
