@@ -14,13 +14,13 @@ const customLabel = (option) => {
 };
 
 const years = [2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020];
-const orderBy = [{ id: 'asc', name: 'Ascending' }, { id: 'desc', name: 'Descending' }, { id: 'popularity.asc', name: 'Popularity Ascending' }, { id: 'popularity.desc', name: 'Popularity Descending' }];
+const orderBy = [{ id: 'asc', name: 'Mais recente' }, { id: 'desc', name: 'Mais antigo' }, { id: 'popularity.asc', name: 'Mais popular' }, { id: 'popularity.desc', name: 'Menos popular' }];
 
 watch(genre, async (newGenre) => {
     if (newGenre) {
         try {
             const response = await axios.get(`/movie/discover/${newGenre.id}`);
-            results.value = response.data; // Supondo que a resposta da API contenha a lista de filmes
+            results.value = response.data;
         } catch (error) {
             console.error('Erro ao buscar filmes:', error);
         }
@@ -37,7 +37,8 @@ watch(genre, async (newGenre) => {
 
             <VueMultiselect :options="years" placeholder="Selecione um dos anos" class="w-1/3" />
 
-            <VueMultiselect :options="orderBy" placeholder="Ordernar por avaliação" class="w-1/3" />
+            <VueMultiselect :options="orderBy" :custom-label="customLabel" placeholder="Ordernar por avaliação"
+                            class="w-1/3" />
 
         </div>
         <div v-if="results.length">

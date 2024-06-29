@@ -13,14 +13,15 @@ const toastMixin = Swal.mixin({
     showConfirmButton: false,
     timer: 3000,
     timerProgressBar: true,
-})
-window.Toast = toastMixin
+});
+
+window.Toast = toastMixin;
 
 const app = createApp({});
-
 Object.entries(import.meta.glob('./**/*.vue', { eager: true })).forEach(([path, definition]) => {
     app.component(path.split('/').pop().replace(/\.\w+$/, ''), definition.default);
 });
+
 app.component('VueMultiselect', VueMultiselect);
-app.directive('debounce', vueDebounce({ lock: true }))
-app.mount('#app')
+app.directive('debounce', vueDebounce({ lock: true }));
+app.mount('#app');
