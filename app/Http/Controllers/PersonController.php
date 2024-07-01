@@ -15,26 +15,15 @@ class PersonController extends Controller
 
     public function index()
     {
-        $persons = $this->service
-            ->peopleList()
-            ->get();
-
         return view('persons', [
-            'persons' => $persons,
+            'persons' => $this->service->peopleList()->get(),
         ]);
     }
 
     public function profile(int $id)
     {
-        $person = $this->service
-            ->Person()
-            ->fromPerson($id)
-            ->get();
-
-        //dd($person);
-
         return view('profile', [
-            'person' => $person,
+            'person' => $this->service->Person()->fromPerson($id)->get(),
         ]);
     }
 }

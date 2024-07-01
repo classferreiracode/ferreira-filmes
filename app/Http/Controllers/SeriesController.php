@@ -8,31 +8,26 @@ class SeriesController extends Controller
 {
     private $service;
     public int $page;
-    public $popularTv;
 
     public function __construct()
     {
         $this->service = new TheMovieDatabaseService();
-
-        $this->popularTv = $this->service
-            ->popularSeries()
-            ->get();
     }
 
     public function index()
     {
         return view('series', [
-            'popularTv' => $this->popularTv
+            'popularTv' => $this->service->popularSeries()->get(),
         ]);
     }
 
     public function setPage(int $page)
     {
-        $this->popularTv = $this->service
+        $popularTv = $this->service
             ->popularSeries()
             ->fromPage($page)
             ->get();
 
-        return json_encode($this);
+        return json_encode($popularTv);
     }
 }

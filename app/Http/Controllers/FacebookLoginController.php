@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use App\Providers\RouteServiceProvider;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
 
 class FacebookLoginController extends Controller
@@ -17,12 +16,11 @@ class FacebookLoginController extends Controller
 
     public function handleFacebookCallback()
     {
-        try{
+        try {
             $fUser = Socialite::driver('facebook')->user();
-            //dd($fUser);
             $user = User::where('facebook_id', $fUser->id)->first();
 
-            if (! $user) {
+            if (!$user) {
                 $user = User::create([
                     'name' => $fUser->name,
                     'email' => $fUser->email,
@@ -33,7 +31,7 @@ class FacebookLoginController extends Controller
 
             Auth::login($user);
             return redirect(RouteServiceProvider::HOME);
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             dd($e);
         }
 
